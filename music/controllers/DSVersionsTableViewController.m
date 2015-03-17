@@ -1,19 +1,26 @@
 //
-//  ViewController.m
+//  DsVersionsTableViewController.m
 //  music
 //
-//  Created by dima on 3/7/15.
+//  Created by Lena on 17.03.15.
 //  Copyright (c) 2015 dima. All rights reserved.
 //
 
-#import "MainViewController.h"
+#import "DSVersionsTableViewController.h"
+#import "DSMainTableViewCell.h"
 
-
-@interface MainViewController ()
+@interface DSVersionsTableViewController ()
 
 @end
 
-@implementation MainViewController
+@implementation DSVersionsTableViewController
+
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 - (id)initWithCoder:(NSCoder *)aCoder
 {
@@ -63,10 +70,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshTable" object:nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -75,7 +79,7 @@
 
 - (PFQuery *)queryForTable
 {
-    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    PFQuery *query = [self.childrens query];
     
     // If no objects are loaded in memory, we look to the cache first to fill the table
     // and then subsequently do a query against the network.
@@ -94,27 +98,19 @@
 // a UITableViewCellStyleDefault style cell with the label being the first key in the object.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
 {
-    static NSString *simpleTableIdentifier = @"RecipeCell";
+    static NSString *mainTableIdentifier = @"mainCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    DSMainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mainTableIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:simpleTableIdentifier];
+        cell = [[DSMainTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:mainTableIdentifier];
     }
     
-    // Configure the cell
-   // PFFile *thumbnail = [object objectForKey:@"imageFile"];
-  //  PFImageView *thumbnailImageView = (PFImageView*)[cell viewWithTag:100];
-   // thumbnailImageView.image = [UIImage imageNamed:@"placeholder.jpg"];
-  //  thumbnailImageView.file = thumbnail;
-  //  [thumbnailImageView loadInBackground];
     
-   // UILabel *nameLabel = (UILabel*) [cell viewWithTag:101];
-  //  nameLabel.text = [object objectForKey:@"name"];
-  //
-  ////  UILabel *prepTimeLabel = (UILabel*) [cell viewWithTag:102];
-  ///  prepTimeLabel.text = [object objectForKey:@"prepTime"];
-    cell.textLabel.text = [object objectForKey:@"author"];
-    cell.detailTextLabel.text = [object objectForKey:@"name"];
+    cell.artistLabel.text = [object objectForKey:@"author"];
+    cell.titleLabel.text = [object objectForKey:@"name"];
+    cell.downloadBtn.tag = indexPath.row;
+    [cell.downloadBtn addTarget:self action:@selector(downloadClicked:)
+               forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
 
@@ -133,5 +129,47 @@
     
     NSLog(@"error: %@", [error localizedDescription]);
 }
+
+#pragma mark - UITableViewDelegate
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    return indexPath;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 60;
+}
+
+#pragma mark - Self Methods
+
+- (void) downloadClicked:(id)sender {
+    
+    UIButton* btn = sender;
+    PFObject *object = [self.objects objectAtIndex:btn.tag];
+    PFFile *soundFile = object[@"mfile"];
+    [soundFile getDataInBackgroundWithBlock:^(NSData *soundData, NSError *error) {
+        if (!error) {
+            NSLog(@"%@",soundFile.name);
+        }
+    }
+                              progressBlock:^(int percentDone) {
+                                  
+                                  NSLog(@"%d", percentDone);
+                                  
+                              }];}
+
+
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+
 
 @end

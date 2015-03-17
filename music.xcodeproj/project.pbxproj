@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		32D65E531AAB2DBD00CB04A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D65E521AAB2DBD00CB04A1 /* main.m */; };
 		32D65E561AAB2DBD00CB04A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D65E551AAB2DBD00CB04A1 /* AppDelegate.m */; };
-		32D65E591AAB2DBD00CB04A1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D65E581AAB2DBD00CB04A1 /* MainViewController.m */; };
 		32D65E5C1AAB2DBD00CB04A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32D65E5A1AAB2DBD00CB04A1 /* Main.storyboard */; };
 		32D65E5E1AAB2DBD00CB04A1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32D65E5D1AAB2DBD00CB04A1 /* Images.xcassets */; };
 		32D65E611AAB2DBD00CB04A1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32D65E5F1AAB2DBD00CB04A1 /* LaunchScreen.xib */; };
@@ -34,6 +33,9 @@
 		32D65E9A1AAB3BD100CB04A1 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D65E991AAB3BD100CB04A1 /* libsqlite3.0.dylib */; };
 		32D65E9C1AAB3BDE00CB04A1 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D65E9B1AAB3BDE00CB04A1 /* libstdc++.6.dylib */; };
 		32D65E9E1AAB3C3200CB04A1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D65E9D1AAB3C3200CB04A1 /* AudioToolbox.framework */; };
+		BFCB0FD31AB856FC0079CCE3 /* DSMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCB0FD21AB856FC0079CCE3 /* DSMainTableViewController.m */; };
+		BFCB0FD61AB857310079CCE3 /* DSMainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCB0FD51AB857310079CCE3 /* DSMainTableViewCell.m */; };
+		BFCB0FD91AB879A40079CCE3 /* DSVersionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCB0FD81AB879A40079CCE3 /* DSVersionsTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,8 +54,6 @@
 		32D65E521AAB2DBD00CB04A1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32D65E541AAB2DBD00CB04A1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		32D65E551AAB2DBD00CB04A1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		32D65E571AAB2DBD00CB04A1 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		32D65E581AAB2DBD00CB04A1 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		32D65E5B1AAB2DBD00CB04A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		32D65E5D1AAB2DBD00CB04A1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		32D65E601AAB2DBD00CB04A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -80,6 +80,12 @@
 		32D65E991AAB3BD100CB04A1 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		32D65E9B1AAB3BDE00CB04A1 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		32D65E9D1AAB3C3200CB04A1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		BFCB0FD11AB856FC0079CCE3 /* DSMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMainTableViewController.h; path = controllers/DSMainTableViewController.h; sourceTree = "<group>"; };
+		BFCB0FD21AB856FC0079CCE3 /* DSMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMainTableViewController.m; path = controllers/DSMainTableViewController.m; sourceTree = "<group>"; };
+		BFCB0FD41AB857310079CCE3 /* DSMainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMainTableViewCell.h; path = cells/DSMainTableViewCell.h; sourceTree = "<group>"; };
+		BFCB0FD51AB857310079CCE3 /* DSMainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMainTableViewCell.m; path = cells/DSMainTableViewCell.m; sourceTree = "<group>"; };
+		BFCB0FD71AB879A40079CCE3 /* DSVersionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSVersionsTableViewController.h; path = controllers/DSVersionsTableViewController.h; sourceTree = "<group>"; };
+		BFCB0FD81AB879A40079CCE3 /* DSVersionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSVersionsTableViewController.m; path = controllers/DSVersionsTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,11 +147,11 @@
 		32D65E4F1AAB2DBD00CB04A1 /* music */ = {
 			isa = PBXGroup;
 			children = (
+				BFCB0FD01AB856ED0079CCE3 /* controllers */,
+				BFCB0FCF1AB856970079CCE3 /* cells */,
 				32D65E761AAB2F4400CB04A1 /* lib */,
 				32D65E541AAB2DBD00CB04A1 /* AppDelegate.h */,
 				32D65E551AAB2DBD00CB04A1 /* AppDelegate.m */,
-				32D65E571AAB2DBD00CB04A1 /* MainViewController.h */,
-				32D65E581AAB2DBD00CB04A1 /* MainViewController.m */,
 				32D65E5A1AAB2DBD00CB04A1 /* Main.storyboard */,
 				32D65E5D1AAB2DBD00CB04A1 /* Images.xcassets */,
 				32D65E5F1AAB2DBD00CB04A1 /* LaunchScreen.xib */,
@@ -204,6 +210,26 @@
 				32D65E7B1AAB2F5D00CB04A1 /* ParseUI.framework */,
 			);
 			name = lib;
+			sourceTree = "<group>";
+		};
+		BFCB0FCF1AB856970079CCE3 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				BFCB0FD41AB857310079CCE3 /* DSMainTableViewCell.h */,
+				BFCB0FD51AB857310079CCE3 /* DSMainTableViewCell.m */,
+			);
+			name = cells;
+			sourceTree = "<group>";
+		};
+		BFCB0FD01AB856ED0079CCE3 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BFCB0FD71AB879A40079CCE3 /* DSVersionsTableViewController.h */,
+				BFCB0FD81AB879A40079CCE3 /* DSVersionsTableViewController.m */,
+				BFCB0FD11AB856FC0079CCE3 /* DSMainTableViewController.h */,
+				BFCB0FD21AB856FC0079CCE3 /* DSMainTableViewController.m */,
+			);
+			name = controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,9 +333,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32D65E591AAB2DBD00CB04A1 /* MainViewController.m in Sources */,
 				32D65E561AAB2DBD00CB04A1 /* AppDelegate.m in Sources */,
+				BFCB0FD31AB856FC0079CCE3 /* DSMainTableViewController.m in Sources */,
 				32D65E531AAB2DBD00CB04A1 /* main.m in Sources */,
+				BFCB0FD91AB879A40079CCE3 /* DSVersionsTableViewController.m in Sources */,
+				BFCB0FD61AB857310079CCE3 /* DSMainTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,8 +396,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -411,8 +439,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -436,7 +464,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/music/lib",
@@ -452,7 +480,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/music/lib",
