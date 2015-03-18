@@ -11,7 +11,7 @@
 #import "DSMainTableViewCell.h"
 
 
-@interface DSMainTableViewController ()
+@interface DSMainTableViewController () <JNJProgressButtonDelegate>
 
 @property (strong, nonatomic) PFRelation* relation;
 
@@ -119,6 +119,12 @@
   ///  prepTimeLabel.text = [object objectForKey:@"prepTime"];
     cell.artistLabel.text = [object objectForKey:@"author"];
     cell.titleLabel.text = [object objectForKey:@"name"];
+    
+    cell.jnjrogressBtn.delegate = self;
+    cell.jnjrogressBtn.tintColor = [UIColor blueColor];
+    cell.jnjrogressBtn.startButtonImage = [UIImage imageNamed:@"56-cloud"];
+    cell.jnjrogressBtn.endButtonImage = [UIImage imageNamed:@"06-magnify"];
+    
     cell.downloadBtn.tag = indexPath.row;
     [cell.downloadBtn addTarget:self action:@selector(downloadClicked:)
      forControlEvents:UIControlEventTouchUpInside];
@@ -162,6 +168,42 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     return 60;
+}
+#pragma mark - JNJProgressButtonDelegate
+
+- (void)progressButtonStartButtonTapped:(JNJProgressButton *)button
+{
+    NSLog(@"Start Button was tapped");
+    
+    [self startProgressWithButton:button];
+}
+
+- (void)progressButtonEndButtonTapped:(JNJProgressButton *)button
+{
+    NSLog(@"End Button was tapped");
+}
+
+- (void)progressButtonDidCancelProgress:(JNJProgressButton *)button
+{
+    NSLog(@"Button was canceled");
+}
+#pragma mark - Sample Progress
+
+- (void)startProgressWithButton:(JNJProgressButton *)button
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [NSThread sleepForTimeInterval:3];
+        NSInteger index = 0;
+        while (index <= 100) {
+            [NSThread sleepForTimeInterval:0.04];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                button.progress = (index / 100.0f);
+            });
+            index++;
+            
+            if (!button.progressing) return;
+        }
+    });
 }
 
 #pragma mark - Self Methods

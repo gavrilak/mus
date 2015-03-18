@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface DSMainTableViewController : PFQueryTableViewController
+@interface DSMainTableViewController : PFQueryTableViewController 
 
 
 @end

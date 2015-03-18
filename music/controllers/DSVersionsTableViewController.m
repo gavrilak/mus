@@ -111,6 +111,37 @@
     cell.downloadBtn.tag = indexPath.row;
     [cell.downloadBtn addTarget:self action:@selector(downloadClicked:)
                forControlEvents:UIControlEventTouchUpInside];
+
+    
+    
+    cell.uaprogressBtn.fillOnTouch = YES;
+    cell.uaprogressBtn.tintColor = [UIColor purpleColor];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60.0, 20.0)];
+    [label setTextAlignment:NSTextAlignmentCenter];
+    label.userInteractionEnabled = NO; // Allows tap to pass through to the progress view.
+    cell.uaprogressBtn.centralView = label;
+    
+    cell.uaprogressBtn.progressChangedBlock = ^(UAProgressView *progressView, CGFloat progress) {
+        [(UILabel *)progressView.centralView setText:[NSString stringWithFormat:@"%2.0f%%", progress * 100]];
+        
+    cell.uaprogressBtn.fillChangedBlock = ^(UAProgressView *progressView, BOOL filled, BOOL animated){
+            UIColor *color = (filled ? [UIColor whiteColor] : progressView.tintColor);
+            if (animated) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    [(UILabel *)progressView.centralView setTextColor:color];
+                }];
+            } else {
+                [(UILabel *)progressView.centralView setTextColor:color];
+            }
+        };
+        
+      
+        
+     cell.uaprogressBtn.didSelectBlock = ^(UAProgressView *progressView){
+         [self downloadAndPlay:indexPath.row forView:progressView];
+      };
+    };
+
     return cell;
 }
 
@@ -159,8 +190,23 @@
                                   
                                   NSLog(@"%d", percentDone);
                                   
-                              }];}
+}];}
 
+- (void) downloadAndPlay:(NSUInteger*) row forView:(UAProgressView*) progressView {
+    
+    
+    PFObject *object = [self.objects objectAtIndex:row];
+    PFFile *soundFile = object[@"mfile"];
+    [soundFile getDataInBackgroundWithBlock:^(NSData *soundData, NSError *error) {
+        if (!error) {
+            NSLog(@"%@",soundFile.name);
+        }
+    }
+    progressBlock:^(int percentDone) {
+                                  
+      [progressView setProgress: percentDone];
+                                  
+}];}
 
 
 #pragma mark - Navigation

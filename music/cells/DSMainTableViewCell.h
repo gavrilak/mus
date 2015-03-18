@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JNJProgressButton.h"
+#import "UAProgressView.h"
 
 @interface DSMainTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *downloadBtn;
-
+@property (weak, nonatomic) IBOutlet JNJProgressButton *jnjrogressBtn;
+@property (weak, nonatomic) IBOutlet UAProgressView *uaprogressBtn;
 @end

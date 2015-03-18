@@ -33,6 +33,10 @@
 		32D65E9A1AAB3BD100CB04A1 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D65E991AAB3BD100CB04A1 /* libsqlite3.0.dylib */; };
 		32D65E9C1AAB3BDE00CB04A1 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D65E9B1AAB3BDE00CB04A1 /* libstdc++.6.dylib */; };
 		32D65E9E1AAB3C3200CB04A1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D65E9D1AAB3C3200CB04A1 /* AudioToolbox.framework */; };
+		BF897C2B1AB9912A00A3963A /* JNJProgressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BF897C2A1AB9912A00A3963A /* JNJProgressButton.m */; };
+		BF897C2F1AB9913200A3963A /* UAProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF897C2E1AB9913200A3963A /* UAProgressView.m */; };
+		BF897C331AB9A23100A3963A /* 06-magnify@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF897C311AB9A23100A3963A /* 06-magnify@2x.png */; };
+		BF897C341AB9A23100A3963A /* 56-cloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF897C321AB9A23100A3963A /* 56-cloud@2x.png */; };
 		BFCB0FD31AB856FC0079CCE3 /* DSMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCB0FD21AB856FC0079CCE3 /* DSMainTableViewController.m */; };
 		BFCB0FD61AB857310079CCE3 /* DSMainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCB0FD51AB857310079CCE3 /* DSMainTableViewCell.m */; };
 		BFCB0FD91AB879A40079CCE3 /* DSVersionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCB0FD81AB879A40079CCE3 /* DSVersionsTableViewController.m */; };
@@ -80,6 +84,12 @@
 		32D65E991AAB3BD100CB04A1 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		32D65E9B1AAB3BDE00CB04A1 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		32D65E9D1AAB3C3200CB04A1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		BF897C291AB9912A00A3963A /* JNJProgressButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNJProgressButton.h; sourceTree = "<group>"; };
+		BF897C2A1AB9912A00A3963A /* JNJProgressButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNJProgressButton.m; sourceTree = "<group>"; };
+		BF897C2D1AB9913200A3963A /* UAProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAProgressView.h; sourceTree = "<group>"; };
+		BF897C2E1AB9913200A3963A /* UAProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAProgressView.m; sourceTree = "<group>"; };
+		BF897C311AB9A23100A3963A /* 06-magnify@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "06-magnify@2x.png"; sourceTree = "<group>"; };
+		BF897C321AB9A23100A3963A /* 56-cloud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "56-cloud@2x.png"; sourceTree = "<group>"; };
 		BFCB0FD11AB856FC0079CCE3 /* DSMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMainTableViewController.h; path = controllers/DSMainTableViewController.h; sourceTree = "<group>"; };
 		BFCB0FD21AB856FC0079CCE3 /* DSMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMainTableViewController.m; path = controllers/DSMainTableViewController.m; sourceTree = "<group>"; };
 		BFCB0FD41AB857310079CCE3 /* DSMainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMainTableViewCell.h; path = cells/DSMainTableViewCell.h; sourceTree = "<group>"; };
@@ -147,6 +157,7 @@
 		32D65E4F1AAB2DBD00CB04A1 /* music */ = {
 			isa = PBXGroup;
 			children = (
+				BF897C301AB9A23100A3963A /* images */,
 				BFCB0FD01AB856ED0079CCE3 /* controllers */,
 				BFCB0FCF1AB856970079CCE3 /* cells */,
 				32D65E761AAB2F4400CB04A1 /* lib */,
@@ -189,6 +200,8 @@
 		32D65E761AAB2F4400CB04A1 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				BF897C2C1AB9913200A3963A /* uaprogressview */,
+				BF897C281AB9912A00A3963A /* jnjprogressbutton */,
 				32D65E851AAB3A7800CB04A1 /* MobileCoreServices.framework */,
 				32D65E831AAB3A6100CB04A1 /* libz.1.1.3.dylib */,
 				32D65E9D1AAB3C3200CB04A1 /* AudioToolbox.framework */,
@@ -210,6 +223,35 @@
 				32D65E7B1AAB2F5D00CB04A1 /* ParseUI.framework */,
 			);
 			name = lib;
+			sourceTree = "<group>";
+		};
+		BF897C281AB9912A00A3963A /* jnjprogressbutton */ = {
+			isa = PBXGroup;
+			children = (
+				BF897C291AB9912A00A3963A /* JNJProgressButton.h */,
+				BF897C2A1AB9912A00A3963A /* JNJProgressButton.m */,
+			);
+			name = jnjprogressbutton;
+			path = lib/jnjprogressbutton;
+			sourceTree = "<group>";
+		};
+		BF897C2C1AB9913200A3963A /* uaprogressview */ = {
+			isa = PBXGroup;
+			children = (
+				BF897C2D1AB9913200A3963A /* UAProgressView.h */,
+				BF897C2E1AB9913200A3963A /* UAProgressView.m */,
+			);
+			name = uaprogressview;
+			path = lib/uaprogressview;
+			sourceTree = "<group>";
+		};
+		BF897C301AB9A23100A3963A /* images */ = {
+			isa = PBXGroup;
+			children = (
+				BF897C311AB9A23100A3963A /* 06-magnify@2x.png */,
+				BF897C321AB9A23100A3963A /* 56-cloud@2x.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 		BFCB0FCF1AB856970079CCE3 /* cells */ = {
@@ -313,9 +355,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				32D65E821AAB346F00CB04A1 /* Entitlements.plist in Resources */,
+				BF897C331AB9A23100A3963A /* 06-magnify@2x.png in Resources */,
 				32D65E5C1AAB2DBD00CB04A1 /* Main.storyboard in Resources */,
 				32D65E611AAB2DBD00CB04A1 /* LaunchScreen.xib in Resources */,
 				32D65E5E1AAB2DBD00CB04A1 /* Images.xcassets in Resources */,
+				BF897C341AB9A23100A3963A /* 56-cloud@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,11 +377,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF897C2F1AB9913200A3963A /* UAProgressView.m in Sources */,
 				32D65E561AAB2DBD00CB04A1 /* AppDelegate.m in Sources */,
 				BFCB0FD31AB856FC0079CCE3 /* DSMainTableViewController.m in Sources */,
 				32D65E531AAB2DBD00CB04A1 /* main.m in Sources */,
 				BFCB0FD91AB879A40079CCE3 /* DSVersionsTableViewController.m in Sources */,
 				BFCB0FD61AB857310079CCE3 /* DSMainTableViewCell.m in Sources */,
+				BF897C2B1AB9912A00A3963A /* JNJProgressButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
