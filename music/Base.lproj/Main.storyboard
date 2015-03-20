@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AOL-kf-ql9">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -94,7 +95,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wOO-3e-9Om" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2223" y="265"/>
+            <point key="canvasLocation" x="-2448" y="223"/>
         </scene>
         <!--Versions Table View Controller-->
         <scene sceneID="w9d-8h-gbt">
@@ -153,6 +154,7 @@
                                     <outlet property="downloadBtn" destination="Dya-wd-1Fg" id="eh7-8e-8fA"/>
                                     <outlet property="titleLabel" destination="pxk-7l-O0o" id="NT8-ss-n0p"/>
                                     <outlet property="uaprogressBtn" destination="TZS-kw-BzS" id="2Gg-FW-oBC"/>
+                                    <segue destination="BpA-Jp-slp" kind="show" id="jxZ-v7-96f"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -164,7 +166,72 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e8k-L6-VAd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1507" y="258"/>
+            <point key="canvasLocation" x="-1825.5" y="258"/>
+        </scene>
+        <!--Progress View Controller-->
+        <scene sceneID="9As-IY-zYF">
+            <objects>
+                <viewController id="BpA-Jp-slp" customClass="DSUAProgressViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MYK-AE-OAm"/>
+                        <viewControllerLayoutGuide type="bottom" id="P5O-XT-6Zz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QJi-Ik-NFU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9WZ-cA-IvQ" customClass="UAProgressView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="1u1-Nj-PMx"/>
+                                    <constraint firstAttribute="width" constant="81" id="hAH-3W-NAe"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="1u1-Nj-PMx"/>
+                                        <exclude reference="hAH-3W-NAe"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="1u1-Nj-PMx"/>
+                                        <include reference="hAH-3W-NAe"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9WZ-cA-IvQ" firstAttribute="leading" secondItem="QJi-Ik-NFU" secondAttribute="leadingMargin" id="I3S-hY-wTD"/>
+                            <constraint firstItem="9WZ-cA-IvQ" firstAttribute="top" secondItem="MYK-AE-OAm" secondAttribute="bottom" constant="28" id="gdx-E6-7Fs"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="9WZ-cA-IvQ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="I3S-hY-wTD"/>
+                                <exclude reference="gdx-E6-7Fs"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="9WZ-cA-IvQ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="I3S-hY-wTD"/>
+                                <include reference="gdx-E6-7Fs"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="progressView" destination="9WZ-cA-IvQ" id="RLK-8l-hlM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6nq-au-aHz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1179" y="335"/>
         </scene>
     </scenes>
 </document>

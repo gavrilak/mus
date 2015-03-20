@@ -33,6 +33,7 @@
 		32D65E9A1AAB3BD100CB04A1 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D65E991AAB3BD100CB04A1 /* libsqlite3.0.dylib */; };
 		32D65E9C1AAB3BDE00CB04A1 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D65E9B1AAB3BDE00CB04A1 /* libstdc++.6.dylib */; };
 		32D65E9E1AAB3C3200CB04A1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D65E9D1AAB3C3200CB04A1 /* AudioToolbox.framework */; };
+		32F5BD0C1ABB87F4009E29AA /* DSUAProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F5BD0B1ABB87F4009E29AA /* DSUAProgressViewController.m */; };
 		BF897C2B1AB9912A00A3963A /* JNJProgressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BF897C2A1AB9912A00A3963A /* JNJProgressButton.m */; };
 		BF897C2F1AB9913200A3963A /* UAProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF897C2E1AB9913200A3963A /* UAProgressView.m */; };
 		BF897C331AB9A23100A3963A /* 06-magnify@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF897C311AB9A23100A3963A /* 06-magnify@2x.png */; };
@@ -84,6 +85,8 @@
 		32D65E991AAB3BD100CB04A1 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		32D65E9B1AAB3BDE00CB04A1 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		32D65E9D1AAB3C3200CB04A1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		32F5BD0A1ABB87F4009E29AA /* DSUAProgressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSUAProgressViewController.h; path = controllers/DSUAProgressViewController.h; sourceTree = "<group>"; };
+		32F5BD0B1ABB87F4009E29AA /* DSUAProgressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSUAProgressViewController.m; path = controllers/DSUAProgressViewController.m; sourceTree = "<group>"; };
 		BF897C291AB9912A00A3963A /* JNJProgressButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNJProgressButton.h; sourceTree = "<group>"; };
 		BF897C2A1AB9912A00A3963A /* JNJProgressButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNJProgressButton.m; sourceTree = "<group>"; };
 		BF897C2D1AB9913200A3963A /* UAProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAProgressView.h; sourceTree = "<group>"; };
@@ -268,6 +271,8 @@
 			children = (
 				BFCB0FD71AB879A40079CCE3 /* DSVersionsTableViewController.h */,
 				BFCB0FD81AB879A40079CCE3 /* DSVersionsTableViewController.m */,
+				32F5BD0A1ABB87F4009E29AA /* DSUAProgressViewController.h */,
+				32F5BD0B1ABB87F4009E29AA /* DSUAProgressViewController.m */,
 				BFCB0FD11AB856FC0079CCE3 /* DSMainTableViewController.h */,
 				BFCB0FD21AB856FC0079CCE3 /* DSMainTableViewController.m */,
 			);
@@ -377,6 +382,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32F5BD0C1ABB87F4009E29AA /* DSUAProgressViewController.m in Sources */,
 				BF897C2F1AB9913200A3963A /* UAProgressView.m in Sources */,
 				32D65E561AAB2DBD00CB04A1 /* AppDelegate.m in Sources */,
 				BFCB0FD31AB856FC0079CCE3 /* DSMainTableViewController.m in Sources */,
