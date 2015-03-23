@@ -121,9 +121,10 @@
     label.userInteractionEnabled = NO; // Allows tap to pass through to the progress view.
     cell.uaprogressBtn.centralView = label;
     
+    
     cell.uaprogressBtn.progressChangedBlock = ^(UAProgressView *progressView, CGFloat progress) {
         [(UILabel *)progressView.centralView setText:[NSString stringWithFormat:@"%2.0f%%", progress * 100]];
-        
+    };
     cell.uaprogressBtn.fillChangedBlock = ^(UAProgressView *progressView, BOOL filled, BOOL animated){
             UIColor *color = (filled ? [UIColor whiteColor] : progressView.tintColor);
             if (animated) {
@@ -140,7 +141,7 @@
      cell.uaprogressBtn.didSelectBlock = ^(UAProgressView *progressView){
          [self downloadAndPlay:indexPath.row forView:progressView];
       };
-    };
+    
 
     return cell;
 }

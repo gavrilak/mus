@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3209D9911ABF73BC000E5977 /* DSSoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3209D9901ABF73BC000E5977 /* DSSoundManager.m */; };
+		3209D9941ABF7906000E5977 /* square@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3209D9921ABF7906000E5977 /* square@3x.png */; };
+		3209D9951ABF7906000E5977 /* triangle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3209D9931ABF7906000E5977 /* triangle@3x.png */; };
+		3209D9971ABFA9FF000E5977 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3209D9961ABFA9FF000E5977 /* bg.jpg */; };
 		32D65E531AAB2DBD00CB04A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D65E521AAB2DBD00CB04A1 /* main.m */; };
 		32D65E561AAB2DBD00CB04A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D65E551AAB2DBD00CB04A1 /* AppDelegate.m */; };
 		32D65E5C1AAB2DBD00CB04A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32D65E5A1AAB2DBD00CB04A1 /* Main.storyboard */; };
@@ -33,12 +37,9 @@
 		32D65E9A1AAB3BD100CB04A1 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D65E991AAB3BD100CB04A1 /* libsqlite3.0.dylib */; };
 		32D65E9C1AAB3BDE00CB04A1 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D65E9B1AAB3BDE00CB04A1 /* libstdc++.6.dylib */; };
 		32D65E9E1AAB3C3200CB04A1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D65E9D1AAB3C3200CB04A1 /* AudioToolbox.framework */; };
-		32F5BD0C1ABB87F4009E29AA /* DSUAProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F5BD0B1ABB87F4009E29AA /* DSUAProgressViewController.m */; };
 		BF897C2B1AB9912A00A3963A /* JNJProgressButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BF897C2A1AB9912A00A3963A /* JNJProgressButton.m */; };
 		BF897C2F1AB9913200A3963A /* UAProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF897C2E1AB9913200A3963A /* UAProgressView.m */; };
-		BF897C331AB9A23100A3963A /* 06-magnify@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF897C311AB9A23100A3963A /* 06-magnify@2x.png */; };
-		BF897C341AB9A23100A3963A /* 56-cloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF897C321AB9A23100A3963A /* 56-cloud@2x.png */; };
-		BFCB0FD31AB856FC0079CCE3 /* DSMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCB0FD21AB856FC0079CCE3 /* DSMainTableViewController.m */; };
+		BFCB0FD31AB856FC0079CCE3 /* DSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCB0FD21AB856FC0079CCE3 /* DSMainViewController.m */; };
 		BFCB0FD61AB857310079CCE3 /* DSMainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCB0FD51AB857310079CCE3 /* DSMainTableViewCell.m */; };
 		BFCB0FD91AB879A40079CCE3 /* DSVersionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCB0FD81AB879A40079CCE3 /* DSVersionsTableViewController.m */; };
 /* End PBXBuildFile section */
@@ -54,6 +55,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3209D98F1ABF73BC000E5977 /* DSSoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSSoundManager.h; path = manager/DSSoundManager.h; sourceTree = "<group>"; };
+		3209D9901ABF73BC000E5977 /* DSSoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSSoundManager.m; path = manager/DSSoundManager.m; sourceTree = "<group>"; };
+		3209D9921ABF7906000E5977 /* square@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "square@3x.png"; sourceTree = "<group>"; };
+		3209D9931ABF7906000E5977 /* triangle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "triangle@3x.png"; sourceTree = "<group>"; };
+		3209D9961ABFA9FF000E5977 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		32D65E4D1AAB2DBD00CB04A1 /* music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = music.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32D65E511AAB2DBD00CB04A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32D65E521AAB2DBD00CB04A1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -85,16 +91,12 @@
 		32D65E991AAB3BD100CB04A1 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		32D65E9B1AAB3BDE00CB04A1 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		32D65E9D1AAB3C3200CB04A1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		32F5BD0A1ABB87F4009E29AA /* DSUAProgressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSUAProgressViewController.h; path = controllers/DSUAProgressViewController.h; sourceTree = "<group>"; };
-		32F5BD0B1ABB87F4009E29AA /* DSUAProgressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSUAProgressViewController.m; path = controllers/DSUAProgressViewController.m; sourceTree = "<group>"; };
 		BF897C291AB9912A00A3963A /* JNJProgressButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNJProgressButton.h; sourceTree = "<group>"; };
 		BF897C2A1AB9912A00A3963A /* JNJProgressButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNJProgressButton.m; sourceTree = "<group>"; };
 		BF897C2D1AB9913200A3963A /* UAProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAProgressView.h; sourceTree = "<group>"; };
 		BF897C2E1AB9913200A3963A /* UAProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAProgressView.m; sourceTree = "<group>"; };
-		BF897C311AB9A23100A3963A /* 06-magnify@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "06-magnify@2x.png"; sourceTree = "<group>"; };
-		BF897C321AB9A23100A3963A /* 56-cloud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "56-cloud@2x.png"; sourceTree = "<group>"; };
-		BFCB0FD11AB856FC0079CCE3 /* DSMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMainTableViewController.h; path = controllers/DSMainTableViewController.h; sourceTree = "<group>"; };
-		BFCB0FD21AB856FC0079CCE3 /* DSMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMainTableViewController.m; path = controllers/DSMainTableViewController.m; sourceTree = "<group>"; };
+		BFCB0FD11AB856FC0079CCE3 /* DSMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMainViewController.h; path = controllers/DSMainViewController.h; sourceTree = "<group>"; };
+		BFCB0FD21AB856FC0079CCE3 /* DSMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMainViewController.m; path = controllers/DSMainViewController.m; sourceTree = "<group>"; };
 		BFCB0FD41AB857310079CCE3 /* DSMainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMainTableViewCell.h; path = cells/DSMainTableViewCell.h; sourceTree = "<group>"; };
 		BFCB0FD51AB857310079CCE3 /* DSMainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMainTableViewCell.m; path = cells/DSMainTableViewCell.m; sourceTree = "<group>"; };
 		BFCB0FD71AB879A40079CCE3 /* DSVersionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSVersionsTableViewController.h; path = controllers/DSVersionsTableViewController.h; sourceTree = "<group>"; };
@@ -138,6 +140,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3209D98E1ABF7356000E5977 /* manager */ = {
+			isa = PBXGroup;
+			children = (
+				3209D98F1ABF73BC000E5977 /* DSSoundManager.h */,
+				3209D9901ABF73BC000E5977 /* DSSoundManager.m */,
+			);
+			name = manager;
+			sourceTree = "<group>";
+		};
 		32D65E441AAB2DBD00CB04A1 = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +171,7 @@
 		32D65E4F1AAB2DBD00CB04A1 /* music */ = {
 			isa = PBXGroup;
 			children = (
+				3209D98E1ABF7356000E5977 /* manager */,
 				BF897C301AB9A23100A3963A /* images */,
 				BFCB0FD01AB856ED0079CCE3 /* controllers */,
 				BFCB0FCF1AB856970079CCE3 /* cells */,
@@ -251,8 +263,9 @@
 		BF897C301AB9A23100A3963A /* images */ = {
 			isa = PBXGroup;
 			children = (
-				BF897C311AB9A23100A3963A /* 06-magnify@2x.png */,
-				BF897C321AB9A23100A3963A /* 56-cloud@2x.png */,
+				3209D9961ABFA9FF000E5977 /* bg.jpg */,
+				3209D9921ABF7906000E5977 /* square@3x.png */,
+				3209D9931ABF7906000E5977 /* triangle@3x.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -271,10 +284,8 @@
 			children = (
 				BFCB0FD71AB879A40079CCE3 /* DSVersionsTableViewController.h */,
 				BFCB0FD81AB879A40079CCE3 /* DSVersionsTableViewController.m */,
-				32F5BD0A1ABB87F4009E29AA /* DSUAProgressViewController.h */,
-				32F5BD0B1ABB87F4009E29AA /* DSUAProgressViewController.m */,
-				BFCB0FD11AB856FC0079CCE3 /* DSMainTableViewController.h */,
-				BFCB0FD21AB856FC0079CCE3 /* DSMainTableViewController.m */,
+				BFCB0FD11AB856FC0079CCE3 /* DSMainViewController.h */,
+				BFCB0FD21AB856FC0079CCE3 /* DSMainViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -360,11 +371,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				32D65E821AAB346F00CB04A1 /* Entitlements.plist in Resources */,
-				BF897C331AB9A23100A3963A /* 06-magnify@2x.png in Resources */,
+				3209D9941ABF7906000E5977 /* square@3x.png in Resources */,
+				3209D9951ABF7906000E5977 /* triangle@3x.png in Resources */,
 				32D65E5C1AAB2DBD00CB04A1 /* Main.storyboard in Resources */,
+				3209D9971ABFA9FF000E5977 /* bg.jpg in Resources */,
 				32D65E611AAB2DBD00CB04A1 /* LaunchScreen.xib in Resources */,
 				32D65E5E1AAB2DBD00CB04A1 /* Images.xcassets in Resources */,
-				BF897C341AB9A23100A3963A /* 56-cloud@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,13 +394,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32F5BD0C1ABB87F4009E29AA /* DSUAProgressViewController.m in Sources */,
 				BF897C2F1AB9913200A3963A /* UAProgressView.m in Sources */,
 				32D65E561AAB2DBD00CB04A1 /* AppDelegate.m in Sources */,
-				BFCB0FD31AB856FC0079CCE3 /* DSMainTableViewController.m in Sources */,
+				BFCB0FD31AB856FC0079CCE3 /* DSMainViewController.m in Sources */,
 				32D65E531AAB2DBD00CB04A1 /* main.m in Sources */,
 				BFCB0FD91AB879A40079CCE3 /* DSVersionsTableViewController.m in Sources */,
 				BFCB0FD61AB857310079CCE3 /* DSMainTableViewCell.m in Sources */,
+				3209D9911ABF73BC000E5977 /* DSSoundManager.m in Sources */,
 				BF897C2B1AB9912A00A3963A /* JNJProgressButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
