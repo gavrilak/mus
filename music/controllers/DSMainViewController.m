@@ -32,7 +32,7 @@
     
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:image];
 
-    [self loadData];
+    [self loadDataForSortType:@"top"];
 }
   
 
@@ -114,13 +114,14 @@
     
     
     
+    
     cell.uaprogressBtn.didSelectBlock = ^(UAProgressView *progressView){
         
         [self downloadAndPlay:indexPath.row forView:progressView];
         
     };
     
-
+    cell.downloadBtn.hidden = YES;
     
     return cell;
 }
@@ -149,24 +150,7 @@
     return 80;
 }
 
-#pragma mark - Sample Progress
 
-- (void)startProgressWithButton:(JNJProgressButton *)button
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [NSThread sleepForTimeInterval:3];
-        NSInteger index = 0;
-        while (index <= 100) {
-            [NSThread sleepForTimeInterval:0.04];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                button.progress = (index / 100.0f);
-            });
-            index++;
-            
-            if (!button.progressing) return;
-        }
-    });
-}
 
 #pragma mark - Self Methods
 
@@ -206,9 +190,16 @@
 }
 
 
-- (void) loadData {
+- (void) loadDataForSortType:(NSString*) key{
     
     PFQuery *query = [PFQuery queryWithClassName:@"Music"];
+    if ([key isEqualToString:@"top"]){
+        [query orderByDescending:@"rate"];
+    }
+    if ([key isEqualToString:@"new"]){
+        [query orderByAscending:@"cratedAt"];
+        
+    }
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             
@@ -220,6 +211,36 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
+}
+
+#pragma mark - UITabBarDelegate
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
+    
+    switch (tabBar.selectedItem.tag) {
+            
+        case 0:{
+            [self loadDataForSortType:@"top"];
+            break;
+        }
+         
+        case 1:{
+            [self loadDataForSortType:@"new"];
+            break;
+        }
+            
+        case 2:{
+            
+            break;
+        }
+            
+        case 3:{
+            
+            break;
+        }
+        
+        
+    }
+    
 }
 
 @end
