@@ -519,8 +519,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "215"
             endingLineNumber = "215"
-            landmarkName = "-loadData"
-            landmarkType = "5">
+            landmarkName = "@implementation DSMainViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -535,7 +535,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "216"
             endingLineNumber = "216"
-            landmarkName = "-loadData"
+            landmarkName = "-tabBar:didSelectItem:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -583,7 +583,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "202"
             endingLineNumber = "202"
-            landmarkName = "-downloadAndPlay:forView:"
+            landmarkName = "-loadDataForSortType:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -615,7 +615,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "193"
             endingLineNumber = "193"
-            landmarkName = "-downloadAndPlay:forView:"
+            landmarkName = "-loadDataForSortType:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

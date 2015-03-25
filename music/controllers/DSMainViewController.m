@@ -11,7 +11,7 @@
 #import "DSMainTableViewCell.h"
 
 
-@interface DSMainViewController ()
+@interface DSMainViewController () <AVAudioPlayerDelegate>
 
 @property (strong, nonatomic) PFRelation* relation;
 @property (strong, nonatomic) NSArray* musicObjects;

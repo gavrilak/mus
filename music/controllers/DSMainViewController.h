@@ -8,7 +8,7 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import <UIKit/UIKit.h>
-
+#import <AVFoundation/AVFoundation.h>
 
 @interface DSMainViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate>
 
