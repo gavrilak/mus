@@ -24,5 +24,7 @@
 
 - (void) playSong:(NSData*) song;
 - (void) pause;
+- (void) play;
 - (float) getCurrentProgress;
+- (BOOL) isPlaying ;
 @end

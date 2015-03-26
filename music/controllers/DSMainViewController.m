@@ -16,7 +16,9 @@
 @property (strong, nonatomic) PFRelation* relation;
 @property (strong, nonatomic) NSArray* musicObjects;
 @property (assign, nonatomic) NSInteger activeItem;
+@property (assign, nonatomic) NSInteger playItem;
 @property (strong, nonatomic) NSTimer* playTimer;
+
 
 @end
 
@@ -36,7 +38,7 @@
 
     [self loadDataForSortType:@"top"];
     [DSSoundManager sharedManager].delegate = self;
-    self.playTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
+    self.playTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
 }
   
 - (void)viewWillDisappear:(BOOL)animated
@@ -89,10 +91,7 @@
      cell.uaprogressBtn.lineWidth = 2.0;
     
     UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
-   
-    [triangle setImage:[UIImage imageNamed:@"triangle.png"]  ];
-    
- 
+    [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
     cell.uaprogressBtn.centralView = triangle;
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 48.0, 18.0)];
@@ -105,6 +104,7 @@
 
     cell.uaprogressBtn.progressChangedBlock = ^(UAProgressView *progressView, CGFloat progress) {
         if ([progressView.centralView isKindOfClass:[UILabel class]]){
+            if (progress == 0) progress = 0.01;
             [(UILabel *)progressView.centralView setText:[NSString stringWithFormat:@"%2.0f%%", progress * 100]];
         }
     };
@@ -123,11 +123,14 @@
     };
     
     
-    
-    
     cell.uaprogressBtn.didSelectBlock = ^(UAProgressView *progressView){
         
-        [self downloadAndPlay:indexPath.row forView:progressView];
+        if (indexPath.row == self.playItem && [[DSSoundManager sharedManager] isPlaying]) {
+            
+            [[DSSoundManager sharedManager] pause];
+        }
+        else
+            [self downloadAndPlay:indexPath.row forView:progressView];
         
     };
     
@@ -187,9 +190,24 @@
     PFObject *object = [self.musicObjects objectAtIndex:row];
     PFFile *soundFile = object[@"mfile"];
     [soundFile getDataInBackgroundWithBlock:^(NSData *soundData, NSError *error) {
-        if (!error) {
-            [[DSSoundManager sharedManager] playSong:soundData];
+        
+        if(self.playItem!=self.activeItem ) {
+            NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
+            DSMainTableViewCell* cell =( DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
+            
+            UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
+            [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
+            cell.uaprogressBtn.centralView = triangle;
+            [cell.uaprogressBtn setProgress:0];
         }
+        
+        if (!error) {
+        
+            self.playItem = row;
+            [[DSSoundManager sharedManager] playSong:soundData];
+            
+        }
+        
     }
     progressBlock:^(int percentDone) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -224,36 +242,33 @@
 }
 #pragma mark - DSSoundManagerDelegate
 - (void) statusChanged:(BOOL) playStatus {
-    NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.activeItem inSection:0];
+   NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
     DSMainTableViewCell* cell =( DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
    
     if (playStatus == YES){
-        UIImageView *square = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+        UIImageView *square = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         [square setImage:[UIImage imageNamed: @"square.png"] ];
         cell.uaprogressBtn.centralView = square;
     }
     else{
+        
         UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
         [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
+        cell.uaprogressBtn.centralView = triangle;
 
-        cell.uaprogressBtn.centralView = nil;
     }
 }
 
 #pragma mark - Timer
 - (void) timerAction:(id)timer{
-    [self updatePlayTime];
-}
 
-- (void) updatePlayTime
-{
-    self.volumeProgress.progress = [DaiVolume volume];
-    self.endLbl.text = [self timeToString:[DSSoundManager sharedManager].streamer.duration];
-    self.startLbl.text = [self timeToString:[DSSoundManager sharedManager].streamer.currentTime];
-    // NSLog(@"%f %f   %f" ,self.playProgress.progress,[DSSoundManager sharedManager].streamer.currentTime, [DSSoundManager sharedManager].streamer.duration);
-    if ([DSSoundManager sharedManager].streamer.duration > 0  )
-        [self.playProgress setProgress: (float)([DSSoundManager sharedManager].streamer.currentTime/[DSSoundManager sharedManager].streamer.duration)  animated:YES];
-    
+    if( [[DSSoundManager sharedManager] isPlaying]) {
+        NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
+        DSMainTableViewCell* cell =( DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
+   
+        [cell.uaprogressBtn setProgress:[DSSoundManager sharedManager].getCurrentProgress];
+   
+    }
 }
 
 #pragma mark - UITabBarDelegate

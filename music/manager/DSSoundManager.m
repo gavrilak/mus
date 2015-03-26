@@ -52,9 +52,20 @@
     [self.delegate statusChanged:NO];
     
 }
+- (void) play {
+    
+    [self.backgroundMusicPlayer play];
+    [self.delegate statusChanged:YES];
+    
+}
+- (BOOL) isPlaying {
+    
+    return self.backgroundMusicPlayer.isPlaying;
+    
+}
 
 - (float) getCurrentProgress {
-    
+  
     return self.backgroundMusicPlayer.currentTime / self.backgroundMusicPlayer.duration;
 }
 
