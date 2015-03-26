@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *downloadBtn;
 @property (weak, nonatomic) IBOutlet UAProgressView *uaprogressBtn;
+@property (assign, nonatomic) BOOL isPlaying;
 
 @end

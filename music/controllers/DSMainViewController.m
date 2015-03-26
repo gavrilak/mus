@@ -11,10 +11,12 @@
 #import "DSMainTableViewCell.h"
 
 
-@interface DSMainViewController () <AVAudioPlayerDelegate>
+@interface DSMainViewController () 
 
 @property (strong, nonatomic) PFRelation* relation;
 @property (strong, nonatomic) NSArray* musicObjects;
+@property (assign, nonatomic) NSInteger activeItem;
+@property (strong, nonatomic) NSTimer* playTimer;
 
 @end
 
@@ -33,9 +35,16 @@
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:image];
 
     [self loadDataForSortType:@"top"];
+    [DSSoundManager sharedManager].delegate = self;
+    self.playTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
 }
   
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [DSSoundManager sharedManager].delegate = nil;
+    [self.playTimer invalidate];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -75,7 +84,7 @@
     
     
     cell.uaprogressBtn.fillOnTouch = YES;
-    cell.uaprogressBtn.tintColor = [UIColor purpleColor];
+    cell.uaprogressBtn.tintColor = [UIColor whiteColor];
     cell.uaprogressBtn.borderWidth = 2.0;
      cell.uaprogressBtn.lineWidth = 2.0;
     
@@ -95,8 +104,9 @@
 
 
     cell.uaprogressBtn.progressChangedBlock = ^(UAProgressView *progressView, CGFloat progress) {
-
-        [(UILabel *)progressView.centralView setText:[NSString stringWithFormat:@"%2.0f%%", progress * 100]];
+        if ([progressView.centralView isKindOfClass:[UILabel class]]){
+            [(UILabel *)progressView.centralView setText:[NSString stringWithFormat:@"%2.0f%%", progress * 100]];
+        }
     };
     
     cell.uaprogressBtn.fillChangedBlock = ^(UAProgressView *progressView, BOOL filled, BOOL animated){
@@ -173,12 +183,12 @@
 
 - (void) downloadAndPlay:(NSUInteger) row forView:(UAProgressView*) progressView {
     
-    
+    self.activeItem = row;
     PFObject *object = [self.musicObjects objectAtIndex:row];
     PFFile *soundFile = object[@"mfile"];
     [soundFile getDataInBackgroundWithBlock:^(NSData *soundData, NSError *error) {
         if (!error) {
-            
+            [[DSSoundManager sharedManager] playSong:soundData];
         }
     }
     progressBlock:^(int percentDone) {
@@ -197,7 +207,7 @@
         [query orderByDescending:@"rate"];
     }
     if ([key isEqualToString:@"new"]){
-        [query orderByAscending:@"cratedAt"];
+        [query orderByDescending:@"createdAt"];
         
     }
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -211,6 +221,39 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
+}
+#pragma mark - DSSoundManagerDelegate
+- (void) statusChanged:(BOOL) playStatus {
+    NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.activeItem inSection:0];
+    DSMainTableViewCell* cell =( DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
+   
+    if (playStatus == YES){
+        UIImageView *square = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+        [square setImage:[UIImage imageNamed: @"square.png"] ];
+        cell.uaprogressBtn.centralView = square;
+    }
+    else{
+        UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
+        [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
+
+        cell.uaprogressBtn.centralView = nil;
+    }
+}
+
+#pragma mark - Timer
+- (void) timerAction:(id)timer{
+    [self updatePlayTime];
+}
+
+- (void) updatePlayTime
+{
+    self.volumeProgress.progress = [DaiVolume volume];
+    self.endLbl.text = [self timeToString:[DSSoundManager sharedManager].streamer.duration];
+    self.startLbl.text = [self timeToString:[DSSoundManager sharedManager].streamer.currentTime];
+    // NSLog(@"%f %f   %f" ,self.playProgress.progress,[DSSoundManager sharedManager].streamer.currentTime, [DSSoundManager sharedManager].streamer.duration);
+    if ([DSSoundManager sharedManager].streamer.duration > 0  )
+        [self.playProgress setProgress: (float)([DSSoundManager sharedManager].streamer.currentTime/[DSSoundManager sharedManager].streamer.duration)  animated:YES];
+    
 }
 
 #pragma mark - UITabBarDelegate

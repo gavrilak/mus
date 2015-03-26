@@ -193,7 +193,7 @@
                                   
 }];}
 
-- (void) downloadAndPlay:(NSUInteger*) row forView:(UAProgressView*) progressView {
+- (void) downloadAndPlay:(NSUInteger) row forView:(UAProgressView*) progressView {
     
     
     PFObject *object = [self.objects objectAtIndex:row];

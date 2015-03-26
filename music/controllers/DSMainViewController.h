@@ -8,9 +8,9 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import <UIKit/UIKit.h>
-#import <AVFoundation/AVFoundation.h>
+#import "DSSoundManager.h"
 
-@interface DSMainViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate>
+@interface DSMainViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, DSSoundManagerDelegate>
 
 @property (nonatomic , weak ) IBOutlet UITableView* tableView;
 @property (nonatomic , weak ) IBOutlet UITabBar* tabbar;
