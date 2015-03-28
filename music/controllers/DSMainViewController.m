@@ -9,16 +9,17 @@
 #import "DSVersionsTableViewController.h"
 #import "DSMainViewController.h"
 #import "DSMainTableViewCell.h"
+#import "DSRateView.h"
 
 
-@interface DSMainViewController () 
+@interface DSMainViewController () <DSRateViewDelegate>
 
 @property (strong, nonatomic) PFRelation* relation;
 @property (strong, nonatomic) NSArray* musicObjects;
 @property (assign, nonatomic) NSInteger activeItem;
 @property (assign, nonatomic) NSInteger playItem;
 @property (strong, nonatomic) NSTimer* playTimer;
-
+@property (assign, nonatomic) NSInteger selectedRow;
 
 @end
 
@@ -35,7 +36,8 @@
     UIGraphicsEndImageContext();
     
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:image];
-
+    self.selectedRow = -1;
+    
     [self loadDataForSortType:@"top"];
     [DSSoundManager sharedManager].delegate = self;
     self.playTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
@@ -77,6 +79,16 @@
     
     PFObject* object = [self.musicObjects objectAtIndex:indexPath.row];
     
+    cell.rateView.delegate = self;
+    cell.rateView.editable = YES;
+    cell.rateView.notSelectedImage = [UIImage imageNamed:@"heart_empty@2x.png"];
+    cell.rateView.halfSelectedImage =  [UIImage imageNamed:@"heart_half@2x.png"];
+    cell.rateView.fullSelectedImage = [UIImage imageNamed:@"heart_full@2x.png"];
+    cell.rateView.maxRating = 5;
+    cell.rateView.rating = [ [object objectForKey:@"rate"] floatValue];
+    if (self.selectedRow != indexPath.row) {
+        [cell.rateView setHidden:YES];
+    }
     cell.artistLabel.text = [object objectForKey:@"author"];
     cell.titleLabel.text = [object objectForKey:@"name"];
     cell.downloadBtn.tag = indexPath.row;
@@ -160,10 +172,25 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 80;
+    if (self.selectedRow == indexPath.row){
+        
+        return 120;
+    }
+    else {
+        
+        return 80;
+    }
 }
 
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.selectedRow = indexPath.row;
+    DSMainTableViewCell* cell =( DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:indexPath];
+    [cell.rateView setHidden:NO];
+    NSMutableArray *modifiedRows = [NSMutableArray array];
+    [modifiedRows addObject:indexPath];
+    [tableView reloadRowsAtIndexPaths:modifiedRows withRowAnimation: UITableViewRowAnimationAutomatic];
+}
 
 #pragma mark - Self Methods
 
@@ -298,6 +325,13 @@
         
         
     }
+    
+}
+
+#pragma mark - DSRateViewDelegate
+
+- (void)rateView:(DSRateView *)rateView ratingDidChange:(float)rating{
+    
     
 }
 

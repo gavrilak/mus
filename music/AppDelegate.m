@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 
-
 @interface AppDelegate ()
 
 @end
@@ -22,6 +21,9 @@
     
     [Parse setApplicationId:@"Zv6z83uLOMbQytAUSXleLRbklPXvA6SnhnTTz19S"
                   clientKey:@"O2IKg9KUCyK110UdMeJVCAanE01EBREJGC0bYQ4o"];
+    
+ 
+    
     
     return YES;
 }

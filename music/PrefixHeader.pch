@@ -1,0 +1,17 @@
+//
+//  PrefixHeader.pch
+//  music
+//
+//  Created by dima on 3/28/15.
+//  Copyright (c) 2015 dima. All rights reserved.
+//
+
+#import <Availability.h>
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#define MR_SHORTHAND
+#import "CoreData+MagicalRecord.h"
+#endif
+
+
