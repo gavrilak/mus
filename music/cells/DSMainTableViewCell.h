@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *versionBtn;
 @property (weak, nonatomic) IBOutlet UIButton *downloadBtn;
 @property (weak, nonatomic) IBOutlet DSRateView *rateView;
 @property (weak, nonatomic) IBOutlet UAProgressView *uaprogressBtn;

@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
-
+#import "DSSong.h"
+#import "DSLikesSong.h"
 
 @protocol DSSoundManagerDelegate
 
@@ -27,4 +28,8 @@
 - (void) play;
 - (float) getCurrentProgress;
 - (BOOL) isPlaying ;
+
+
+- (void) addLikeforSongID: (NSString*) ID;
+- (BOOL) existsLikeForSongID:(NSString*) ID;
 @end

@@ -23,7 +23,7 @@
                   clientKey:@"O2IKg9KUCyK110UdMeJVCAanE01EBREJGC0bYQ4o"];
     
  
-    
+    [MagicalRecord setupAutoMigratingCoreDataStack];
     
     return YES;
 }

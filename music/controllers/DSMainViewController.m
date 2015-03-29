@@ -16,10 +16,12 @@
 
 @property (strong, nonatomic) PFRelation* relation;
 @property (strong, nonatomic) NSArray* musicObjects;
+@property (strong, nonatomic) NSArray* categories;
 @property (assign, nonatomic) NSInteger activeItem;
 @property (assign, nonatomic) NSInteger playItem;
 @property (strong, nonatomic) NSTimer* playTimer;
 @property (assign, nonatomic) NSInteger selectedRow;
+@property (assign, nonatomic) NSInteger selectedTab;
 
 @end
 
@@ -64,14 +66,30 @@
 
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return  [self.musicObjects count];
+    if (self.selectedTab == 2){
+        return  [ self.categories count];
+    } else {
+        return  [self.musicObjects count];
+
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *mainTableIdentifier = @"mainCell";
+    static NSString *categoryIdentifier = @"category";
     
+    if (self.selectedTab ==2){
+    
+       UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:categoryIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:mainTableIdentifier];
+            
+        }
+       NSString* object = [self.categories objectAtIndex:indexPath.row];
+        cell.textLabel.text = object  ;
+        return cell;
+    }else{
    DSMainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mainTableIdentifier];
     if (cell == nil) {
         cell = [[DSMainTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:mainTableIdentifier];
@@ -149,6 +167,7 @@
     cell.downloadBtn.hidden = YES;
     
     return cell;
+    }
 }
 
 
@@ -243,8 +262,20 @@
         });
     }];
 }
-
-
+- (void) loadCategories {
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Music"];
+    [query selectKeys:@[@"ganre"]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+         if (!error) {
+             self.categories = [objects valueForKeyPath:@"@distinctUnionOfObjects.ganre"];
+             [self.tableView reloadData];
+         } else {
+             // Log details of the failure
+             NSLog(@"Error: %@ %@", error, [error userInfo]);
+         }
+}   ];
+}
 - (void) loadDataForSortType:(NSString*) key{
     
     PFQuery *query = [PFQuery queryWithClassName:@"Music"];
@@ -301,6 +332,7 @@
 #pragma mark - UITabBarDelegate
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
     
+    self.selectedTab = tabBar.selectedItem.tag;
     switch (tabBar.selectedItem.tag) {
             
         case 0:{
@@ -314,7 +346,7 @@
         }
             
         case 2:{
-            
+            [self loadCategories];
             break;
         }
             

@@ -60,6 +60,9 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backdrop@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jty-U4-MdC">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="3" y="5" width="314" height="138"/>
+                                                    </variation>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YUJ-OH-IXU" customClass="UAProgressView">
                                                     <rect key="frame" x="21" y="10" width="50" height="50"/>
@@ -90,6 +93,9 @@
                                                     <state key="normal" title="Other versions">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="196" y="106" width="100" height="30"/>
+                                                    </variation>
                                                     <connections>
                                                         <segue destination="ynb-AH-wBV" kind="show" id="kKv-3Z-xbM"/>
                                                     </connections>
@@ -107,7 +113,8 @@
                                                             <exclude reference="VJc-2H-vVe"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="widthClass=compact">
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="97" y="63" width="200" height="40"/>
                                                         <mask key="constraints">
                                                             <include reference="8hQ-o8-e6y"/>
                                                             <include reference="VJc-2H-vVe"/>
@@ -164,11 +171,11 @@
                                                     <exclude reference="ItE-Ss-M5x"/>
                                                     <exclude reference="eA8-Q7-JJo"/>
                                                     <exclude reference="lnc-Hf-gaK"/>
+                                                    <exclude reference="EV4-qd-sG2"/>
                                                     <exclude reference="JSW-Vl-fbN"/>
                                                     <exclude reference="bXB-Ei-l8B"/>
                                                     <exclude reference="eLm-i1-KhG"/>
                                                     <exclude reference="xf9-rW-Waq"/>
-                                                    <exclude reference="EV4-qd-sG2"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
@@ -181,11 +188,11 @@
                                                     <include reference="ItE-Ss-M5x"/>
                                                     <include reference="eA8-Q7-JJo"/>
                                                     <include reference="lnc-Hf-gaK"/>
+                                                    <include reference="EV4-qd-sG2"/>
                                                     <exclude reference="JSW-Vl-fbN"/>
                                                     <include reference="bXB-Ei-l8B"/>
                                                     <include reference="eLm-i1-KhG"/>
                                                     <exclude reference="xf9-rW-Waq"/>
-                                                    <include reference="EV4-qd-sG2"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -197,6 +204,13 @@
                                             <outlet property="titleLabel" destination="y3r-DB-Re5" id="635-Bm-HCI"/>
                                             <outlet property="uaprogressBtn" destination="YUJ-OH-IXU" id="V7N-r1-QAs"/>
                                         </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="category" rowHeight="93" id="R3S-ku-0FY">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R3S-ku-0FY" id="FjB-w8-JQe">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -260,6 +274,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yYu-Wi-dIx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2244" y="262"/>
+        </scene>
+        <!--Item 2-->
+        <scene sceneID="RjA-9j-0Ev">
+            <objects>
+                <viewController id="PkC-0p-7ea" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="L9B-iK-0EI"/>
+                        <viewControllerLayoutGuide type="bottom" id="ECU-8u-NyC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BJh-Ld-SKB">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="Jvk-KM-wXn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hQP-VS-Pq7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1531.5" y="1128"/>
         </scene>
         <!--Versions Table View Controller-->
         <scene sceneID="w9d-8h-gbt">
@@ -331,7 +363,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e8k-L6-VAd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1329" y="239"/>
+            <point key="canvasLocation" x="-1338" y="115"/>
         </scene>
     </scenes>
     <resources>

@@ -8,7 +8,6 @@
 
 #import "DSSoundManager.h"
 
-
 @interface DSSoundManager () <AVAudioPlayerDelegate>
 
 @property (strong, nonatomic) AVAudioSession *audioSession;
@@ -77,6 +76,28 @@
    
 }
 
+# pragma mark - work with data
 
+- (void) addLikeforSongID: (NSString*) ID{
+    
+    DSLikesSong* like = [DSLikesSong MR_createEntity];
+    like.id = ID;
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+    
+}
 
+- (BOOL) existsLikeForSongID:(NSString*) ID{
+    
+    
+    NSMutableArray* array = [[NSMutableArray alloc] init];
+    array = [[DSLikesSong  MR_findAllSortedBy:@"id"
+                                ascending:YES
+                            withPredicate:[NSPredicate predicateWithFormat:@"id contains[c] %@", ID]
+                                inContext:[NSManagedObjectContext MR_defaultContext]] mutableCopy];
+    if ( [array count] > 0) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
 @end
