@@ -9,7 +9,9 @@
 #import "DSVersionsTableViewController.h"
 #import "DSMainViewController.h"
 #import "DSMainTableViewCell.h"
+#import "DSCategoryTableViewCell.h"
 #import "DSRateView.h"
+#import "NFXIntroViewController.h"
 
 
 @interface DSMainViewController () <DSRateViewDelegate>
@@ -22,6 +24,7 @@
 @property (strong, nonatomic) NSTimer* playTimer;
 @property (assign, nonatomic) NSInteger selectedRow;
 @property (assign, nonatomic) NSInteger selectedTab;
+@property (strong, nonatomic) NSString* selectCategory;
 
 @end
 
@@ -37,12 +40,26 @@
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
+    
+    UIImage *btnImg = [UIImage imageNamed:@"button_set_up.png"];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0.f, 0.f, btnImg.size.width, btnImg.size.height);
+    [btn setImage:btnImg forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(showInstruction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    self.navigationItem.rightBarButtonItem = item;
+    
+    [self.tabbar setSelectedItem:[self.tabbar.items objectAtIndex:0]];
+    
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:image];
     self.selectedRow = -1;
     
     [self loadDataForSortType:@"top"];
     [DSSoundManager sharedManager].delegate = self;
     self.playTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
+    
+    
+    
 }
   
 - (void)viewWillDisappear:(BOOL)animated
@@ -81,13 +98,13 @@
     
     if (self.selectedTab ==2){
     
-       UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:categoryIdentifier];
+       DSCategoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:categoryIdentifier];
         if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:mainTableIdentifier];
+            cell = [[DSCategoryTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:mainTableIdentifier];
             
         }
        NSString* object = [self.categories objectAtIndex:indexPath.row];
-        cell.textLabel.text = object  ;
+        cell.categoryLabel.text = object  ;
         return cell;
     }else{
    DSMainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mainTableIdentifier];
@@ -164,7 +181,7 @@
         
     };
     
-    cell.downloadBtn.hidden = YES;
+    cell.versionBtn.hidden = YES;
     
     return cell;
     }
@@ -191,13 +208,17 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (self.selectedRow == indexPath.row){
+    if (self.selectedTab == 2){
+        return 50;
+    } else {
+        if (self.selectedRow == indexPath.row){
         
-        return 120;
-    }
-    else {
+            return 120;
+        }
+        else {
         
-        return 80;
+            return 80;
+        }
     }
 }
 
@@ -298,6 +319,24 @@
         }
     }];
 }
+
+- (void) showInstruction {
+    
+    UIImage*i1 = [UIImage imageNamed:@"1.png"];
+    UIImage*i2 = [UIImage imageNamed:@"2.png"];
+    UIImage*i3 = [UIImage imageNamed:@"3.png"];
+    UIImage*i4 = [UIImage imageNamed:@"4.png"];
+    UIImage*i5 = [UIImage imageNamed:@"5.png"];
+    UIImage*i6 = [UIImage imageNamed:@"6.png"];
+    UIImage*i7 = [UIImage imageNamed:@"7.png"];
+    UIImage*i8 = [UIImage imageNamed:@"8.png"];
+    UIImage*i9 = [UIImage imageNamed:@"9.png"];
+    
+    NFXIntroViewController*vc = [[NFXIntroViewController alloc] initWithViews:@[i1,i2,i3,i4,i5,i2,i6,i7,i8,i9]];
+    [self presentViewController:vc animated:true completion:nil];
+    
+}
+
 #pragma mark - DSSoundManagerDelegate
 - (void) statusChanged:(BOOL) playStatus {
    NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
@@ -336,22 +375,25 @@
     switch (tabBar.selectedItem.tag) {
             
         case 0:{
+            self.navigationItem.title = @"Тop";
             [self loadDataForSortType:@"top"];
             break;
         }
          
         case 1:{
+            self.navigationItem.title = @"New";
             [self loadDataForSortType:@"new"];
             break;
         }
             
         case 2:{
+            self.navigationItem.title = @"Categories";
             [self loadCategories];
             break;
         }
             
         case 3:{
-            
+            self.navigationItem.title = @"Downloads";
             break;
         }
         
