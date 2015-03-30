@@ -78,6 +78,43 @@
 
 # pragma mark - work with data
 
+- (BOOL) existsSongInDownloads: (NSString*) ID {
+    
+    NSMutableArray* array = [[NSMutableArray alloc] init];
+    array = [[DSSong  MR_findAllSortedBy:@"objectid"
+                                    ascending:YES
+                                withPredicate:[NSPredicate predicateWithFormat:@"id contains[c] %@", ID]
+                                    inContext:[NSManagedObjectContext MR_defaultContext]] mutableCopy];
+    if ( [array count] > 0) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+
+}
+
+- (NSArray*) getDownloads {
+    
+    NSArray* array = [[NSArray alloc] init];
+    array = [[DSSong  MR_findAllSortedBy:@"objectid"
+                               ascending:YES
+                               inContext:[NSManagedObjectContext MR_defaultContext]] mutableCopy];
+    
+    return array;
+}
+- (void) addSongToDownload: (PFObject *) object fileUrl:(NSString*)  Url {
+    
+    DSSong* song = [DSSong MR_createEntity];
+    song.objectid = [object objectForKey:@"objectId"];
+    song.artist = [object objectForKey:@"author"];
+    song.name = [object objectForKey:@"name"];
+    song.rate = [object objectForKey:@"rate"];
+    song.link = Url;
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+
+    
+    
+}
 - (void) addLikeforSongID: (NSString*) ID{
     
     DSLikesSong* like = [DSLikesSong MR_createEntity];

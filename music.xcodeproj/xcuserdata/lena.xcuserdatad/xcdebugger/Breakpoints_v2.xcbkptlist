@@ -103,7 +103,7 @@
                   symbolName = "-[DSVersionsTableViewController tableView:cellForRowAtIndexPath:object:]"
                   moduleName = "music"
                   urlString = "file:///Users/lena/Desktop/mus/music/controllers/DSVersionsTableViewController.m"
-                  timestampString = "449069516.940401"
+                  timestampString = "449415025.93911"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "141"
@@ -117,7 +117,7 @@
                   symbolName = "__72-[DSVersionsTableViewController tableView:cellForRowAtIndexPath:object:]_block_invoke106"
                   moduleName = "music"
                   urlString = "file:///Users/lena/Desktop/mus/music/controllers/DSVersionsTableViewController.m"
-                  timestampString = "449069516.940594"
+                  timestampString = "449415025.939303"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "141"
@@ -149,7 +149,7 @@
                   symbolName = "-[DSVersionsTableViewController tableView:cellForRowAtIndexPath:object:]"
                   moduleName = "music"
                   urlString = "file:///Users/lena/Desktop/mus/music/controllers/DSVersionsTableViewController.m"
-                  timestampString = "449069516.941493"
+                  timestampString = "449415026.093683"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "125"
@@ -163,7 +163,7 @@
                   symbolName = "__72-[DSVersionsTableViewController tableView:cellForRowAtIndexPath:object:]_block_invoke"
                   moduleName = "music"
                   urlString = "file:///Users/lena/Desktop/mus/music/controllers/DSVersionsTableViewController.m"
-                  timestampString = "449069516.94167"
+                  timestampString = "449415026.093888"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "125"
@@ -217,7 +217,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "208"
             endingLineNumber = "208"
-            landmarkName = "-loadDataForSortType:"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -233,8 +233,24 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "22"
             endingLineNumber = "22"
-            landmarkName = "@implementation DSSoundManager"
-            landmarkType = "3">
+            landmarkName = "+sharedManager"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "music/manager/DSSoundManager.m"
+            timestampString = "449419210.561162"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "-addSongToDownload:fileUrl:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

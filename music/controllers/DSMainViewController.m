@@ -71,7 +71,7 @@ typedef enum {
     
     [self.tabbar setSelectedItem:[self.tabbar.items objectAtIndex:0]];
     
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:image];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
     self.selectedRow = -1;
     
     [self loadDataForSortType:@"top"];

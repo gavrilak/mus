@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
+#import <Parse/Parse.h>
 #import "DSSong.h"
 #import "DSLikesSong.h"
 

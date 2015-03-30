@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AOL-kf-ql9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AOL-kf-ql9">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -56,7 +56,7 @@
                             </tabBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="143" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="lLq-s4-eEB">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -82,18 +82,19 @@
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3r-DB-Re5">
                                                     <rect key="frame" x="96" y="40" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9k8-Ty-NVv">
                                                     <rect key="frame" x="96" y="8" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cHq-zc-LCs">
                                                     <rect key="frame" x="181" y="0.0" width="100" height="30"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                                     <state key="normal" title="Other versions">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -206,19 +207,19 @@
                                                     <exclude reference="Vjj-jV-WrF"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="3rd-A9-54q"/>
-                                                    <exclude reference="ItE-Ss-M5x"/>
-                                                    <exclude reference="eA8-Q7-JJo"/>
-                                                    <exclude reference="lnc-Hf-gaK"/>
-                                                    <exclude reference="JSW-Vl-fbN"/>
-                                                    <exclude reference="bXB-Ei-l8B"/>
-                                                    <exclude reference="eLm-i1-KhG"/>
-                                                    <exclude reference="xf9-rW-Waq"/>
-                                                    <exclude reference="EV4-qd-sG2"/>
                                                     <exclude reference="FIq-Qm-CSI"/>
                                                     <exclude reference="Pao-i9-ngR"/>
                                                     <exclude reference="VNz-dn-CT4"/>
                                                     <exclude reference="tlN-lL-szy"/>
+                                                    <exclude reference="3rd-A9-54q"/>
+                                                    <exclude reference="ItE-Ss-M5x"/>
+                                                    <exclude reference="eA8-Q7-JJo"/>
+                                                    <exclude reference="lnc-Hf-gaK"/>
+                                                    <exclude reference="EV4-qd-sG2"/>
+                                                    <exclude reference="JSW-Vl-fbN"/>
+                                                    <exclude reference="bXB-Ei-l8B"/>
+                                                    <exclude reference="eLm-i1-KhG"/>
+                                                    <exclude reference="xf9-rW-Waq"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
@@ -228,19 +229,19 @@
                                                     <include reference="Vjj-jV-WrF"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="3rd-A9-54q"/>
-                                                    <include reference="ItE-Ss-M5x"/>
-                                                    <include reference="eA8-Q7-JJo"/>
-                                                    <include reference="lnc-Hf-gaK"/>
-                                                    <exclude reference="JSW-Vl-fbN"/>
-                                                    <include reference="bXB-Ei-l8B"/>
-                                                    <include reference="eLm-i1-KhG"/>
-                                                    <exclude reference="xf9-rW-Waq"/>
-                                                    <include reference="EV4-qd-sG2"/>
                                                     <include reference="FIq-Qm-CSI"/>
                                                     <include reference="Pao-i9-ngR"/>
                                                     <include reference="VNz-dn-CT4"/>
                                                     <include reference="tlN-lL-szy"/>
+                                                    <include reference="3rd-A9-54q"/>
+                                                    <include reference="ItE-Ss-M5x"/>
+                                                    <include reference="eA8-Q7-JJo"/>
+                                                    <include reference="lnc-Hf-gaK"/>
+                                                    <include reference="EV4-qd-sG2"/>
+                                                    <exclude reference="JSW-Vl-fbN"/>
+                                                    <include reference="bXB-Ei-l8B"/>
+                                                    <include reference="eLm-i1-KhG"/>
+                                                    <exclude reference="xf9-rW-Waq"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -289,13 +290,13 @@
                                                     <exclude reference="OLN-GC-DJj"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <exclude reference="8Qg-NT-hxV"/>
+                                                    <exclude reference="DkK-am-sJg"/>
+                                                    <exclude reference="SdJ-JU-aff"/>
                                                     <exclude reference="XHS-8D-sup"/>
                                                     <exclude reference="qLl-lN-0IX"/>
                                                     <exclude reference="s1u-xY-Fux"/>
                                                     <exclude reference="v75-mY-fV9"/>
-                                                    <exclude reference="8Qg-NT-hxV"/>
-                                                    <exclude reference="DkK-am-sJg"/>
-                                                    <exclude reference="SdJ-JU-aff"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
@@ -304,13 +305,13 @@
                                                     <include reference="OLN-GC-DJj"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <include reference="8Qg-NT-hxV"/>
+                                                    <include reference="DkK-am-sJg"/>
+                                                    <include reference="SdJ-JU-aff"/>
                                                     <include reference="XHS-8D-sup"/>
                                                     <include reference="qLl-lN-0IX"/>
                                                     <include reference="s1u-xY-Fux"/>
                                                     <include reference="v75-mY-fV9"/>
-                                                    <include reference="8Qg-NT-hxV"/>
-                                                    <include reference="DkK-am-sJg"/>
-                                                    <include reference="SdJ-JU-aff"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
