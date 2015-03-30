@@ -13,8 +13,12 @@
 #import "DSRateView.h"
 #import "NFXIntroViewController.h"
 
+typedef enum {
+    DSSongSearch,
+    DSArtistSearch
+}DSSortType;
 
-@interface DSMainViewController () <DSRateViewDelegate>
+@interface DSMainViewController () <DSRateViewDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) PFRelation* relation;
 @property (strong, nonatomic) NSArray* musicObjects;
@@ -26,6 +30,9 @@
 @property (assign, nonatomic) NSInteger selectedTab;
 @property (strong, nonatomic) NSString* selectCategory;
 @property (strong, nonatomic) UIBarButtonItem* navBarItem;
+@property (assign, nonatomic) NSInteger selectedSearch;
+@property (weak,nonatomic) UISearchBar *searchBar;
+@property (strong , nonatomic) UIView* titleView;
 
 @end
 
@@ -41,6 +48,7 @@
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
+     self.titleView = self.navigationItem.titleView;
     
     UIImage *btnImg = [UIImage imageNamed:@"button_set_up.png"];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -51,15 +59,15 @@
     self.navigationItem.rightBarButtonItem = item;
     
     
-    UIImage *btnImg2 = [UIImage imageNamed:@"button_back.png"];
-    UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn2.frame = CGRectMake(0.f, 0.f, btnImg2.size.width, btnImg2.size.height);
-    [btn2 setImage:btnImg2 forState:UIControlStateNormal];
-    [btn2 addTarget:self action:@selector(showInstruction) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *item2 = [[UIBarButtonItem alloc] initWithCustomView:btn2];
-    self.navigationItem.leftBarButtonItem = item2;
+    btnImg = [UIImage imageNamed:@"button_back.png"];
+    btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0.f, 0.f, btnImg.size.width, btnImg.size.height);
+    [btn setImage:btnImg forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    self.navBarItem = item;
     
-    
+    [self setSearchItem];
     
     [self.tabbar setSelectedItem:[self.tabbar.items objectAtIndex:0]];
     
@@ -257,24 +265,61 @@
 }
 
 #pragma mark - Self Methods
+- (void)searchShow:(UIBarButtonItem *)sender {
+    
+    
+    UIBarButtonSystemItem item = UIBarButtonSystemItemEdit;
+    
+    
+    if ([self.navigationItem.titleView isKindOfClass:[UISearchBar class]]) {
+        
+        item = UIBarButtonSystemItemSearch;
+        
+        
+        UISegmentedControl *control = [[UISegmentedControl alloc]initWithItems:@[@"Song",@"Artist"]];
+        [control addTarget:self action:@selector(searchSongsControl:) forControlEvents:UIControlEventValueChanged];
+        control.selectedSegmentIndex = self.selectedSearch;
+       
+        self.navigationItem.titleView = control;
+        
+    } else {
+        
+        UISearchBar *searchBar = [[UISearchBar alloc]init];
+        self.searchBar = searchBar;
+        self.searchBar.delegate = self;
+        self.navigationItem.titleView = self.searchBar;
+        
+    }
+    
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:item target:self action:@selector(searchShow:)];
+    
+    [self.navigationItem setLeftBarButtonItem:leftButton animated:YES];
+    
+}
+
+- (void)searchSongsControl:(UISegmentedControl *)sender {
+    
+    self.selectedSearch = sender.selectedSegmentIndex;
+    
+}
+
 
 - (void) downloadClicked:(id)sender {
     
     UIButton* btn = sender;
     PFObject *object = [self.musicObjects objectAtIndex:btn.tag];
     PFFile *soundFile = object[@"mfile"];
-    [soundFile getDataInBackgroundWithBlock:^(NSData *soundData, NSError *error) {
-        if (!error) {
-            NSLog(@"%@",soundFile.name);
-        }
-    }
-    progressBlock:^(int percentDone) {
-        
-        NSLog(@"%d", percentDone);
-        
-    }];
+    [soundFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+         if (!error) {
+             NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+             NSString *documentsDirectory = [paths objectAtIndex:0];
+             
+             NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:soundFile.name];
+             [data writeToFile:fullPath options:NSDataWritingWithoutOverwriting error:nil];
+             //NSLog(@"Data Ok");
+         }
+    } ];
 }
-
 - (void) downloadAndPlay:(NSUInteger) row forView:(UAProgressView*) progressView {
     
     self.activeItem = row;
@@ -307,7 +352,24 @@
         });
     }];
 }
+
+- (void) setSearchItem {
+    UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchShow:)];
+    item.tintColor = [UIColor whiteColor];
+    self.navigationItem.leftBarButtonItem = item;
+    
+}
+
+- (void) back {
+    [self setSearchItem];
+    self.selectCategory = nil;
+    [self loadCategories];
+}
+
 - (void) loadCategory:(NSString*) category {
+   
+    self.navigationItem.leftBarButtonItems  = @[self.navBarItem ];
+    
     self.navigationItem.title = category;
     PFQuery *query = [PFQuery queryWithClassName:@"Music"];
     [query whereKey:@"ganre" equalTo:category];
@@ -325,9 +387,10 @@
 }
 - (void) loadCategories {
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Music"];
-    [query selectKeys:@[@"ganre"]];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    if ([self.categories count] == 0 ) {
+        PFQuery *query = [PFQuery queryWithClassName:@"Music"];
+        [query selectKeys:@[@"ganre"]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
          if (!error) {
              self.categories = [objects valueForKeyPath:@"@distinctUnionOfObjects.ganre"];
              [self.tableView reloadData];
@@ -335,7 +398,11 @@
              // Log details of the failure
              NSLog(@"Error: %@ %@", error, [error userInfo]);
          }
-}   ];
+        }];
+    } else {
+        [self.tableView reloadData];
+    }
+    
 }
 - (void) loadDataForSortType:(NSString*) key{
     
@@ -410,30 +477,36 @@
 
 #pragma mark - UITabBarDelegate
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
-    
+    if ([self.navigationItem.titleView isKindOfClass:[UISearchBar class]] ||[self.navigationItem.titleView isKindOfClass:[UISegmentedControl class]]) {
+        self.navigationItem.titleView = self.titleView;
+    }
     self.selectedTab = tabBar.selectedItem.tag;
     self.selectedRow = -1;
     switch (tabBar.selectedItem.tag) {
             
         case 0:{
+            [self setSearchItem];
             self.navigationItem.title = @"Тop";
             [self loadDataForSortType:@"top"];
             break;
         }
          
         case 1:{
+            [self setSearchItem];
             self.navigationItem.title = @"New";
             [self loadDataForSortType:@"new"];
             break;
         }
             
         case 2:{
+            self.navigationItem.leftBarButtonItem = nil;
             self.navigationItem.title = @"Categories";
             [self loadCategories];
             break;
         }
             
         case 3:{
+            self.navigationItem.leftBarButtonItem = nil;
             self.navigationItem.title = @"Downloads";
             break;
         }
@@ -449,5 +522,49 @@
     
     
 }
+#pragma mark - UISearchBarDelegate
 
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
+    
+    [searchBar resignFirstResponder];
+    [searchBar setShowsCancelButton:NO animated:YES];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    NSString* searchKey;
+    if (self.selectedSearch == 0){
+        searchKey = @"name" ;
+    } else {
+        searchKey = @"author";
+    }
+   
+    PFQuery *queryCapitalizedString = [PFQuery queryWithClassName:@"Music"];
+    [queryCapitalizedString whereKey:searchKey containsString:[searchBar.text capitalizedString]];
+    
+    //query converted user text to lowercase
+    PFQuery *queryLowerCaseString = [PFQuery queryWithClassName:@"Music"];
+    [queryLowerCaseString whereKey:searchKey containsString:[searchBar.text lowercaseString]];
+    
+    //query real user text
+    PFQuery *querySearchBarString = [PFQuery queryWithClassName:@"Music"];
+    [querySearchBarString whereKey:searchKey containsString:searchBar.text];
+    
+    PFQuery *finalQuery = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:queryCapitalizedString,queryLowerCaseString, querySearchBarString,nil]];
+    
+    [finalQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            
+            self.musicObjects = objects;
+            
+            [self.tableView reloadData];
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+}
 @end
