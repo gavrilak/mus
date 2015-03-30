@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AOL-kf-ql9">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -253,7 +254,7 @@
                                             <outlet property="versionBtn" destination="cHq-zc-LCs" id="EmU-30-Iyx"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="category" rowHeight="93" id="R3S-ku-0FY" customClass="DSCategoryTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="category" rowHeight="93" id="R3S-ku-0FY" customClass="DSCategoryTableViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R3S-ku-0FY" id="FjB-w8-JQe">
@@ -261,21 +262,37 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Poy-vg-YDS">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="22"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backdrop@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="OLN-GC-DJj">
+                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Poy-vg-YDS" firstAttribute="top" secondItem="FjB-w8-JQe" secondAttribute="topMargin" constant="17" id="8Qg-NT-hxV"/>
+                                                <constraint firstItem="Poy-vg-YDS" firstAttribute="top" secondItem="FjB-w8-JQe" secondAttribute="topMargin" constant="5" id="8Qg-NT-hxV"/>
                                                 <constraint firstItem="Poy-vg-YDS" firstAttribute="leading" secondItem="FjB-w8-JQe" secondAttribute="leadingMargin" constant="23" id="DkK-am-sJg"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Poy-vg-YDS" secondAttribute="trailing" constant="98" id="SdJ-JU-aff"/>
+                                                <constraint firstItem="OLN-GC-DJj" firstAttribute="leading" secondItem="FjB-w8-JQe" secondAttribute="leadingMargin" id="XHS-8D-sup"/>
+                                                <constraint firstItem="OLN-GC-DJj" firstAttribute="bottom" secondItem="FjB-w8-JQe" secondAttribute="bottomMargin" id="qLl-lN-0IX">
+                                                    <variation key="widthClass=compact" constant="10"/>
+                                                </constraint>
+                                                <constraint firstItem="OLN-GC-DJj" firstAttribute="trailing" secondItem="FjB-w8-JQe" secondAttribute="trailingMargin" id="s1u-xY-Fux">
+                                                    <variation key="widthClass=compact" constant="0.0"/>
+                                                </constraint>
+                                                <constraint firstItem="OLN-GC-DJj" firstAttribute="top" secondItem="FjB-w8-JQe" secondAttribute="topMargin" id="v75-mY-fV9"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
                                                     <exclude reference="Poy-vg-YDS"/>
+                                                    <exclude reference="OLN-GC-DJj"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <exclude reference="XHS-8D-sup"/>
+                                                    <exclude reference="qLl-lN-0IX"/>
+                                                    <exclude reference="s1u-xY-Fux"/>
+                                                    <exclude reference="v75-mY-fV9"/>
                                                     <exclude reference="8Qg-NT-hxV"/>
                                                     <exclude reference="DkK-am-sJg"/>
                                                     <exclude reference="SdJ-JU-aff"/>
@@ -284,8 +301,13 @@
                                             <variation key="widthClass=compact">
                                                 <mask key="subviews">
                                                     <include reference="Poy-vg-YDS"/>
+                                                    <include reference="OLN-GC-DJj"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <include reference="XHS-8D-sup"/>
+                                                    <include reference="qLl-lN-0IX"/>
+                                                    <include reference="s1u-xY-Fux"/>
+                                                    <include reference="v75-mY-fV9"/>
                                                     <include reference="8Qg-NT-hxV"/>
                                                     <include reference="DkK-am-sJg"/>
                                                     <include reference="SdJ-JU-aff"/>
@@ -350,7 +372,11 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Top" id="bm7-OG-HDe"/>
+                    <navigationItem key="navigationItem" title="Top" id="bm7-OG-HDe">
+                        <barButtonItem key="leftBarButtonItem" id="4K2-Wz-Zgp">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tabbar" destination="6nG-m8-cUg" id="5nh-dm-68E"/>
                         <outlet property="tableView" destination="lLq-s4-eEB" id="jxZ-Uk-Ygv"/>

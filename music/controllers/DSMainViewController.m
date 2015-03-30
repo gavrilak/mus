@@ -25,6 +25,7 @@
 @property (assign, nonatomic) NSInteger selectedRow;
 @property (assign, nonatomic) NSInteger selectedTab;
 @property (strong, nonatomic) NSString* selectCategory;
+@property (strong, nonatomic) UIBarButtonItem* navBarItem;
 
 @end
 
@@ -48,6 +49,17 @@
     [btn addTarget:self action:@selector(showInstruction) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = item;
+    
+    
+    UIImage *btnImg2 = [UIImage imageNamed:@"button_back.png"];
+    UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn2.frame = CGRectMake(0.f, 0.f, btnImg2.size.width, btnImg2.size.height);
+    [btn2 setImage:btnImg2 forState:UIControlStateNormal];
+    [btn2 addTarget:self action:@selector(showInstruction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item2 = [[UIBarButtonItem alloc] initWithCustomView:btn2];
+    self.navigationItem.leftBarButtonItem = item2;
+    
+    
     
     [self.tabbar setSelectedItem:[self.tabbar.items objectAtIndex:0]];
     
@@ -83,7 +95,7 @@
 
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.selectedTab == 2){
+    if (self.selectedTab == 2 && self.selectCategory == nil){
         return  [ self.categories count];
     } else {
         return  [self.musicObjects count];
@@ -96,7 +108,7 @@
     static NSString *mainTableIdentifier = @"mainCell";
     static NSString *categoryIdentifier = @"category";
     
-    if (self.selectedTab ==2){
+    if (self.selectedTab ==2 && self.selectCategory == nil){
     
        DSCategoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:categoryIdentifier];
         if (cell == nil) {
@@ -200,15 +212,19 @@
 #pragma mark - UITableViewDelegate
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    if (self.selectCategory != nil){
     
-    PFObject *object = [self.musicObjects objectAtIndex:indexPath.row];
-    self.relation = [object relationForKey:@"versions"];
+        PFObject *object = [self.musicObjects objectAtIndex:indexPath.row];
+        self.relation = [object relationForKey:@"versions"];
+        
+    }
     return indexPath;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (self.selectedTab == 2){
+    if (self.selectedTab == 2 && self.selectCategory == nil){
         return 50;
     } else {
         if (self.selectedRow == indexPath.row){
@@ -225,11 +241,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.selectedRow = indexPath.row;
-    DSMainTableViewCell* cell =( DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:indexPath];
-    [cell.rateView setHidden:NO];
-    NSMutableArray *modifiedRows = [NSMutableArray array];
-    [modifiedRows addObject:indexPath];
-    [tableView reloadRowsAtIndexPaths:modifiedRows withRowAnimation: UITableViewRowAnimationAutomatic];
+    if (self.selectedTab == 2  && self.selectCategory == nil){
+        DSCategoryTableViewCell* cell =( DSCategoryTableViewCell*)  [self.tableView cellForRowAtIndexPath:indexPath];
+        self.selectCategory  = cell.categoryLabel.text;
+        self.selectedRow = -1;
+        [self loadCategory:self.selectCategory];
+
+    } else {
+        DSMainTableViewCell* cell =( DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:indexPath];
+        [cell.rateView setHidden:NO];
+        NSMutableArray *modifiedRows = [NSMutableArray array];
+        [modifiedRows addObject:indexPath];
+        [tableView reloadRowsAtIndexPaths:modifiedRows withRowAnimation: UITableViewRowAnimationAutomatic];
+    }
 }
 
 #pragma mark - Self Methods
@@ -281,6 +305,22 @@
                                    
                     [progressView setProgress: (float) percentDone/100];
         });
+    }];
+}
+- (void) loadCategory:(NSString*) category {
+    self.navigationItem.title = category;
+    PFQuery *query = [PFQuery queryWithClassName:@"Music"];
+    [query whereKey:@"ganre" equalTo:category];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            
+            self.musicObjects = objects;
+            
+            [self.tableView reloadData];
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
     }];
 }
 - (void) loadCategories {
@@ -372,6 +412,7 @@
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
     
     self.selectedTab = tabBar.selectedItem.tag;
+    self.selectedRow = -1;
     switch (tabBar.selectedItem.tag) {
             
         case 0:{
