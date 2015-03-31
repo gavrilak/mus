@@ -33,6 +33,7 @@ typedef enum {
 @property (assign, nonatomic) NSInteger selectedSearch;
 @property (weak,nonatomic) UISearchBar *searchBar;
 @property (strong , nonatomic) UIView* titleView;
+@property (assign , nonatomic) BOOL reloadData;
 
 @end
 
@@ -103,11 +104,15 @@ typedef enum {
 
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.selectedTab == 2 && self.selectCategory == nil){
-        return  [ self.categories count];
+    if (self.reloadData) {
+        return 0;
     } else {
-        return  [self.musicObjects count];
+        if (self.selectedTab == 2 && self.selectCategory == nil){
+            return  [ self.categories count];
+        } else {
+            return  [self.musicObjects count];
 
+        }
     }
 }
 
@@ -235,11 +240,10 @@ typedef enum {
     if (self.selectedTab == 2 && self.selectCategory == nil){
         return 50;
     } else {
-        if (self.selectedRow == indexPath.row){
-        
-            return 120;
-        }
-        else {
+        if ([indexPath isEqual:[tableView indexPathForSelectedRow]])
+        {
+            return 120.0f;
+        }  else {
         
             return 80;
         }
@@ -256,15 +260,31 @@ typedef enum {
         [self loadCategory:self.selectCategory];
 
     } else {
-        DSMainTableViewCell* cell =( DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:indexPath];
-        [cell.rateView setHidden:NO];
-        NSMutableArray *modifiedRows = [NSMutableArray array];
-        [modifiedRows addObject:indexPath];
-        [tableView reloadRowsAtIndexPaths:modifiedRows withRowAnimation: UITableViewRowAnimationAutomatic];
+       // DSMainTableViewCell* cell =( DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:indexPath];
+      //  [cell.rateView setHidden:NO];
+     //   NSMutableArray *modifiedRows = [NSMutableArray array];
+      //  [modifiedRows addObject:indexPath];
+      //  [tableView reloadRowsAtIndexPaths:modifiedRows withRowAnimation: UITableViewRowAnimationAutomatic];
+        [tableView beginUpdates];
+        [self animateCell:indexPath andTableView:tableView];
+        [tableView endUpdates];
     }
 }
 
 #pragma mark - Self Methods
+- (void)animateCell:(NSIndexPath*)indexPath andTableView:(UITableView*)tableView
+{
+    [UIView animateWithDuration:0.5f animations: ^
+     {
+         DSMainTableViewCell *cell = ( DSMainTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+        // [cell.rateView setHidden:NO ];
+
+         CGRect rect = cell.frame;
+         rect.size.height = 120.0f;
+         cell.frame = rect;
+         //NSLog(@"%f", cell.frame.size.height);
+     }];
+}
 - (void)searchShow:(UIBarButtonItem *)sender {
     
     
@@ -363,6 +383,9 @@ typedef enum {
 - (void) back {
     [self setSearchItem];
     self.selectCategory = nil;
+    self.reloadData = YES;
+    [self.tableView reloadData];
+    self.reloadData = NO;
     [self loadCategories];
 }
 
@@ -377,8 +400,10 @@ typedef enum {
         if (!error) {
             
             self.musicObjects = objects;
-            
+            self.reloadData = YES;
             [self.tableView reloadData];
+            self.reloadData = NO;
+            [self reloadMusicObjects];
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -393,17 +418,42 @@ typedef enum {
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
          if (!error) {
              self.categories = [objects valueForKeyPath:@"@distinctUnionOfObjects.ganre"];
-             [self.tableView reloadData];
+             [self reloadCategories];
+             
          } else {
              // Log details of the failure
              NSLog(@"Error: %@ %@", error, [error userInfo]);
          }
         }];
     } else {
-        [self.tableView reloadData];
+        [self reloadCategories];
     }
     
 }
+- (void) reloadCategories {
+    NSMutableArray* newPaths = [NSMutableArray array];
+    for (int i =0 ; i < [self.categories count]; i++) {
+        [newPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+    }
+    
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:newPaths withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView endUpdates];
+
+}
+
+- (void) reloadMusicObjects {
+    NSMutableArray* newPaths = [NSMutableArray array];
+    for (int i =0 ; i < [self.musicObjects count]; i++) {
+        [newPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+    }
+    
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:newPaths withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView endUpdates];
+    
+}
+
 - (void) loadDataForSortType:(NSString*) key{
     
     PFQuery *query = [PFQuery queryWithClassName:@"Music"];
@@ -419,7 +469,7 @@ typedef enum {
             
             self.musicObjects = objects;
         
-            [self.tableView reloadData];
+            [self reloadMusicObjects];
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -480,6 +530,9 @@ typedef enum {
     if ([self.navigationItem.titleView isKindOfClass:[UISearchBar class]] ||[self.navigationItem.titleView isKindOfClass:[UISegmentedControl class]]) {
         self.navigationItem.titleView = self.titleView;
     }
+    self.reloadData = YES;
+    [self.tableView reloadData];
+    self.reloadData = NO;
     self.selectedTab = tabBar.selectedItem.tag;
     self.selectedRow = -1;
     switch (tabBar.selectedItem.tag) {
