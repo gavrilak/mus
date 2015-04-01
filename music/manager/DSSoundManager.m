@@ -77,7 +77,24 @@
 }
 
 # pragma mark - work with data
+[myPerson MR_deleteEntity];
 
+
+
+- (void)removeFile:(NSString *) filePath
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSError *error;
+    BOOL success = [fileManager removeItemAtPath:filePath error:&error];
+    if (success) {
+        NSLog(@"File deleted %@",filePath);
+    }
+    else
+    {
+        NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+    }
+}
 - (BOOL) existsSongInDownloads: (NSString*) ID {
     
     NSMutableArray* array = [[NSMutableArray alloc] init];
