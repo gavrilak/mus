@@ -12,7 +12,7 @@
 
 @interface DSSong : NSManagedObject
 
-@property (nonatomic, retain) NSString * artist;
+@property (nonatomic, retain) NSString * author;
 @property (nonatomic, retain) NSString * link;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * objectid;

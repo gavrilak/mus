@@ -77,9 +77,23 @@
 }
 
 # pragma mark - work with data
-[myPerson MR_deleteEntity];
 
-
+- (void) deleteSong:(NSString*) ID {
+    
+    NSMutableArray* array = [[NSMutableArray alloc] init];
+    array = [[DSSong  MR_findAllSortedBy:@"objectid"
+                               ascending:YES
+                           withPredicate:[NSPredicate predicateWithFormat:@"id contains[c] %@", ID]
+                               inContext:[NSManagedObjectContext MR_defaultContext]] mutableCopy];
+    if ( [array count] > 0) {
+    
+        DSSong* song = array[0];
+        [self removeFile:song.link];
+        [song MR_deleteEntity];
+        
+    }
+    
+}
 
 - (void)removeFile:(NSString *) filePath
 {
@@ -95,6 +109,7 @@
         NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
     }
 }
+
 - (BOOL) existsSongInDownloads: (NSString*) ID {
     
     NSMutableArray* array = [[NSMutableArray alloc] init];
@@ -119,11 +134,11 @@
     
     return array;
 }
-- (void) addSongToDownload: (PFObject *) object fileUrl:(NSString*)  Url {
+- (void) addSongToDownloads: (PFObject *) object fileUrl:(NSString*)  Url {
     
     DSSong* song = [DSSong MR_createEntity];
     song.objectid = [object objectForKey:@"objectId"];
-    song.artist = [object objectForKey:@"author"];
+    song.author = [object objectForKey:@"author"];
     song.name = [object objectForKey:@"name"];
     song.rate = [object objectForKey:@"rate"];
     song.link = Url;

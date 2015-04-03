@@ -12,6 +12,7 @@
 #import "DSCategoryTableViewCell.h"
 #import "DSRateView.h"
 #import "NFXIntroViewController.h"
+#import "DSSong.h"
 
 typedef enum {
     DSSongSearch,
@@ -409,7 +410,14 @@ typedef enum {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
+    
 }
+- (void) loadDownloads {
+    
+    self.musicObjects = [[DSSoundManager sharedManager] getDownloads];
+    [self reloadMusicObjects];
+}
+
 - (void) loadCategories {
     
     if ([self.categories count] == 0 ) {
@@ -561,6 +569,7 @@ typedef enum {
         case 3:{
             self.navigationItem.leftBarButtonItem = nil;
             self.navigationItem.title = @"Downloads";
+            [self loadDownloads];
             break;
         }
         

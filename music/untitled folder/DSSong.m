@@ -11,7 +11,7 @@
 
 @implementation DSSong
 
-@dynamic artist;
+@dynamic author;
 @dynamic link;
 @dynamic name;
 @dynamic objectid;
