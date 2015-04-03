@@ -3,7 +3,7 @@
     <entity name="DSLikesSong" representedClassName="DSLikesSong" syncable="YES">
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="DSSong" representedClassName="Entity" syncable="YES">
+    <entity name="DSSong" representedClassName="DSSong" syncable="YES">
         <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -12,6 +12,6 @@
     </entity>
     <elements>
         <element name="DSLikesSong" positionX="-63" positionY="-18" width="128" height="60"/>
-        <element name="DSSong" positionX="-63" positionY="-9" width="128" height="120"/>
+        <element name="DSSong" positionX="-63" positionY="27" width="128" height="118"/>
     </elements>
 </model>

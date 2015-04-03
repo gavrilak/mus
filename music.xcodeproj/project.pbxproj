@@ -96,12 +96,12 @@
 		32F1827C1AC87B8100EED920 /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32F182741AC87B8100EED920 /* star@2x.png */; };
 		32F1827E1AC87C5C00EED920 /* cancel_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32F1827D1AC87C5C00EED920 /* cancel_gray@2x.png */; };
 		32F182801AC87CEF00EED920 /* cancel_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32F1827F1AC87CEF00EED920 /* cancel_blue@2x.png */; };
-		32FFE58B1AC783940093DD1B /* DSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FFE58A1AC783940093DD1B /* DSSong.m */; };
-		32FFE58E1AC783950093DD1B /* DSLikesSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FFE58D1AC783950093DD1B /* DSLikesSong.m */; };
 		BF897C2F1AB9913200A3963A /* UAProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF897C2E1AB9913200A3963A /* UAProgressView.m */; };
 		BFCB0FD31AB856FC0079CCE3 /* DSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCB0FD21AB856FC0079CCE3 /* DSMainViewController.m */; };
 		BFCB0FD61AB857310079CCE3 /* DSMainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCB0FD51AB857310079CCE3 /* DSMainTableViewCell.m */; };
 		BFCB0FD91AB879A40079CCE3 /* DSVersionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCB0FD81AB879A40079CCE3 /* DSVersionsTableViewController.m */; };
+		BFCDBE3A1ACE9DD70002FEF6 /* DSLikesSong.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCDBE371ACE9DD70002FEF6 /* DSLikesSong.m */; };
+		BFCDBE3B1ACE9DD70002FEF6 /* DSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCDBE391ACE9DD70002FEF6 /* DSSong.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -248,10 +248,6 @@
 		32F182741AC87B8100EED920 /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
 		32F1827D1AC87C5C00EED920 /* cancel_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_gray@2x.png"; sourceTree = "<group>"; };
 		32F1827F1AC87CEF00EED920 /* cancel_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_blue@2x.png"; sourceTree = "<group>"; };
-		32FFE5891AC783940093DD1B /* DSSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSSong.h; path = "untitled folder/DSSong.h"; sourceTree = "<group>"; };
-		32FFE58A1AC783940093DD1B /* DSSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSSong.m; path = "untitled folder/DSSong.m"; sourceTree = "<group>"; };
-		32FFE58C1AC783950093DD1B /* DSLikesSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSLikesSong.h; path = "untitled folder/DSLikesSong.h"; sourceTree = "<group>"; };
-		32FFE58D1AC783950093DD1B /* DSLikesSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSLikesSong.m; path = "untitled folder/DSLikesSong.m"; sourceTree = "<group>"; };
 		BF897C2D1AB9913200A3963A /* UAProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAProgressView.h; sourceTree = "<group>"; };
 		BF897C2E1AB9913200A3963A /* UAProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAProgressView.m; sourceTree = "<group>"; };
 		BFCB0FD11AB856FC0079CCE3 /* DSMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMainViewController.h; path = controllers/DSMainViewController.h; sourceTree = "<group>"; };
@@ -260,6 +256,10 @@
 		BFCB0FD51AB857310079CCE3 /* DSMainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSMainTableViewCell.m; path = cells/DSMainTableViewCell.m; sourceTree = "<group>"; };
 		BFCB0FD71AB879A40079CCE3 /* DSVersionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSVersionsTableViewController.h; path = controllers/DSVersionsTableViewController.h; sourceTree = "<group>"; };
 		BFCB0FD81AB879A40079CCE3 /* DSVersionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSVersionsTableViewController.m; path = controllers/DSVersionsTableViewController.m; sourceTree = "<group>"; };
+		BFCDBE361ACE9DD70002FEF6 /* DSLikesSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSLikesSong.h; path = models/DSLikesSong.h; sourceTree = "<group>"; };
+		BFCDBE371ACE9DD70002FEF6 /* DSLikesSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSLikesSong.m; path = models/DSLikesSong.m; sourceTree = "<group>"; };
+		BFCDBE381ACE9DD70002FEF6 /* DSSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSSong.h; path = models/DSSong.h; sourceTree = "<group>"; };
+		BFCDBE391ACE9DD70002FEF6 /* DSSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSSong.m; path = models/DSSong.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -576,10 +576,10 @@
 		32FFE5821AC7827D0093DD1B /* model */ = {
 			isa = PBXGroup;
 			children = (
-				32FFE58C1AC783950093DD1B /* DSLikesSong.h */,
-				32FFE58D1AC783950093DD1B /* DSLikesSong.m */,
-				32FFE5891AC783940093DD1B /* DSSong.h */,
-				32FFE58A1AC783940093DD1B /* DSSong.m */,
+				BFCDBE361ACE9DD70002FEF6 /* DSLikesSong.h */,
+				BFCDBE371ACE9DD70002FEF6 /* DSLikesSong.m */,
+				BFCDBE381ACE9DD70002FEF6 /* DSSong.h */,
+				BFCDBE391ACE9DD70002FEF6 /* DSSong.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -767,7 +767,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32FFE58B1AC783940093DD1B /* DSSong.m in Sources */,
+				BFCDBE3B1ACE9DD70002FEF6 /* DSSong.m in Sources */,
 				320157F81AC74AAD00999D88 /* NSManagedObject+MagicalDataImport.m in Sources */,
 				BF897C2F1AB9913200A3963A /* UAProgressView.m in Sources */,
 				320158031AC74AAD00999D88 /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
@@ -775,7 +775,6 @@
 				32D6D91E1AC7265500DC6061 /* DSRateView.m in Sources */,
 				320157FE1AC74AAD00999D88 /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				320158001AC74AAD00999D88 /* NSManagedObjectContext+MagicalThreading.m in Sources */,
-				32FFE58E1AC783950093DD1B /* DSLikesSong.m in Sources */,
 				320157F41AC74AAD00999D88 /* NSObject+MagicalDataImport.m in Sources */,
 				320157F11AC74AAD00999D88 /* NSAttributeDescription+MagicalDataImport.m in Sources */,
 				320157FB1AC74AAD00999D88 /* NSManagedObject+MagicalRequests.m in Sources */,
@@ -789,6 +788,7 @@
 				320157F51AC74AAD00999D88 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				320157FC1AC74AAD00999D88 /* NSManagedObjectContext+MagicalChainSave.m in Sources */,
 				320157FD1AC74AAD00999D88 /* NSManagedObjectContext+MagicalObserving.m in Sources */,
+				BFCDBE3A1ACE9DD70002FEF6 /* DSLikesSong.m in Sources */,
 				320158081AC74AAD00999D88 /* MagicalRecord+Setup.m in Sources */,
 				32F182761AC87B8100EED920 /* iRate.m in Sources */,
 				32F182771AC87B8100EED920 /* SARate.m in Sources */,

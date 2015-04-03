@@ -133,25 +133,36 @@ typedef enum {
         cell.categoryLabel.text = object  ;
         return cell;
     }else{
-   DSMainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mainTableIdentifier];
+        
+        
+        
+    DSMainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mainTableIdentifier];
     if (cell == nil) {
         cell = [[DSMainTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:mainTableIdentifier];
     }
     
-    PFObject* object = [self.musicObjects objectAtIndex:indexPath.row];
-    
+    if (self.selectedTab == 3) {
+        DSSong*   song = [self.musicObjects objectAtIndex:indexPath.row];
+        cell.rateView.rating = [song.rate floatValue];
+        cell.artistLabel.text = song.author;
+        cell.titleLabel.text = song.name;
+    } else {
+        PFObject* object = [self.musicObjects objectAtIndex:indexPath.row];
+        cell.rateView.rating = [[object objectForKey:@"rate"] floatValue];
+        cell.artistLabel.text = [object objectForKey:@"author"];
+        cell.titleLabel.text = [object objectForKey:@"name"];
+    }
     cell.rateView.delegate = self;
     cell.rateView.editable = YES;
     cell.rateView.notSelectedImage = [UIImage imageNamed:@"heart_empty@2x.png"];
     cell.rateView.halfSelectedImage =  [UIImage imageNamed:@"heart_half@2x.png"];
     cell.rateView.fullSelectedImage = [UIImage imageNamed:@"heart_full@2x.png"];
     cell.rateView.maxRating = 5;
-    cell.rateView.rating = [ [object objectForKey:@"rate"] floatValue];
+    
     if (self.selectedRow != indexPath.row) {
         [cell.rateView setHidden:YES];
     }
-    cell.artistLabel.text = [object objectForKey:@"author"];
-    cell.titleLabel.text = [object objectForKey:@"name"];
+   
     cell.downloadBtn.tag = indexPath.row;
     [cell.downloadBtn addTarget:self action:@selector(downloadClicked:)
                forControlEvents:UIControlEventTouchUpInside];
@@ -337,6 +348,7 @@ typedef enum {
              
              NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:soundFile.name];
              [data writeToFile:fullPath options:NSDataWritingWithoutOverwriting error:nil];
+             [[DSSoundManager sharedManager] addSongToDownloads:object fileUrl:fullPath];
              //NSLog(@"Data Ok");
          }
     } ];
