@@ -39,6 +39,7 @@
 		3209D9941ABF7906000E5977 /* square@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3209D9921ABF7906000E5977 /* square@3x.png */; };
 		3209D9951ABF7906000E5977 /* triangle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3209D9931ABF7906000E5977 /* triangle@3x.png */; };
 		3209D9971ABFA9FF000E5977 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3209D9961ABFA9FF000E5977 /* bg.jpg */; };
+		32314D521ACF697A009B0E9C /* UIView+AnimateHidden.m in Sources */ = {isa = PBXBuildFile; fileRef = 32314D511ACF697A009B0E9C /* UIView+AnimateHidden.m */; };
 		32D65E531AAB2DBD00CB04A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D65E521AAB2DBD00CB04A1 /* main.m */; };
 		32D65E561AAB2DBD00CB04A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D65E551AAB2DBD00CB04A1 /* AppDelegate.m */; };
 		32D65E5C1AAB2DBD00CB04A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32D65E5A1AAB2DBD00CB04A1 /* Main.storyboard */; };
@@ -180,6 +181,8 @@
 		3209D9931ABF7906000E5977 /* triangle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "triangle@3x.png"; sourceTree = "<group>"; };
 		3209D9961ABFA9FF000E5977 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		322588CA1AC7591800CBF27C /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		32314D501ACF697A009B0E9C /* UIView+AnimateHidden.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+AnimateHidden.h"; path = "music/categories/UIView+AnimateHidden.h"; sourceTree = "<group>"; };
+		32314D511ACF697A009B0E9C /* UIView+AnimateHidden.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+AnimateHidden.m"; path = "music/categories/UIView+AnimateHidden.m"; sourceTree = "<group>"; };
 		32D65E4D1AAB2DBD00CB04A1 /* music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = music.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32D65E511AAB2DBD00CB04A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32D65E521AAB2DBD00CB04A1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -414,9 +417,19 @@
 			name = manager;
 			sourceTree = "<group>";
 		};
+		32314D531ACF69D3009B0E9C /* categories */ = {
+			isa = PBXGroup;
+			children = (
+				32314D501ACF697A009B0E9C /* UIView+AnimateHidden.h */,
+				32314D511ACF697A009B0E9C /* UIView+AnimateHidden.m */,
+			);
+			name = categories;
+			sourceTree = "<group>";
+		};
 		32D65E441AAB2DBD00CB04A1 = {
 			isa = PBXGroup;
 			children = (
+				32314D531ACF69D3009B0E9C /* categories */,
 				3201580B1AC74ADE00999D88 /* Model.xcdatamodeld */,
 				32D65E811AAB346F00CB04A1 /* Entitlements.plist */,
 				32D65E4F1AAB2DBD00CB04A1 /* music */,
@@ -795,6 +808,7 @@
 				BFCB0FD31AB856FC0079CCE3 /* DSMainViewController.m in Sources */,
 				320158091AC74AAD00999D88 /* MagicalRecord+ShorthandSupport.m in Sources */,
 				32D65E531AAB2DBD00CB04A1 /* main.m in Sources */,
+				32314D521ACF697A009B0E9C /* UIView+AnimateHidden.m in Sources */,
 				3201580D1AC74ADE00999D88 /* Model.xcdatamodeld in Sources */,
 				BFCB0FD91AB879A40079CCE3 /* DSVersionsTableViewController.m in Sources */,
 				BFCB0FD61AB857310079CCE3 /* DSMainTableViewCell.m in Sources */,

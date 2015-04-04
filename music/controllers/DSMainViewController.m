@@ -13,6 +13,7 @@
 #import "DSRateView.h"
 #import "NFXIntroViewController.h"
 #import "DSSong.h"
+#import "UIView+AnimateHidden.h"
 
 typedef enum {
     DSSongSearch,
@@ -254,17 +255,18 @@ typedef enum {
     } else {
         if ([indexPath isEqual:[tableView indexPathForSelectedRow]])
         {
-            return 120.0f;
+            return 125.0f;
         }  else {
-        
+          
             return 80;
+            
         }
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.selectedRow = indexPath.row;
+   
     if (self.selectedTab == 2  && self.selectCategory == nil){
         DSCategoryTableViewCell* cell =( DSCategoryTableViewCell*)  [self.tableView cellForRowAtIndexPath:indexPath];
         self.selectCategory  = cell.categoryLabel.text;
@@ -277,10 +279,18 @@ typedef enum {
      //   NSMutableArray *modifiedRows = [NSMutableArray array];
       //  [modifiedRows addObject:indexPath];
       //  [tableView reloadRowsAtIndexPaths:modifiedRows withRowAnimation: UITableViewRowAnimationAutomatic];
+        NSIndexPath *myIP = [NSIndexPath indexPathForRow:self.selectedRow inSection:0];
+        DSMainTableViewCell *cell = ( DSMainTableViewCell*)[tableView cellForRowAtIndexPath:myIP];
+        if (cell.rateView.hidden == NO){
+            
+            [cell.rateView setHiddenAnimated:YES delay:0 duration:0.3];
+            
+        }
         [tableView beginUpdates];
         [self animateCell:indexPath andTableView:tableView];
         [tableView endUpdates];
     }
+     self.selectedRow = indexPath.row;
 }
 
 #pragma mark - Self Methods
@@ -292,21 +302,20 @@ typedef enum {
         // [cell.rateView setHidden:NO ];
 
          CGRect rect = cell.frame;
-         rect.size.height = 120.0f;
+         rect.size.height = 125.0f;
          cell.frame = rect;
          //NSLog(@"%f", cell.frame.size.height);
      }];
+    DSMainTableViewCell *cell = ( DSMainTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+    [cell.rateView setHiddenAnimated:NO delay:0 duration:1];
 }
 - (void)searchShow:(UIBarButtonItem *)sender {
     
-    
     UIBarButtonSystemItem item = UIBarButtonSystemItemEdit;
-    
     
     if ([self.navigationItem.titleView isKindOfClass:[UISearchBar class]]) {
         
         item = UIBarButtonSystemItemSearch;
-        
         
         UISegmentedControl *control = [[UISegmentedControl alloc]initWithItems:@[@"Song",@"Artist"]];
         [control addTarget:self action:@selector(searchSongsControl:) forControlEvents:UIControlEventValueChanged];
@@ -477,6 +486,9 @@ typedef enum {
 - (void) loadDataForSortType:(NSString*) key{
     
     PFQuery *query = [PFQuery queryWithClassName:@"Music"];
+   // query.maxCacheAge = 60 * 60 * 24;
+   // query.cachePolicy = kPFCachePolicyNetworkElseCache;
+    query.limit = 1000;
     if ([key isEqualToString:@"top"]){
         [query orderByDescending:@"rate"];
     }
