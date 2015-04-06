@@ -526,6 +526,16 @@ typedef enum {
     
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= self.tableView.contentSize.height - scrollView.frame.size.height/2) {
+     //   if (!self.loadingData) {
+       //     [self getFriendFromServer];
+        NSLog(@"%f , %f,  %f",scrollView.contentOffset.y,scrollView.frame.size.height , self.tableView.contentSize.height);
+       // }
+    }
+}
+
 #pragma mark - DSSoundManagerDelegate
 - (void) statusChanged:(BOOL) playStatus {
    NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];

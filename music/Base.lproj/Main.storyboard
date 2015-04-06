@@ -82,22 +82,25 @@
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3r-DB-Re5">
                                                     <rect key="frame" x="96" y="40" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9k8-Ty-NVv">
                                                     <rect key="frame" x="96" y="8" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cHq-zc-LCs">
                                                     <rect key="frame" x="181" y="0.0" width="100" height="30"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="15"/>
                                                     <state key="normal" title="Other versions">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="250" y="105" width="126" height="31"/>
+                                                    </variation>
                                                     <connections>
                                                         <segue destination="ynb-AH-wBV" kind="show" id="kKv-3Z-xbM"/>
                                                     </connections>
@@ -207,19 +210,19 @@
                                                     <exclude reference="jKw-vW-Qzd"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="3rd-A9-54q"/>
-                                                    <exclude reference="ItE-Ss-M5x"/>
-                                                    <exclude reference="eA8-Q7-JJo"/>
-                                                    <exclude reference="lnc-Hf-gaK"/>
-                                                    <exclude reference="Emc-zc-2Xg"/>
-                                                    <exclude reference="JSW-Vl-fbN"/>
-                                                    <exclude reference="eLm-i1-KhG"/>
-                                                    <exclude reference="xf9-rW-Waq"/>
-                                                    <exclude reference="EV4-qd-sG2"/>
                                                     <exclude reference="FIq-Qm-CSI"/>
                                                     <exclude reference="Pao-i9-ngR"/>
                                                     <exclude reference="VNz-dn-CT4"/>
                                                     <exclude reference="tlN-lL-szy"/>
+                                                    <exclude reference="3rd-A9-54q"/>
+                                                    <exclude reference="ItE-Ss-M5x"/>
+                                                    <exclude reference="eA8-Q7-JJo"/>
+                                                    <exclude reference="lnc-Hf-gaK"/>
+                                                    <exclude reference="EV4-qd-sG2"/>
+                                                    <exclude reference="Emc-zc-2Xg"/>
+                                                    <exclude reference="JSW-Vl-fbN"/>
+                                                    <exclude reference="eLm-i1-KhG"/>
+                                                    <exclude reference="xf9-rW-Waq"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
@@ -229,19 +232,19 @@
                                                     <include reference="jKw-vW-Qzd"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="3rd-A9-54q"/>
-                                                    <include reference="ItE-Ss-M5x"/>
-                                                    <include reference="eA8-Q7-JJo"/>
-                                                    <include reference="lnc-Hf-gaK"/>
-                                                    <include reference="Emc-zc-2Xg"/>
-                                                    <exclude reference="JSW-Vl-fbN"/>
-                                                    <include reference="eLm-i1-KhG"/>
-                                                    <exclude reference="xf9-rW-Waq"/>
-                                                    <include reference="EV4-qd-sG2"/>
                                                     <include reference="FIq-Qm-CSI"/>
                                                     <include reference="Pao-i9-ngR"/>
                                                     <include reference="VNz-dn-CT4"/>
                                                     <include reference="tlN-lL-szy"/>
+                                                    <include reference="3rd-A9-54q"/>
+                                                    <include reference="ItE-Ss-M5x"/>
+                                                    <include reference="eA8-Q7-JJo"/>
+                                                    <include reference="lnc-Hf-gaK"/>
+                                                    <include reference="EV4-qd-sG2"/>
+                                                    <include reference="Emc-zc-2Xg"/>
+                                                    <exclude reference="JSW-Vl-fbN"/>
+                                                    <include reference="eLm-i1-KhG"/>
+                                                    <exclude reference="xf9-rW-Waq"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
