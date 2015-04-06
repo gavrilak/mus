@@ -23,7 +23,7 @@ typedef enum {
 @interface DSMainViewController () <DSRateViewDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) PFRelation* relation;
-@property (strong, nonatomic) NSArray* musicObjects;
+@property (strong, nonatomic) NSMutableArray* musicObjects;
 @property (strong, nonatomic) NSArray* categories;
 @property (assign, nonatomic) NSInteger activeItem;
 @property (assign, nonatomic) NSInteger playItem;
@@ -36,6 +36,7 @@ typedef enum {
 @property (weak,nonatomic) UISearchBar *searchBar;
 @property (strong , nonatomic) UIView* titleView;
 @property (assign , nonatomic) BOOL reloadData;
+@property (assign , nonatomic) BOOL loadingData;
 
 @end
 
@@ -421,7 +422,7 @@ typedef enum {
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             
-            self.musicObjects = objects;
+            self.musicObjects = [NSMutableArray arrayWithArray:objects];
             self.reloadData = YES;
             [self.tableView reloadData];
             self.reloadData = NO;
@@ -482,13 +483,55 @@ typedef enum {
     [self.tableView endUpdates];
     
 }
+- (void)getDataFromServer {
+    
+    if (self.loadingData != YES) {
+        
+        self.loadingData = YES;
+        PFQuery *query = [PFQuery queryWithClassName:@"Music"];
+        query.skip = [self.musicObjects count];
+        query.limit = 20;
+     //   if ([key isEqualToString:@"top"]){
+            [query orderByDescending:@"rate"];
+    //    }
+     //   if ([key isEqualToString:@"new"]){
+            [query orderByDescending:@"createdAt"];
+            
+      //  }
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                
+                [self.musicObjects addObjectsFromArray:objects];
+                NSMutableArray* newPaths = [NSMutableArray array];
+                for (int i = (int)[self.musicObjects count] - (int)[objects count]; i < [self.musicObjects count]; i++) {
+                    [newPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                }
+                
+                [self.tableView beginUpdates];
+                [self.tableView insertRowsAtIndexPaths:newPaths withRowAnimation:UITableViewRowAnimationNone];
+                [self.tableView endUpdates];
+                
+                 self.loadingData = NO;
+            } else {
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+                self.loadingData = NO;
+            }
+        }];
+       
+                
+        
+                
+        
+    }
+}
 
 - (void) loadDataForSortType:(NSString*) key{
     
     PFQuery *query = [PFQuery queryWithClassName:@"Music"];
    // query.maxCacheAge = 60 * 60 * 24;
    // query.cachePolicy = kPFCachePolicyNetworkElseCache;
-    query.limit = 1000;
+    query.limit = 20;
     if ([key isEqualToString:@"top"]){
         [query orderByDescending:@"rate"];
     }
@@ -499,7 +542,7 @@ typedef enum {
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             
-            self.musicObjects = objects;
+            self.musicObjects = [NSMutableArray arrayWithArray:objects];
         
             [self reloadMusicObjects];
         } else {
@@ -529,10 +572,10 @@ typedef enum {
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= self.tableView.contentSize.height - scrollView.frame.size.height/2) {
-     //   if (!self.loadingData) {
-       //     [self getFriendFromServer];
-        NSLog(@"%f , %f,  %f",scrollView.contentOffset.y,scrollView.frame.size.height , self.tableView.contentSize.height);
-       // }
+        if (!self.loadingData) {
+           [self getDataFromServer];
+            NSLog(@"%f , %f,  %f",scrollView.contentOffset.y,scrollView.frame.size.height , self.tableView.contentSize.height);
+       }
     }
 }
 
