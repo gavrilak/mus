@@ -48,11 +48,13 @@ typedef enum {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     UIGraphicsBeginImageContext(self.view.frame.size);
-    [[UIImage imageNamed:@"bg.jpg"] drawInRect:self.view.bounds];
+    [[UIImage imageNamed:@"1.jpg"] drawInRect:self.view.bounds];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
     
-     self.titleView = self.navigationItem.titleView;
+   
+    self.titleView = self.navigationItem.titleView;
     
     UIImage *btnImg = [UIImage imageNamed:@"button_set_up.png"];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -75,14 +77,14 @@ typedef enum {
     
     [self.tabbar setSelectedItem:[self.tabbar.items objectAtIndex:0]];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+    
     self.selectedRow = -1;
     
     [self loadDataForSortType:@"top"];
     [DSSoundManager sharedManager].delegate = self;
     self.playTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
     
-    
+   
     
 }
   
@@ -156,6 +158,7 @@ typedef enum {
     }
     cell.rateView.delegate = self;
     cell.rateView.editable = YES;
+    cell.rateView.tag = indexPath.row;
     cell.rateView.notSelectedImage = [UIImage imageNamed:@"heart_empty@2x.png"];
     cell.rateView.halfSelectedImage =  [UIImage imageNamed:@"heart_half@2x.png"];
     cell.rateView.fullSelectedImage = [UIImage imageNamed:@"heart_full@2x.png"];
@@ -359,7 +362,8 @@ typedef enum {
              NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:soundFile.name];
              [data writeToFile:fullPath options:NSDataWritingWithoutOverwriting error:nil];
              [[DSSoundManager sharedManager] addSongToDownloads:object fileUrl:fullPath];
-             //NSLog(@"Data Ok");
+             [object incrementKey:@"colDownloads"];
+             [object saveInBackground];
          }
     } ];
 }
@@ -658,7 +662,12 @@ typedef enum {
 #pragma mark - DSRateViewDelegate
 
 - (void)rateView:(DSRateView *)rateView ratingDidChange:(float)rating{
-    
+    PFObject *object = [self.musicObjects objectAtIndex:rateView.tag];
+    double newRate = ([[object objectForKey:@"rate"] floatValue] * [[object objectForKey:@"colRates"] integerValue] + rating) / ([[object objectForKey:@"colRates"] integerValue] + 1);
+    newRate = newRate - [[object objectForKey:@"rate"] floatValue] ;
+    [object incrementKey:@"colRates"];
+    [object incrementKey:@"rate" byAmount:[NSNumber numberWithDouble:newRate] ];
+    [object saveInBackground];
     
 }
 #pragma mark - UISearchBarDelegate
