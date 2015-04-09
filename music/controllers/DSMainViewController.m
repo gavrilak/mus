@@ -14,6 +14,7 @@
 #import "NFXIntroViewController.h"
 #import "DSSong.h"
 #import "UIView+AnimateHidden.h"
+#import "YRActivityIndicator.h"
 
 typedef enum {
     DSSongSearch,
@@ -37,6 +38,7 @@ typedef enum {
 @property (strong , nonatomic) UIView* titleView;
 @property (assign , nonatomic) BOOL reloadData;
 @property (assign , nonatomic) BOOL loadingData;
+@property (strong , nonatomic) YRActivityIndicator* activityIndicator;
 
 @end
 
@@ -85,6 +87,10 @@ typedef enum {
     self.playTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
     
    
+    self.activityIndicator = [[YRActivityIndicator alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
+    self.activityIndicator.center = self.tableView.center;
+    [self.tableView addSubview: self.activityIndicator];
+    [self.activityIndicator startAnimating];
     
 }
   
