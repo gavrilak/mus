@@ -15,6 +15,7 @@
 #import "DSSong.h"
 #import "UIView+AnimateHidden.h"
 #import "YRActivityIndicator.h"
+#import "MSLiveBlur.h"
 
 typedef enum {
     DSSongSearch,
@@ -48,6 +49,8 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     // Do any additional setup after loading the view, typically from a nib.
     UIGraphicsBeginImageContext(self.view.frame.size);
     [[UIImage imageNamed:@"1.jpg"] drawInRect:self.view.bounds];
@@ -55,7 +58,6 @@ typedef enum {
     UIGraphicsEndImageContext();
     self.view.backgroundColor = [UIColor colorWithPatternImage:image];
     
-   
     self.titleView = self.navigationItem.titleView;
     
     UIImage *btnImg = [UIImage imageNamed:@"button_set_up.png"];
@@ -65,7 +67,6 @@ typedef enum {
     [btn addTarget:self action:@selector(showInstruction) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = item;
-    
     
     btnImg = [UIImage imageNamed:@"button_back.png"];
     btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -79,26 +80,27 @@ typedef enum {
     
     [self.tabbar setSelectedItem:[self.tabbar.items objectAtIndex:0]];
     
-    
     self.selectedRow = -1;
+    
+    self.activityIndicator = [[YRActivityIndicator alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    self.activityIndicator.center = self.tableView.center;
+    [self addLoading];
     
     [self loadDataForSortType:@"top"];
     [DSSoundManager sharedManager].delegate = self;
     self.playTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
     
-   
-    self.activityIndicator = [[YRActivityIndicator alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
-    self.activityIndicator.center = self.tableView.center;
-    [self.tableView addSubview: self.activityIndicator];
-    [self.activityIndicator startAnimating];
-    
+   }
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
-  
+
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [DSSoundManager sharedManager].delegate = nil;
     [self.playTimer invalidate];
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -110,9 +112,7 @@ typedef enum {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
-
 #pragma mark - UITableViewDataSource
-
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.reloadData) {
@@ -143,8 +143,6 @@ typedef enum {
         cell.categoryLabel.text = object  ;
         return cell;
     }else{
-        
-        
         
     DSMainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mainTableIdentifier];
     if (cell == nil) {
@@ -178,12 +176,10 @@ typedef enum {
     [cell.downloadBtn addTarget:self action:@selector(downloadClicked:)
                forControlEvents:UIControlEventTouchUpInside];
     
-    
-    
     cell.uaprogressBtn.fillOnTouch = YES;
     cell.uaprogressBtn.tintColor = [UIColor whiteColor];
     cell.uaprogressBtn.borderWidth = 2.0;
-     cell.uaprogressBtn.lineWidth = 2.0;
+    cell.uaprogressBtn.lineWidth = 2.0;
     
     UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
     [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
@@ -194,8 +190,6 @@ typedef enum {
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = cell.uaprogressBtn.tintColor;
     label.backgroundColor = [UIColor clearColor];
-
-
 
     cell.uaprogressBtn.progressChangedBlock = ^(UAProgressView *progressView, CGFloat progress) {
         if ([progressView.centralView isKindOfClass:[UILabel class]]){
@@ -216,7 +210,6 @@ typedef enum {
             }
         
     };
-    
     
     cell.uaprogressBtn.didSelectBlock = ^(UAProgressView *progressView){
         
@@ -267,9 +260,7 @@ typedef enum {
         {
             return 125.0f;
         }  else {
-          
             return 80;
-            
         }
     }
 }
@@ -304,6 +295,26 @@ typedef enum {
 }
 
 #pragma mark - Self Methods
+- (void)addLoading{
+    
+   // [[MSLiveBlur sharedInstance] addSubview:self.activityIndicator];
+  //  [MSLiveBlur sharedInstance].isStatic = YES;
+  //  [MSLiveBlur sharedInstance].blurRadius = 1.5;
+  //  [[MSLiveBlur sharedInstance] blurRect:self.tableView.bounds];
+    [self.tableView addSubview:self.activityIndicator];
+    [self.activityIndicator startAnimating];
+
+}
+
+- (void)removeLoading{
+    
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator removeFromSuperview];
+    //[[MSLiveBlur sharedInstance] stopBlurringRect:self.view.bounds];
+    
+}
+
+
 - (void)animateCell:(NSIndexPath*)indexPath andTableView:(UITableView*)tableView
 {
     [UIView animateWithDuration:0.5f animations: ^
@@ -319,6 +330,8 @@ typedef enum {
     DSMainTableViewCell *cell = ( DSMainTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     [cell.rateView setHiddenAnimated:NO delay:0 duration:1];
 }
+
+
 - (void)searchShow:(UIBarButtonItem *)sender {
     
     UIBarButtonSystemItem item = UIBarButtonSystemItemEdit;
@@ -493,7 +506,7 @@ typedef enum {
     [self.tableView endUpdates];
     
 }
-- (void)getDataFromServer {
+- (void)getAddDataFromServer:(NSString*) key {
     
     if (self.loadingData != YES) {
         
@@ -501,16 +514,16 @@ typedef enum {
         PFQuery *query = [PFQuery queryWithClassName:@"Music"];
         query.skip = [self.musicObjects count];
         query.limit = 20;
-     //   if ([key isEqualToString:@"top"]){
+        if ([key isEqualToString:@"top"]){
             [query orderByDescending:@"rate"];
-    //    }
-     //   if ([key isEqualToString:@"new"]){
+        }
+        if ([key isEqualToString:@"new"]){
             [query orderByDescending:@"createdAt"];
             
-      //  }
+        }
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
-                
+                self.loadingData = NO;
                 [self.musicObjects addObjectsFromArray:objects];
                 NSMutableArray* newPaths = [NSMutableArray array];
                 for (int i = (int)[self.musicObjects count] - (int)[objects count]; i < [self.musicObjects count]; i++) {
@@ -520,8 +533,6 @@ typedef enum {
                 [self.tableView beginUpdates];
                 [self.tableView insertRowsAtIndexPaths:newPaths withRowAnimation:UITableViewRowAnimationNone];
                 [self.tableView endUpdates];
-                
-                 self.loadingData = NO;
             } else {
                 // Log details of the failure
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -551,13 +562,13 @@ typedef enum {
     }
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            
             self.musicObjects = [NSMutableArray arrayWithArray:objects];
-        
+            [self removeLoading];
             [self reloadMusicObjects];
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
+            [self removeLoading];
         }
     }];
 }
@@ -580,12 +591,16 @@ typedef enum {
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
-    if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= self.tableView.contentSize.height - scrollView.frame.size.height/2) {
-        if (!self.loadingData) {
-           [self getDataFromServer];
+    if (self.selectedTab < 2 ) {
+        if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= self.tableView.contentSize.height - scrollView.frame.size.height/2) {
+            if (!self.loadingData) {
+            if(self.selectedTab == 0 )
+                [self getAddDataFromServer:@"top"];
+            else
+                [self getAddDataFromServer:@"new"];
             NSLog(@"%f , %f,  %f",scrollView.contentOffset.y,scrollView.frame.size.height , self.tableView.contentSize.height);
        }
+    }
     }
 }
 
@@ -610,7 +625,7 @@ typedef enum {
 
 #pragma mark - Timer
 - (void) timerAction:(id)timer{
-
+   
     if( [[DSSoundManager sharedManager] isPlaying]) {
         NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
         DSMainTableViewCell* cell =( DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
@@ -630,6 +645,7 @@ typedef enum {
     self.reloadData = NO;
     self.selectedTab = tabBar.selectedItem.tag;
     self.selectedRow = -1;
+    [self addLoading];
     switch (tabBar.selectedItem.tag) {
             
         case 0:{

@@ -514,11 +514,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450544678.661835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "438"
-            endingLineNumber = "438"
+            startingLineNumber = "451"
+            endingLineNumber = "451"
             landmarkName = "-loadCategory:"
             landmarkType = "5">
          </BreakpointContent>
@@ -530,11 +530,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450544678.661835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "439"
-            endingLineNumber = "439"
+            startingLineNumber = "452"
+            endingLineNumber = "452"
             landmarkName = "-loadCategory:"
             landmarkType = "5">
          </BreakpointContent>
@@ -546,11 +546,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450544678.661835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -562,11 +562,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450544678.661835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -578,11 +578,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450544678.661835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -594,11 +594,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450544678.661835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "365"
-            endingLineNumber = "365"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
             landmarkName = "-downloadClicked:"
             landmarkType = "5">
          </BreakpointContent>
@@ -610,11 +610,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450544678.661835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -626,11 +626,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450544678.661835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -642,11 +642,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450544678.661835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "472"
-            endingLineNumber = "472"
+            startingLineNumber = "485"
+            endingLineNumber = "485"
             landmarkName = "-loadCategories"
             landmarkType = "5">
          </BreakpointContent>
@@ -658,11 +658,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450544678.661835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "479"
-            endingLineNumber = "479"
+            startingLineNumber = "492"
+            endingLineNumber = "492"
             landmarkName = "-reloadCategories"
             landmarkType = "5">
          </BreakpointContent>
@@ -674,11 +674,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450544678.661835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "351"
-            endingLineNumber = "351"
+            startingLineNumber = "364"
+            endingLineNumber = "364"
             landmarkName = "-searchSongsControl:"
             landmarkType = "5">
          </BreakpointContent>
@@ -690,7 +690,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450544678.661835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "135"
@@ -706,7 +706,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450544678.661835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "136"
@@ -722,7 +722,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450544678.661835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "137"
@@ -738,11 +738,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450544678.661835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -754,7 +754,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450544678.661835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "139"
@@ -770,7 +770,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450544678.661835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "130"
@@ -782,15 +782,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450546755.236638"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "674"
-            endingLineNumber = "674"
+            startingLineNumber = "690"
+            endingLineNumber = "690"
             landmarkName = "-rateView:ratingDidChange:"
             landmarkType = "5">
          </BreakpointContent>
@@ -802,12 +802,92 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "450302429.564628"
+            timestampString = "450546755.236638"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "672"
-            endingLineNumber = "672"
+            startingLineNumber = "688"
+            endingLineNumber = "688"
             landmarkName = "-rateView:ratingDidChange:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "music/controllers/DSMainViewController.m"
+            timestampString = "450544678.661835"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "528"
+            endingLineNumber = "528"
+            landmarkName = "-getDataFromServer"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "music/controllers/DSMainViewController.m"
+            timestampString = "450546755.236638"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "565"
+            endingLineNumber = "565"
+            landmarkName = "-loadDataForSortType:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "music/controllers/DSMainViewController.m"
+            timestampString = "450546755.236638"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "566"
+            endingLineNumber = "566"
+            landmarkName = "-loadDataForSortType:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "music/controllers/DSMainViewController.m"
+            timestampString = "450544663.345997"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "-tableView:numberOfRowsInSection:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "music/controllers/DSMainViewController.m"
+            timestampString = "450546839.418939"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "594"
+            endingLineNumber = "594"
+            landmarkName = "-scrollViewDidScroll:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
