@@ -314,7 +314,6 @@ typedef enum {
     
 }
 
-
 - (void)animateCell:(NSIndexPath*)indexPath andTableView:(UITableView*)tableView
 {
     [UIView animateWithDuration:0.5f animations: ^
@@ -540,10 +539,6 @@ typedef enum {
             }
         }];
        
-                
-        
-                
-        
     }
 }
 
