@@ -34,7 +34,6 @@ typedef enum {
 @property (assign, nonatomic) NSInteger selectedTab;
 @property (strong, nonatomic) NSString* selectCategory;
 @property (strong, nonatomic) UIBarButtonItem* navBarItem;
-@property (assign, nonatomic) NSInteger selectedSearch;
 @property (weak,nonatomic) UISearchBar *searchBar;
 @property (strong , nonatomic) UIView* titleView;
 @property (assign , nonatomic) BOOL reloadData;
@@ -280,16 +279,16 @@ typedef enum {
      //   NSMutableArray *modifiedRows = [NSMutableArray array];
       //  [modifiedRows addObject:indexPath];
       //  [tableView reloadRowsAtIndexPaths:modifiedRows withRowAnimation: UITableViewRowAnimationAutomatic];
-        NSIndexPath *myIP = [NSIndexPath indexPathForRow:self.selectedRow inSection:0];
-        DSMainTableViewCell *cell = ( DSMainTableViewCell*)[tableView cellForRowAtIndexPath:myIP];
-        if (cell.rateView.hidden == NO){
-            
-            [cell.rateView setHiddenAnimated:YES delay:0 duration:0.3];
-            
+        if (self.selectedRow != indexPath.row) {
+            NSIndexPath *myIP = [NSIndexPath indexPathForRow:self.selectedRow inSection:0];
+            DSMainTableViewCell *cell = ( DSMainTableViewCell*)[tableView cellForRowAtIndexPath:myIP];
+            if (cell.rateView.hidden == NO){
+                [cell.rateView setHiddenAnimated:YES delay:0 duration:0.3];
+            }
+            [tableView beginUpdates];
+            [self animateCell:indexPath andTableView:tableView];
+            [tableView endUpdates];
         }
-        [tableView beginUpdates];
-        [self animateCell:indexPath andTableView:tableView];
-        [tableView endUpdates];
     }
      self.selectedRow = indexPath.row;
 }
@@ -333,39 +332,15 @@ typedef enum {
 
 - (void)searchShow:(UIBarButtonItem *)sender {
     
-    UIBarButtonSystemItem item = UIBarButtonSystemItemEdit;
+    UISearchBar *searchBar = [[UISearchBar alloc]init];
+    self.searchBar = searchBar;
+    self.searchBar.delegate = self;
+    self.navigationItem.titleView = self.searchBar;
     
-    if ([self.navigationItem.titleView isKindOfClass:[UISearchBar class]]) {
-        
-        item = UIBarButtonSystemItemSearch;
-        
-        UISegmentedControl *control = [[UISegmentedControl alloc]initWithItems:@[@"Song",@"Artist"]];
-        [control addTarget:self action:@selector(searchSongsControl:) forControlEvents:UIControlEventValueChanged];
-        control.selectedSegmentIndex = self.selectedSearch;
-       
-        self.navigationItem.titleView = control;
-        
-    } else {
-        
-        UISearchBar *searchBar = [[UISearchBar alloc]init];
-        self.searchBar = searchBar;
-        self.searchBar.delegate = self;
-        self.navigationItem.titleView = self.searchBar;
-        
-    }
-    
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:item target:self action:@selector(searchShow:)];
-    
-    [self.navigationItem setLeftBarButtonItem:leftButton animated:YES];
+    [self.navigationItem setLeftBarButtonItem:nil animated:YES];
+    [self.navigationItem setRightBarButtonItem:nil animated:YES];
     
 }
-
-- (void)searchSongsControl:(UISegmentedControl *)sender {
-    
-    self.selectedSearch = sender.selectedSegmentIndex;
-    
-}
-
 
 - (void) downloadClicked:(id)sender {
     
@@ -636,6 +611,7 @@ typedef enum {
         self.navigationItem.titleView = self.titleView;
     }
     self.reloadData = YES;
+    self.musicObjects = nil;
     [self.tableView reloadData];
     self.reloadData = NO;
     self.selectedTab = tabBar.selectedItem.tag;
@@ -690,44 +666,35 @@ typedef enum {
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+   
     [searchBar setShowsCancelButton:YES animated:YES];
+    
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
     
     [searchBar resignFirstResponder];
     [searchBar setShowsCancelButton:NO animated:YES];
+    
 }
 
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    NSString* searchKey;
-    if (self.selectedSearch == 0){
-        searchKey = @"name" ;
-    } else {
-        searchKey = @"author";
-    }
-   
-    PFQuery *queryCapitalizedString = [PFQuery queryWithClassName:@"Music"];
-    [queryCapitalizedString whereKey:searchKey containsString:[searchBar.text capitalizedString]];
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     
-    //query converted user text to lowercase
-    PFQuery *queryLowerCaseString = [PFQuery queryWithClassName:@"Music"];
-    [queryLowerCaseString whereKey:searchKey containsString:[searchBar.text lowercaseString]];
     
-    //query real user text
-    PFQuery *querySearchBarString = [PFQuery queryWithClassName:@"Music"];
-    [querySearchBarString whereKey:searchKey containsString:searchBar.text];
+    PFQuery *querySearchBarName = [PFQuery queryWithClassName:@"Music"];
+    [querySearchBarName whereKey:@"name" matchesRegex:searchBar.text modifiers:@"i" ];
     
-    PFQuery *finalQuery = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:queryCapitalizedString,queryLowerCaseString, querySearchBarString,nil]];
+    PFQuery *querySearchBarAuthor = [PFQuery queryWithClassName:@"Music"];
+    [querySearchBarAuthor whereKey:@"author" matchesRegex:searchBar.text modifiers:@"i" ];
     
+    PFQuery *finalQuery = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects: querySearchBarName,  querySearchBarAuthor, nil]];
+
     [finalQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            
-            self.musicObjects = objects;
-            
+            self.musicObjects =(NSMutableArray*) objects;
             [self.tableView reloadData];
         } else {
-            // Log details of the failure
+      
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
