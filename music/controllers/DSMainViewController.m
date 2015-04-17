@@ -190,6 +190,7 @@ typedef enum {
     label.textColor = cell.uaprogressBtn.tintColor;
     label.backgroundColor = [UIColor clearColor];
 
+   
     cell.uaprogressBtn.progressChangedBlock = ^(UAProgressView *progressView, CGFloat progress) {
         if ([progressView.centralView isKindOfClass:[UILabel class]]){
             if (progress == 0) progress = 0.01;
@@ -336,7 +337,6 @@ typedef enum {
     self.searchBar = searchBar;
     self.searchBar.delegate = self;
     self.navigationItem.titleView = self.searchBar;
-    
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     [self.navigationItem setRightBarButtonItem:nil animated:YES];
     
@@ -351,7 +351,6 @@ typedef enum {
          if (!error) {
              NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
              NSString *documentsDirectory = [paths objectAtIndex:0];
-             
              NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:soundFile.name];
              [data writeToFile:fullPath options:NSDataWritingWithoutOverwriting error:nil];
              [[DSSoundManager sharedManager] addSongToDownloads:object fileUrl:fullPath];
@@ -366,29 +365,22 @@ typedef enum {
     PFObject *object = [self.musicObjects objectAtIndex:row];
     PFFile *soundFile = object[@"mfile"];
     [soundFile getDataInBackgroundWithBlock:^(NSData *soundData, NSError *error) {
-        
         if(self.playItem!=self.activeItem ) {
             NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
             DSMainTableViewCell* cell =( DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
-            
             UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
             [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
             cell.uaprogressBtn.centralView = triangle;
             [cell.uaprogressBtn setProgress:0];
         }
-        
         if (!error) {
-        
             self.playItem = row;
             [[DSSoundManager sharedManager] playSong:soundData];
-            
         }
-        
     }
     progressBlock:^(int percentDone) {
         dispatch_async(dispatch_get_main_queue(), ^{
-                                   
-                    [progressView setProgress: (float) percentDone/100];
+                [progressView setProgress: (float) percentDone/100];
         });
     }];
 }

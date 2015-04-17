@@ -125,9 +125,9 @@
 
 }
 
-- (NSArray*) getDownloads {
+- (NSMutableArray*) getDownloads {
     
-    NSArray* array = [[NSArray alloc] init];
+    NSMutableArray* array = [[NSMutableArray alloc] init];
     array = [[DSSong  MR_findAllSortedBy:@"objectid"
                                ascending:YES
                                inContext:[NSManagedObjectContext MR_defaultContext]] mutableCopy];

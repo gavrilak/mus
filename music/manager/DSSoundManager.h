@@ -33,7 +33,7 @@
 
 - (void) addLikeforSongID: (NSString*) ID;
 - (BOOL) existsLikeForSongID:(NSString*) ID;
-- (NSArray*) getDownloads ;
+- (NSMutableArray*) getDownloads ;
 - (void) addSongToDownloads: (PFObject *) object fileUrl:(NSString*)  Url ;
 - (BOOL) existsSongInDownloads: (NSString*) ID;
 - (void) deleteSong:(NSString*) ID ;
