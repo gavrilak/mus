@@ -293,7 +293,9 @@ NSString * const UAProgressViewProgressAnimationKey = @"UAProgressViewProgressAn
 		} else {
 			
 			[self removeFillAnimated:NO];
-			
+            if (self.cancelSelectBlock) {
+                self.cancelSelectBlock(self);
+            }
 		}
 		
     } else if (UIGestureRecognizerStateEnded == gestureRecognizer.state) { // the touch has been picked up
@@ -309,6 +311,9 @@ NSString * const UAProgressViewProgressAnimationKey = @"UAProgressViewProgressAn
 		} else {
 			
 			[self removeFillAnimated:NO];
+            if (self.cancelSelectBlock) {
+                self.cancelSelectBlock(self);
+            }
 			
 		}
 		

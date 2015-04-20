@@ -15,6 +15,9 @@
  *
  *  Example usage would be to invert the colors on your centralView
  */
+@property (nonatomic, copy) void (^cancelSelectBlock)(UAProgressView *progressView);
+
+
 @property (nonatomic, copy) void (^fillChangedBlock)(UAProgressView *progressView, BOOL filled, BOOL animated);
 
 /**

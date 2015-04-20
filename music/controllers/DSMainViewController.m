@@ -80,9 +80,16 @@ typedef enum {
     [self.tabbar setSelectedItem:[self.tabbar.items objectAtIndex:0]];
     
     self.selectedRow = -1;
+    self.playItem = -1;
     
     self.activityIndicator = [[YRActivityIndicator alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    self.activityIndicator.center = self.tableView.center;
+    self.activityIndicator.center = CGPointMake(self.tableView.center.x, self.tableView.center.y - 80);
+    self.activityIndicator.radius = 60;
+    self.activityIndicator.maxItems = 5;
+    self.activityIndicator.minItemSize = CGSizeMake(10, 10);
+    self.activityIndicator.maxItemSize = CGSizeMake(35, 35);
+    self.activityIndicator.itemColor = [UIColor colorWithWhite:0.8 alpha:0.8];
+    
     [self addLoading];
     
     [self loadDataForSortType:@"top"];
@@ -182,14 +189,33 @@ typedef enum {
     
     UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
     [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
-    cell.uaprogressBtn.centralView = triangle;
-    
+        
+    UIImageView *square = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [square setImage:[UIImage imageNamed: @"square.png"] ];
+        
+    if (indexPath.row != self.playItem) {
+        cell.uaprogressBtn.centralView = triangle;
+        if ([[DSSoundManager sharedManager] isPlaying]){
+            [cell.uaprogressBtn setProgress:[DSSoundManager sharedManager].getCurrentProgress];
+        } else {
+            [cell.uaprogressBtn setProgress:0];
+        }
+    } else {
+
+        cell.uaprogressBtn.centralView = square;
+    }
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 48.0, 18.0)];
     label.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:14];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = cell.uaprogressBtn.tintColor;
     label.backgroundColor = [UIColor clearColor];
-
+        
+    cell.uaprogressBtn.cancelSelectBlock =  ^(UAProgressView *progressView) {
+        if (![progressView.centralView isKindOfClass:[UIImageView class]]){
+            cell.uaprogressBtn.centralView = triangle;
+        }
+    };
+        
    
     cell.uaprogressBtn.progressChangedBlock = ^(UAProgressView *progressView, CGFloat progress) {
         if ([progressView.centralView isKindOfClass:[UILabel class]]){
@@ -301,6 +327,7 @@ typedef enum {
   //  [MSLiveBlur sharedInstance].isStatic = YES;
   //  [MSLiveBlur sharedInstance].blurRadius = 1.5;
   //  [[MSLiveBlur sharedInstance] blurRect:self.tableView.bounds];
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [self.tableView addSubview:self.activityIndicator];
     [self.activityIndicator startAnimating];
 
@@ -308,8 +335,10 @@ typedef enum {
 
 - (void)removeLoading{
     
+     [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     [self.activityIndicator stopAnimating];
     [self.activityIndicator removeFromSuperview];
+    
     //[[MSLiveBlur sharedInstance] stopBlurringRect:self.view.bounds];
     
 }
@@ -608,6 +637,11 @@ typedef enum {
     self.reloadData = NO;
     self.selectedTab = tabBar.selectedItem.tag;
     self.selectedRow = -1;
+    
+    
+    self.playItem = -1;
+    self.activeItem = -1;
+    [[DSSoundManager sharedManager] pause];
     [self addLoading];
     switch (tabBar.selectedItem.tag) {
             
