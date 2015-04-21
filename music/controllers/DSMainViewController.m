@@ -16,6 +16,7 @@
 #import "UIView+AnimateHidden.h"
 #import "YRActivityIndicator.h"
 #import "MSLiveBlur.h"
+#import "GoogleWearAlertObjc.h"
 
 typedef enum {
     DSSongSearch,
@@ -301,11 +302,6 @@ typedef enum {
         [self loadCategory:self.selectCategory];
 
     } else {
-       // DSMainTableViewCell* cell =( DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:indexPath];
-      //  [cell.rateView setHidden:NO];
-     //   NSMutableArray *modifiedRows = [NSMutableArray array];
-      //  [modifiedRows addObject:indexPath];
-      //  [tableView reloadRowsAtIndexPaths:modifiedRows withRowAnimation: UITableViewRowAnimationAutomatic];
         if (self.selectedRow != indexPath.row) {
             NSIndexPath *myIP = [NSIndexPath indexPathForRow:self.selectedRow inSection:0];
             DSMainTableViewCell *cell = ( DSMainTableViewCell*)[tableView cellForRowAtIndexPath:myIP];
@@ -335,7 +331,7 @@ typedef enum {
 
 - (void)removeLoading{
     
-     [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     [self.activityIndicator stopAnimating];
     [self.activityIndicator removeFromSuperview];
     
@@ -348,12 +344,11 @@ typedef enum {
     [UIView animateWithDuration:0.5f animations: ^
      {
          DSMainTableViewCell *cell = ( DSMainTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-        // [cell.rateView setHidden:NO ];
 
          CGRect rect = cell.frame;
          rect.size.height = 125.0f;
          cell.frame = rect;
-         //NSLog(@"%f", cell.frame.size.height);
+
      }];
     DSMainTableViewCell *cell = ( DSMainTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     [cell.rateView setHiddenAnimated:NO delay:0 duration:1];
@@ -456,6 +451,7 @@ typedef enum {
     
     self.musicObjects = [[DSSoundManager sharedManager] getDownloads];
     [self reloadMusicObjects];
+    [self removeLoading];
 }
 
 - (void) loadCategories {
@@ -467,14 +463,17 @@ typedef enum {
          if (!error) {
              self.categories = [objects valueForKeyPath:@"@distinctUnionOfObjects.ganre"];
              [self reloadCategories];
+             [self removeLoading];
              
          } else {
              // Log details of the failure
              NSLog(@"Error: %@ %@", error, [error userInfo]);
+             [self removeLoading];
          }
         }];
     } else {
         [self reloadCategories];
+        [self removeLoading];
     }
     
 }
@@ -682,11 +681,20 @@ typedef enum {
 
 - (void)rateView:(DSRateView *)rateView ratingDidChange:(float)rating{
     PFObject *object = [self.musicObjects objectAtIndex:rateView.tag];
+    UIImage *image;
     double newRate = ([[object objectForKey:@"rate"] floatValue] * [[object objectForKey:@"colRates"] integerValue] + rating) / ([[object objectForKey:@"colRates"] integerValue] + 1);
     newRate = newRate - [[object objectForKey:@"rate"] floatValue] ;
     [object incrementKey:@"colRates"];
     [object incrementKey:@"rate" byAmount:[NSNumber numberWithDouble:newRate] ];
     [object saveInBackground];
+    if (rating < 2) {
+        image = [UIImage imageNamed:@"broken_heart.png"];
+    } else if (rating < 4) {
+        image = [UIImage imageNamed:@"neutral_heart.png"];
+    } else {
+        image = [UIImage imageNamed:@"smile_heart.png"];
+    }
+    [[GoogleWearAlertObjc getInstance]prepareNotificationToBeShown:[[GoogleWearAlertViewObjc alloc]initWithTitle:nil andImage:image andWithType:Message andWithDuration:2.5 inViewController:self atPostion:Center canBeDismissedByUser:NO]];
     
 }
 #pragma mark - UISearchBarDelegate

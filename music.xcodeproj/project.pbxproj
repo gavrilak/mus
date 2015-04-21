@@ -125,6 +125,12 @@
 		BFCB0FD91AB879A40079CCE3 /* DSVersionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCB0FD81AB879A40079CCE3 /* DSVersionsTableViewController.m */; };
 		BFCDBE3A1ACE9DD70002FEF6 /* DSLikesSong.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCDBE371ACE9DD70002FEF6 /* DSLikesSong.m */; };
 		BFCDBE3B1ACE9DD70002FEF6 /* DSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCDBE391ACE9DD70002FEF6 /* DSSong.m */; };
+		BFE8FD2A1AE680F500B11E51 /* broken_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE8FD271AE680F500B11E51 /* broken_heart.png */; };
+		BFE8FD2B1AE680F500B11E51 /* neutral_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE8FD281AE680F500B11E51 /* neutral_heart.png */; };
+		BFE8FD2C1AE680F500B11E51 /* smile_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE8FD291AE680F500B11E51 /* smile_heart.png */; };
+		BFE8FD381AE69BC600B11E51 /* GoogleWearAlertObjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FD351AE69BC600B11E51 /* GoogleWearAlertObjc.m */; };
+		BFE8FD391AE69BC600B11E51 /* GoogleWearAlertViewObjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FD371AE69BC600B11E51 /* GoogleWearAlertViewObjc.m */; };
+		BFE8FD3C1AE69DB000B11E51 /* UIColor+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FD3B1AE69DB000B11E51 /* UIColor+Alert.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -324,6 +330,15 @@
 		BFCDBE371ACE9DD70002FEF6 /* DSLikesSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSLikesSong.m; path = models/DSLikesSong.m; sourceTree = "<group>"; };
 		BFCDBE381ACE9DD70002FEF6 /* DSSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSSong.h; path = models/DSSong.h; sourceTree = "<group>"; };
 		BFCDBE391ACE9DD70002FEF6 /* DSSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSSong.m; path = models/DSSong.m; sourceTree = "<group>"; };
+		BFE8FD271AE680F500B11E51 /* broken_heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = broken_heart.png; sourceTree = "<group>"; };
+		BFE8FD281AE680F500B11E51 /* neutral_heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = neutral_heart.png; sourceTree = "<group>"; };
+		BFE8FD291AE680F500B11E51 /* smile_heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile_heart.png; sourceTree = "<group>"; };
+		BFE8FD341AE69BC600B11E51 /* GoogleWearAlertObjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleWearAlertObjc.h; sourceTree = "<group>"; };
+		BFE8FD351AE69BC600B11E51 /* GoogleWearAlertObjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleWearAlertObjc.m; sourceTree = "<group>"; };
+		BFE8FD361AE69BC600B11E51 /* GoogleWearAlertViewObjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleWearAlertViewObjc.h; sourceTree = "<group>"; };
+		BFE8FD371AE69BC600B11E51 /* GoogleWearAlertViewObjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleWearAlertViewObjc.m; sourceTree = "<group>"; };
+		BFE8FD3A1AE69DB000B11E51 /* UIColor+Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Alert.h"; sourceTree = "<group>"; };
+		BFE8FD3B1AE69DB000B11E51 /* UIColor+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Alert.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -614,6 +629,7 @@
 		32D65E761AAB2F4400CB04A1 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				BFE8FD331AE69BC600B11E51 /* AlertImage */,
 				3245F1141AD971CA0063A2A1 /* MSLiveBlur */,
 				32EB20631AD70C0800CFA191 /* YRActivityIndicator */,
 				32F182681AC87B8100EED920 /* Rate */,
@@ -739,6 +755,9 @@
 		BF897C301AB9A23100A3963A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				BFE8FD271AE680F500B11E51 /* broken_heart.png */,
+				BFE8FD281AE680F500B11E51 /* neutral_heart.png */,
+				BFE8FD291AE680F500B11E51 /* smile_heart.png */,
 				32F1CA6B1AD7291D00D6BEE6 /* key.png */,
 				32EB20571AD5AB9900CFA191 /* 1.jpg */,
 				32EB20581AD5AB9900CFA191 /* 2.jpg */,
@@ -783,6 +802,20 @@
 				BFCB0FD21AB856FC0079CCE3 /* DSMainViewController.m */,
 			);
 			name = controllers;
+			sourceTree = "<group>";
+		};
+		BFE8FD331AE69BC600B11E51 /* AlertImage */ = {
+			isa = PBXGroup;
+			children = (
+				BFE8FD3A1AE69DB000B11E51 /* UIColor+Alert.h */,
+				BFE8FD3B1AE69DB000B11E51 /* UIColor+Alert.m */,
+				BFE8FD341AE69BC600B11E51 /* GoogleWearAlertObjc.h */,
+				BFE8FD351AE69BC600B11E51 /* GoogleWearAlertObjc.m */,
+				BFE8FD361AE69BC600B11E51 /* GoogleWearAlertViewObjc.h */,
+				BFE8FD371AE69BC600B11E51 /* GoogleWearAlertViewObjc.m */,
+			);
+			name = AlertImage;
+			path = lib/AlertImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -871,6 +904,7 @@
 				32D6D9251AC7305F00DC6061 /* heart_half@2x.png in Resources */,
 				32F1825B1AC87AC500EED920 /* 5.png in Resources */,
 				32EB205D1AD5AB9900CFA191 /* 3.jpg in Resources */,
+				BFE8FD2B1AE680F500B11E51 /* neutral_heart.png in Resources */,
 				32F1825D1AC87AC500EED920 /* 7.png in Resources */,
 				32F1827E1AC87C5C00EED920 /* cancel_gray@2x.png in Resources */,
 				32F182451AC84CE300EED920 /* download@3x.png in Resources */,
@@ -884,8 +918,10 @@
 				3209D9941ABF7906000E5977 /* square@3x.png in Resources */,
 				3209D9951ABF7906000E5977 /* triangle@3x.png in Resources */,
 				32D6D91B1AC7154D00DC6061 /* backdrop@3x.png in Resources */,
+				BFE8FD2A1AE680F500B11E51 /* broken_heart.png in Resources */,
 				32F1827A1AC87B8100EED920 /* star-gray@2x.png in Resources */,
 				32F182571AC87AC500EED920 /* 1.png in Resources */,
+				BFE8FD2C1AE680F500B11E51 /* smile_heart.png in Resources */,
 				32F182581AC87AC500EED920 /* 2.png in Resources */,
 				32F182631AC87AD700EED920 /* ic_search@3x.png in Resources */,
 				32EB205C1AD5AB9900CFA191 /* 2.jpg in Resources */,
@@ -926,6 +962,7 @@
 				320157FA1AC74AAD00999D88 /* NSManagedObject+MagicalRecord.m in Sources */,
 				32D6D91E1AC7265500DC6061 /* DSRateView.m in Sources */,
 				320157FE1AC74AAD00999D88 /* NSManagedObjectContext+MagicalRecord.m in Sources */,
+				BFE8FD391AE69BC600B11E51 /* GoogleWearAlertViewObjc.m in Sources */,
 				320158001AC74AAD00999D88 /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				320157F41AC74AAD00999D88 /* NSObject+MagicalDataImport.m in Sources */,
 				320157F11AC74AAD00999D88 /* NSAttributeDescription+MagicalDataImport.m in Sources */,
@@ -953,12 +990,14 @@
 				BFCB0FD31AB856FC0079CCE3 /* DSMainViewController.m in Sources */,
 				320158091AC74AAD00999D88 /* MagicalRecord+ShorthandSupport.m in Sources */,
 				32D65E531AAB2DBD00CB04A1 /* main.m in Sources */,
+				BFE8FD381AE69BC600B11E51 /* GoogleWearAlertObjc.m in Sources */,
 				32314D521ACF697A009B0E9C /* UIView+AnimateHidden.m in Sources */,
 				3245F13E1AD971CA0063A2A1 /* GPUImageTwoPassFilter.m in Sources */,
 				3201580D1AC74ADE00999D88 /* Model.xcdatamodeld in Sources */,
 				3245F1391AD971CA0063A2A1 /* GPUImageFilter.m in Sources */,
 				3245F13C1AD971CA0063A2A1 /* GPUImageTextureInput.m in Sources */,
 				3245F1381AD971CA0063A2A1 /* GPUImageBuffer.m in Sources */,
+				BFE8FD3C1AE69DB000B11E51 /* UIColor+Alert.m in Sources */,
 				3245F1451AD971CA0063A2A1 /* MSViewController.m in Sources */,
 				BFCB0FD91AB879A40079CCE3 /* DSVersionsTableViewController.m in Sources */,
 				BFCB0FD61AB857310079CCE3 /* DSMainTableViewCell.m in Sources */,
