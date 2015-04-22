@@ -67,9 +67,6 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backdrop@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jty-U4-MdC">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="3" y="5" width="314" height="142"/>
-                                                    </variation>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YUJ-OH-IXU" customClass="UAProgressView">
                                                     <rect key="frame" x="21" y="10" width="50" height="50"/>
@@ -88,27 +85,35 @@
                                                     <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="78" y="44" width="189" height="23"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9k8-Ty-NVv">
                                                     <rect key="frame" x="96" y="8" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="78" y="10" width="189" height="23"/>
-                                                    </variation>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cHq-zc-LCs">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="cHq-zc-LCs">
                                                     <rect key="frame" x="181" y="0.0" width="100" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="90" id="02u-Op-XTj"/>
+                                                        <constraint firstAttribute="height" constant="51" id="GQ8-K4-7iQ"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="15"/>
                                                     <state key="normal" title="Other versions">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="174" y="105" width="122" height="31"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="02u-Op-XTj"/>
+                                                            <exclude reference="GQ8-K4-7iQ"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="02u-Op-XTj"/>
+                                                            <include reference="GQ8-K4-7iQ"/>
+                                                        </mask>
                                                     </variation>
                                                     <connections>
                                                         <segue destination="ynb-AH-wBV" kind="show" id="kKv-3Z-xbM"/>
@@ -127,8 +132,7 @@
                                                             <exclude reference="e0a-sQ-NR5"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="267" y="13" width="50" height="50"/>
+                                                    <variation key="widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="Az7-ER-yaq"/>
                                                             <include reference="e0a-sQ-NR5"/>
@@ -200,7 +204,7 @@
                                                     <variation key="widthClass=compact" constant="-5"/>
                                                 </constraint>
                                                 <constraint firstAttribute="trailingMargin" secondItem="cHq-zc-LCs" secondAttribute="trailing" constant="31" id="qj4-oc-Q8k">
-                                                    <variation key="widthClass=compact" constant="16"/>
+                                                    <variation key="widthClass=compact" constant="0.0"/>
                                                 </constraint>
                                                 <constraint firstItem="Vjj-jV-WrF" firstAttribute="leading" secondItem="y3r-DB-Re5" secondAttribute="trailing" constant="5" id="tlN-lL-szy">
                                                     <variation key="widthClass=compact" constant="0.0"/>

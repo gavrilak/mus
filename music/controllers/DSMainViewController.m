@@ -50,7 +50,6 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     // Do any additional setup after loading the view, typically from a nib.
     UIGraphicsBeginImageContext(self.view.frame.size);
     [[UIImage imageNamed:@"1.jpg"] drawInRect:self.view.bounds];
@@ -129,7 +128,6 @@ typedef enum {
             return  [ self.categories count];
         } else {
             return  [self.musicObjects count];
-
         }
     }
 }
@@ -161,11 +159,13 @@ typedef enum {
         cell.rateView.rating = [song.rate floatValue];
         cell.artistLabel.text = song.author;
         cell.titleLabel.text = song.name;
+        cell.rateView.editable = [[DSSoundManager sharedManager] existsLikeForSongID:song.objectid];
     } else {
         PFObject* object = [self.musicObjects objectAtIndex:indexPath.row];
         cell.rateView.rating = [[object objectForKey:@"rate"] floatValue];
         cell.artistLabel.text = [object objectForKey:@"author"];
         cell.titleLabel.text = [object objectForKey:@"name"];
+       // cell.rateView.editable = [[DSSoundManager sharedManager] existsLikeForSongID:[object objectForKey:@"objectId"]];
     }
     cell.rateView.delegate = self;
     cell.rateView.editable = YES;
@@ -174,7 +174,7 @@ typedef enum {
     cell.rateView.halfSelectedImage =  [UIImage imageNamed:@"heart_half@2x.png"];
     cell.rateView.fullSelectedImage = [UIImage imageNamed:@"heart_full@2x.png"];
     cell.rateView.maxRating = 5;
-    
+        
     if (self.selectedRow != indexPath.row) {
         [cell.rateView setHidden:YES];
     }
@@ -196,14 +196,14 @@ typedef enum {
         
     if (indexPath.row != self.playItem) {
         cell.uaprogressBtn.centralView = triangle;
-        if ([[DSSoundManager sharedManager] isPlaying]){
-            [cell.uaprogressBtn setProgress:[DSSoundManager sharedManager].getCurrentProgress];
-        } else {
-            [cell.uaprogressBtn setProgress:0];
-        }
+        [cell.uaprogressBtn setProgress:0];
     } else {
-
-        cell.uaprogressBtn.centralView = square;
+        [cell.uaprogressBtn setProgress:[DSSoundManager sharedManager].getCurrentProgress];
+        if ([[DSSoundManager sharedManager] isPlaying]) {
+            cell.uaprogressBtn.centralView = square;
+        } else {
+            cell.uaprogressBtn.centralView = triangle;
+        }
     }
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 48.0, 18.0)];
     label.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:14];
@@ -213,7 +213,11 @@ typedef enum {
         
     cell.uaprogressBtn.cancelSelectBlock =  ^(UAProgressView *progressView) {
         if (![progressView.centralView isKindOfClass:[UIImageView class]]){
-            cell.uaprogressBtn.centralView = triangle;
+            if ( progressView.tag == self.playItem) {
+                cell.uaprogressBtn.centralView = triangle;
+            } else {
+                cell.uaprogressBtn.centralView = square;
+            }
         }
     };
         
@@ -240,13 +244,12 @@ typedef enum {
     
     cell.uaprogressBtn.didSelectBlock = ^(UAProgressView *progressView){
         
-        if (indexPath.row == self.playItem && [[DSSoundManager sharedManager] isPlaying]) {
+    if (indexPath.row == self.playItem && [[DSSoundManager sharedManager] isPlaying]) {
             
             [[DSSoundManager sharedManager] pause];
         }
         else
             [self downloadAndPlay:indexPath.row forView:progressView];
-        
     };
     
     cell.versionBtn.hidden = YES;
@@ -283,8 +286,7 @@ typedef enum {
     if (self.selectedTab == 2 && self.selectCategory == nil){
         return 50;
     } else {
-        if ([indexPath isEqual:[tableView indexPathForSelectedRow]])
-        {
+        if(indexPath.row == self.selectedRow){
             return 125.0f;
         }  else {
             return 80;
@@ -294,29 +296,32 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
     if (self.selectedTab == 2  && self.selectCategory == nil){
         DSCategoryTableViewCell* cell =( DSCategoryTableViewCell*)  [self.tableView cellForRowAtIndexPath:indexPath];
         self.selectCategory  = cell.categoryLabel.text;
         self.selectedRow = -1;
         [self loadCategory:self.selectCategory];
-
     } else {
-        if (self.selectedRow != indexPath.row) {
-            NSIndexPath *myIP = [NSIndexPath indexPathForRow:self.selectedRow inSection:0];
-            DSMainTableViewCell *cell = ( DSMainTableViewCell*)[tableView cellForRowAtIndexPath:myIP];
-            if (cell.rateView.hidden == NO){
-                [cell.rateView setHiddenAnimated:YES delay:0 duration:0.3];
-            }
-            [tableView beginUpdates];
-            [self animateCell:indexPath andTableView:tableView];
-            [tableView endUpdates];
-        }
+        [self selectRow:indexPath];
     }
-     self.selectedRow = indexPath.row;
+ 
 }
 
 #pragma mark - Self Methods
+- (void) selectRow:(NSIndexPath *) indexPath {
+    if (self.selectedRow != indexPath.row) {
+        NSIndexPath *myIP = [NSIndexPath indexPathForRow:self.selectedRow inSection:0];
+        DSMainTableViewCell *cell = ( DSMainTableViewCell*)[self.tableView cellForRowAtIndexPath:myIP];
+        if (cell.rateView.hidden == NO){
+            [cell.rateView setHiddenAnimated:YES delay:0 duration:0.3];
+            [cell.versionBtn setHiddenAnimated:YES delay:0 duration:0.3];
+        }
+        self.selectedRow = indexPath.row;
+        [self.tableView beginUpdates];
+        [self animateCell:indexPath andTableView:self.tableView];
+        [self.tableView endUpdates];
+    }
+}
 - (void)addLoading{
     
    // [[MSLiveBlur sharedInstance] addSubview:self.activityIndicator];
@@ -352,6 +357,7 @@ typedef enum {
      }];
     DSMainTableViewCell *cell = ( DSMainTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     [cell.rateView setHiddenAnimated:NO delay:0 duration:1];
+    [cell.versionBtn setHiddenAnimated:NO delay:0 duration:1];
 }
 
 
@@ -388,6 +394,8 @@ typedef enum {
     self.activeItem = row;
     PFObject *object = [self.musicObjects objectAtIndex:row];
     PFFile *soundFile = object[@"mfile"];
+    [self selectRow:[NSIndexPath indexPathForRow:row inSection:0]];
+   
     [soundFile getDataInBackgroundWithBlock:^(NSData *soundData, NSError *error) {
         if(self.playItem!=self.activeItem ) {
             NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
@@ -434,7 +442,6 @@ typedef enum {
     [query whereKey:@"ganre" equalTo:category];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            
             self.musicObjects = [NSMutableArray arrayWithArray:objects];
             self.reloadData = YES;
             [self.tableView reloadData];
