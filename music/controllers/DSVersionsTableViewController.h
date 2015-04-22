@@ -8,8 +8,9 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import <UIKit/UIKit.h>
+#import "DSSoundManager.h"
 
-@interface DSVersionsTableViewController : PFQueryTableViewController
+@interface DSVersionsTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, DSSoundManagerDelegate>
 
 @property (strong, nonatomic) PFRelation* childrens;
 

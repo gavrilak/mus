@@ -22,30 +22,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (id)initWithCoder:(NSCoder *)aCoder
-{
-    self = [super initWithCoder:aCoder];
-    if (self) {
-        // Custom the table
-        
-        // The className to query on
-        self.parseClassName = @"Music";
-        
-        // The key of the PFObject to display in the label of the default cell style
-        self.textKey = @"name";
-        
-        // Whether the built-in pull-to-refresh is enabled
-        self.pullToRefreshEnabled = YES;
-        
-        // Whether the built-in pagination is enabled
-        self.paginationEnabled = NO;
-        
-        // The number of objects to show per page
-        //self.objectsPerPage = 10;
-    }
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -56,11 +32,6 @@
                                                object:nil];
 }
 
-- (void)refreshTable:(NSNotification *) notification
-{
-    // Reload the recipes
-    [self loadObjects];
-}
 
 
 - (void)viewDidUnload

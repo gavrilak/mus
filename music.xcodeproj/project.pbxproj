@@ -125,6 +125,7 @@
 		BFCB0FD91AB879A40079CCE3 /* DSVersionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCB0FD81AB879A40079CCE3 /* DSVersionsTableViewController.m */; };
 		BFCDBE3A1ACE9DD70002FEF6 /* DSLikesSong.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCDBE371ACE9DD70002FEF6 /* DSLikesSong.m */; };
 		BFCDBE3B1ACE9DD70002FEF6 /* DSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCDBE391ACE9DD70002FEF6 /* DSSong.m */; };
+		BFD9E57C1AE7F0B500676066 /* DSVersionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD9E57B1AE7F0B500676066 /* DSVersionTableViewCell.m */; };
 		BFE8FD2A1AE680F500B11E51 /* broken_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE8FD271AE680F500B11E51 /* broken_heart.png */; };
 		BFE8FD2B1AE680F500B11E51 /* neutral_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE8FD281AE680F500B11E51 /* neutral_heart.png */; };
 		BFE8FD2C1AE680F500B11E51 /* smile_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE8FD291AE680F500B11E51 /* smile_heart.png */; };
@@ -330,6 +331,8 @@
 		BFCDBE371ACE9DD70002FEF6 /* DSLikesSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSLikesSong.m; path = models/DSLikesSong.m; sourceTree = "<group>"; };
 		BFCDBE381ACE9DD70002FEF6 /* DSSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSSong.h; path = models/DSSong.h; sourceTree = "<group>"; };
 		BFCDBE391ACE9DD70002FEF6 /* DSSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSSong.m; path = models/DSSong.m; sourceTree = "<group>"; };
+		BFD9E57A1AE7F0B500676066 /* DSVersionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSVersionTableViewCell.h; path = cells/DSVersionTableViewCell.h; sourceTree = "<group>"; };
+		BFD9E57B1AE7F0B500676066 /* DSVersionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSVersionTableViewCell.m; path = cells/DSVersionTableViewCell.m; sourceTree = "<group>"; };
 		BFE8FD271AE680F500B11E51 /* broken_heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = broken_heart.png; sourceTree = "<group>"; };
 		BFE8FD281AE680F500B11E51 /* neutral_heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = neutral_heart.png; sourceTree = "<group>"; };
 		BFE8FD291AE680F500B11E51 /* smile_heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile_heart.png; sourceTree = "<group>"; };
@@ -785,6 +788,8 @@
 		BFCB0FCF1AB856970079CCE3 /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				BFD9E57A1AE7F0B500676066 /* DSVersionTableViewCell.h */,
+				BFD9E57B1AE7F0B500676066 /* DSVersionTableViewCell.m */,
 				32F182461AC85D6000EED920 /* DSCategoryTableViewCell.h */,
 				32F182471AC85D6000EED920 /* DSCategoryTableViewCell.m */,
 				BFCB0FD41AB857310079CCE3 /* DSMainTableViewCell.h */,
@@ -1005,6 +1010,7 @@
 				3245F1461AD971CA0063A2A1 /* MSViewControllerView.m in Sources */,
 				320158071AC74AAD00999D88 /* MagicalRecord+Options.m in Sources */,
 				320157F21AC74AAD00999D88 /* NSEntityDescription+MagicalDataImport.m in Sources */,
+				BFD9E57C1AE7F0B500676066 /* DSVersionTableViewCell.m in Sources */,
 				320158041AC74AAD00999D88 /* MagicalRecord+Actions.m in Sources */,
 				3245F13A1AD971CA0063A2A1 /* GPUImageGaussianBlurFilter.m in Sources */,
 				3209D9911ABF73BC000E5977 /* DSSoundManager.m in Sources */,
