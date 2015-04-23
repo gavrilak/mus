@@ -18,10 +18,7 @@
 #import "MSLiveBlur.h"
 #import "GoogleWearAlertObjc.h"
 
-typedef enum {
-    DSSongSearch,
-    DSArtistSearch
-}DSSortType;
+
 
 @interface DSMainViewController () <DSRateViewDelegate, UISearchBarDelegate>
 
@@ -264,7 +261,7 @@ typedef enum {
 {
    
     DSVersionsTableViewController* vc = [segue destinationViewController];
-    vc.childrens = self.relation;
+    vc.musicObject =  [self.musicObjects objectAtIndex:self.selectedRow];
    
 }
 

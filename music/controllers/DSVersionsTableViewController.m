@@ -7,10 +7,21 @@
 //
 
 #import "DSVersionsTableViewController.h"
-#import "DSMainTableViewCell.h"
+#import "DSVersionTableViewCell.h"
+#import "DSRateView.h"
+#import "YRActivityIndicator.h"
+#import "NFXIntroViewController.h"
+#import "DSSong.h"
+#import "UIView+AnimateHidden.h"
+#import "GoogleWearAlertObjc.h"
 
-@interface DSVersionsTableViewController ()
-
+@interface DSVersionsTableViewController ()  <DSRateViewDelegate>
+    @property (strong, nonatomic) NSMutableArray* musicObjects;
+    @property (assign, nonatomic) NSInteger activeItem;
+    @property (assign, nonatomic) NSInteger playItem;
+    @property (strong, nonatomic) NSTimer* playTimer;
+    @property (assign, nonatomic) NSInteger selectedRow;
+    @property (strong , nonatomic) YRActivityIndicator* activityIndicator;
 @end
 
 @implementation DSVersionsTableViewController
@@ -25,58 +36,61 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    [[UIImage imageNamed:@"1.jpg"] drawInRect:self.view.bounds];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(refreshTable:)
-                                                 name:@"refreshTable"
-                                               object:nil];
+    self.selectedRow = -1;
+    self.playItem = -1;
+    
+    self.activityIndicator = [[YRActivityIndicator alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    self.activityIndicator.center = CGPointMake(self.tableView.center.x, self.tableView.center.y - 80);
+    self.activityIndicator.radius = 60;
+    self.activityIndicator.maxItems = 5;
+    self.activityIndicator.minItemSize = CGSizeMake(10, 10);
+    self.activityIndicator.maxItemSize = CGSizeMake(35, 35);
+    self.activityIndicator.itemColor = [UIColor colorWithWhite:0.8 alpha:0.8];
+    self.musicObjects = [[NSMutableArray alloc] init];
+    [self.musicObjects addObject:self.musicObject];
+    [self addLoading];
+    
+    [self loadData];
+    [DSSoundManager sharedManager].delegate = self;
+    self.playTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
+
+  
 }
 
-
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshTable" object:nil];
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
-
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (void)viewWillDisappear:(BOOL)animated
 {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    [super viewWillDisappear:animated];
+    [DSSoundManager sharedManager].delegate = nil;
+    [self.playTimer invalidate];
 }
 
-- (PFQuery *)queryForTable
-{
-    PFQuery *query = [self.childrens query];
+#pragma mark - UITableViewDataSource
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+ 
+   return  [self.musicObjects count];
     
-    // If no objects are loaded in memory, we look to the cache first to fill the table
-    // and then subsequently do a query against the network.
-    /*    if ([self.objects count] == 0) {
-     query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-     }*/
-    
-    //    [query orderByAscending:@"name"];
-    
-    return query;
 }
-
-
-
-// Override to customize the look of a cell representing an object. The default is to display
-// a UITableViewCellStyleDefault style cell with the label being the first key in the object.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *mainTableIdentifier = @"mainCell";
+    static NSString *mainTableIdentifier = @"versionCell";
     
-    DSMainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mainTableIdentifier];
+    DSVersionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mainTableIdentifier];
     if (cell == nil) {
-        cell = [[DSMainTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:mainTableIdentifier];
+        cell = [[DSVersionTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:mainTableIdentifier];
     }
     
-    
+    PFObject* object = [self.musicObjects objectAtIndex:indexPath.row];
     cell.artistLabel.text = [object objectForKey:@"author"];
     cell.titleLabel.text = [object objectForKey:@"name"];
     cell.downloadBtn.tag = indexPath.row;
@@ -117,21 +131,6 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Remove the row from data model
-    PFObject *object = [self.objects objectAtIndex:indexPath.row];
-    [object deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        [self refreshTable:nil];
-    }];
-}
-
-- (void) objectsDidLoad:(NSError *)error
-{
-    [super objectsDidLoad:error];
-    
-    NSLog(@"error: %@", [error localizedDescription]);
-}
 
 #pragma mark - UITableViewDelegate
 
@@ -146,47 +145,166 @@
     return 60;
 }
 
+
+
 #pragma mark - Self Methods
+- (void) selectRow:(NSIndexPath *) indexPath {
+    if (self.selectedRow != indexPath.row) {
+        NSIndexPath *myIP = [NSIndexPath indexPathForRow:self.selectedRow inSection:0];
+        DSVersionTableViewCell *cell = ( DSVersionTableViewCell*)[self.tableView cellForRowAtIndexPath:myIP];
+        if (cell.rateView.hidden == NO){
+            [cell.rateView setHiddenAnimated:YES delay:0 duration:0.3];
+            [cell.shareBtn setHiddenAnimated:YES delay:0 duration:0.3];
+        }
+        self.selectedRow = indexPath.row;
+        [self.tableView beginUpdates];
+        [self animateCell:indexPath andTableView:self.tableView];
+        [self.tableView endUpdates];
+    }
+}
+- (void)addLoading{
+    
+    // [[MSLiveBlur sharedInstance] addSubview:self.activityIndicator];
+    //  [MSLiveBlur sharedInstance].isStatic = YES;
+    //  [MSLiveBlur sharedInstance].blurRadius = 1.5;
+    //  [[MSLiveBlur sharedInstance] blurRect:self.tableView.bounds];
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [self.tableView addSubview:self.activityIndicator];
+    [self.activityIndicator startAnimating];
+    
+}
+
+- (void)removeLoading{
+    
+    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator removeFromSuperview];
+    
+    //[[MSLiveBlur sharedInstance] stopBlurringRect:self.view.bounds];
+    
+}
+
+- (void)animateCell:(NSIndexPath*)indexPath andTableView:(UITableView*)tableView
+{
+    [UIView animateWithDuration:0.5f animations: ^
+     {
+         DSVersionTableViewCell *cell = ( DSVersionTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+         
+         CGRect rect = cell.frame;
+         rect.size.height = 125.0f;
+         cell.frame = rect;
+         
+     }];
+    DSVersionTableViewCell *cell = ( DSVersionTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+    [cell.rateView setHiddenAnimated:NO delay:0 duration:1];
+    [cell.shareBtn setHiddenAnimated:NO delay:0 duration:1];
+}
 
 - (void) downloadClicked:(id)sender {
     
     UIButton* btn = sender;
-    PFObject *object = [self.objects objectAtIndex:btn.tag];
+    PFObject *object = [self.musicObjects objectAtIndex:btn.tag];
     PFFile *soundFile = object[@"mfile"];
-    [soundFile getDataInBackgroundWithBlock:^(NSData *soundData, NSError *error) {
+    [soundFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         if (!error) {
-            NSLog(@"%@",soundFile.name);
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectory = [paths objectAtIndex:0];
+            NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:soundFile.name];
+            [data writeToFile:fullPath options:NSDataWritingWithoutOverwriting error:nil];
+            [[DSSoundManager sharedManager] addSongToDownloads:object fileUrl:fullPath];
+            [object incrementKey:@"colDownloads"];
+            [object saveInBackground];
+        }
+    } ];
+}
+- (void) downloadAndPlay:(NSUInteger) row forView:(UAProgressView*) progressView {
+    
+    self.activeItem = row;
+    PFObject *object = [self.musicObjects objectAtIndex:row];
+    PFFile *soundFile = object[@"mfile"];
+    [self selectRow:[NSIndexPath indexPathForRow:row inSection:0]];
+    
+    [soundFile getDataInBackgroundWithBlock:^(NSData *soundData, NSError *error) {
+        if(self.playItem!=self.activeItem ) {
+            NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
+            DSVersionTableViewCell* cell =( DSVersionTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
+            UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
+            [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
+            cell.uaprogressBtn.centralView = triangle;
+            [cell.uaprogressBtn setProgress:0];
+        }
+        if (!error) {
+            self.playItem = row;
+            [[DSSoundManager sharedManager] playSong:soundData];
         }
     }
                               progressBlock:^(int percentDone) {
-                                  
-                                  NSLog(@"%d", percentDone);
-                                  
-}];}
+                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                      [progressView setProgress: (float) percentDone/100];
+                                  });
+                              }];
+}
 
-- (void) downloadAndPlay:(NSUInteger) row forView:(UAProgressView*) progressView {
+
+- (void) loadData {
     
-    
-    PFObject *object = [self.objects objectAtIndex:row];
-    PFFile *soundFile = object[@"mfile"];
-    [soundFile getDataInBackgroundWithBlock:^(NSData *soundData, NSError *error) {
-        if (!error) {
-            NSLog(@"%@",soundFile.name);
-        }
+        PFQuery *query = [[self.musicObject  relationForKey:@"versions"]  query];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                [self.musicObjects addObjectsFromArray:objects];
+                [self reloadData];
+                [self removeLoading];
+                
+            } else {
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+                [self removeLoading];
+            }
+        }];
+ 
+}
+
+- (void) reloadData {
+    NSMutableArray* newPaths = [NSMutableArray array];
+    for (int i =1 ; i < [self.musicObjects count] ; i++) {
+        [newPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
     }
-    progressBlock:^(int percentDone) {
-                                  
-      [progressView setProgress: percentDone];
-                                  
-}];}
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:newPaths withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView endUpdates];
+    
+}
 
 
-#pragma mark - Navigation
+#pragma mark - DSSoundManagerDelegate
+- (void) statusChanged:(BOOL) playStatus {
+    NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
+    DSVersionTableViewCell* cell =( DSVersionTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
+    
+    if (playStatus == YES){
+        UIImageView *square = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [square setImage:[UIImage imageNamed: @"square.png"] ];
+        cell.uaprogressBtn.centralView = square;
+    }
+    else{
+        
+        UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
+        [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
+        cell.uaprogressBtn.centralView = triangle;
+        
+    }
+}
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Timer
+- (void) timerAction:(id)timer{
+    
+    if( [[DSSoundManager sharedManager] isPlaying]) {
+        NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
+        DSVersionTableViewCell* cell =( DSVersionTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
+        
+        [cell.uaprogressBtn setProgress:[DSSoundManager sharedManager].getCurrentProgress];
+        
+    }
 }
 
 

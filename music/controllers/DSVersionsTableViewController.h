@@ -12,6 +12,7 @@
 
 @interface DSVersionsTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, DSSoundManagerDelegate>
 
-@property (strong, nonatomic) PFRelation* childrens;
+@property (strong, nonatomic) PFObject* musicObject;
+@property (nonatomic , weak ) IBOutlet UITableView* tableView;
 
 @end
