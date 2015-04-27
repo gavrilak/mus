@@ -91,8 +91,24 @@
     }
     
     PFObject* object = [self.musicObjects objectAtIndex:indexPath.row];
+    cell.rateView.rating = [[object objectForKey:@"rate"] floatValue];
     cell.artistLabel.text = [object objectForKey:@"author"];
     cell.titleLabel.text = [object objectForKey:@"name"];
+    // cell.rateView.editable = [[DSSoundManager sharedManager] existsLikeForSongID:[object objectForKey:@"objectId"]];
+    if (self.selectedRow != indexPath.row && indexPath.row != 0 ) {
+       [cell.rateView setHidden:YES];
+       // [cell.versionBtn setHidden:YES];
+    }
+    
+    cell.rateView.delegate = self;
+    cell.rateView.editable = YES;
+    cell.rateView.tag = indexPath.row;
+    cell.rateView.notSelectedImage = [UIImage imageNamed:@"heart_empty@2x.png"];
+    cell.rateView.halfSelectedImage =  [UIImage imageNamed:@"heart_half@2x.png"];
+    cell.rateView.fullSelectedImage = [UIImage imageNamed:@"heart_full@2x.png"];
+    cell.rateView.maxRating = 5;
+   
+    
     cell.downloadBtn.tag = indexPath.row;
     [cell.downloadBtn addTarget:self action:@selector(downloadClicked:)
                forControlEvents:UIControlEventTouchUpInside];
@@ -100,33 +116,73 @@
     
     
     cell.uaprogressBtn.fillOnTouch = YES;
-    cell.uaprogressBtn.tintColor = [UIColor purpleColor];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60.0, 20.0)];
-    [label setTextAlignment:NSTextAlignmentCenter];
-    label.userInteractionEnabled = NO; // Allows tap to pass through to the progress view.
-    cell.uaprogressBtn.centralView = label;
+    cell.uaprogressBtn.tintColor = [UIColor whiteColor];
+    cell.uaprogressBtn.borderWidth = 2.0;
+    cell.uaprogressBtn.lineWidth = 2.0;
+    
+    UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
+    [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
+    
+    UIImageView *square = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [square setImage:[UIImage imageNamed: @"square.png"] ];
+    
+    
+    if (indexPath.row != self.playItem) {
+        cell.uaprogressBtn.centralView = triangle;
+        [cell.uaprogressBtn setProgress:0];
+    } else {
+        [cell.uaprogressBtn setProgress:[DSSoundManager sharedManager].getCurrentProgress];
+        if ([[DSSoundManager sharedManager] isPlaying]) {
+            cell.uaprogressBtn.centralView = square;
+        } else {
+            cell.uaprogressBtn.centralView = triangle;
+        }
+    }
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 48.0, 18.0)];
+    label.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:14];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = cell.uaprogressBtn.tintColor;
+    label.backgroundColor = [UIColor clearColor];
+    cell.uaprogressBtn.cancelSelectBlock =  ^(UAProgressView *progressView) {
+        if (![progressView.centralView isKindOfClass:[UIImageView class]]){
+            if ( progressView.tag == self.playItem) {
+                cell.uaprogressBtn.centralView = triangle;
+            } else {
+                cell.uaprogressBtn.centralView = square;
+            }
+        }
+    };
     
     
     cell.uaprogressBtn.progressChangedBlock = ^(UAProgressView *progressView, CGFloat progress) {
-        [(UILabel *)progressView.centralView setText:[NSString stringWithFormat:@"%2.0f%%", progress * 100]];
+        if ([progressView.centralView isKindOfClass:[UILabel class]]){
+            if (progress == 0) progress = 0.01;
+            [(UILabel *)progressView.centralView setText:[NSString stringWithFormat:@"%2.0f%%", progress * 100]];
+        }
     };
-    cell.uaprogressBtn.fillChangedBlock = ^(UAProgressView *progressView, BOOL filled, BOOL animated){
-            UIColor *color = (filled ? [UIColor whiteColor] : progressView.tintColor);
-            if (animated) {
-                [UIView animateWithDuration:0.3 animations:^{
-                    [(UILabel *)progressView.centralView setTextColor:color];
-                }];
-            } else {
-                [(UILabel *)progressView.centralView setTextColor:color];
-            }
-        };
-        
-      
-        
-     cell.uaprogressBtn.didSelectBlock = ^(UAProgressView *progressView){
-         [self downloadAndPlay:indexPath.row forView:progressView];
-      };
     
+    cell.uaprogressBtn.fillChangedBlock = ^(UAProgressView *progressView, BOOL filled, BOOL animated){
+        UIColor *color = (filled ? [UIColor greenColor] : progressView.tintColor);
+        progressView.centralView =label;
+        if (animated) {
+            [UIView animateWithDuration:0.3 animations:^{
+                [(UILabel *)progressView.centralView setTextColor:color];
+            }];
+        } else {
+            [(UILabel *)progressView.centralView setTextColor:color];
+        }
+        
+    };
+    
+    cell.uaprogressBtn.didSelectBlock = ^(UAProgressView *progressView){
+        
+        if (indexPath.row == self.playItem && [[DSSoundManager sharedManager] isPlaying]) {
+            
+            [[DSSoundManager sharedManager] pause];
+        }
+        else
+            [self downloadAndPlay:indexPath.row forView:progressView];
+    };
 
     return cell;
 }
@@ -142,7 +198,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 60;
+    if(indexPath.row == self.selectedRow || indexPath.row == 0){
+        return 125.0f;
+    }  else {
+        return 80;
+    }
+
 }
 
 

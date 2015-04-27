@@ -174,6 +174,7 @@
         
     if (self.selectedRow != indexPath.row) {
         [cell.rateView setHidden:YES];
+        [cell.versionBtn setHidden:YES];
     }
    
     cell.downloadBtn.tag = indexPath.row;
@@ -249,7 +250,7 @@
             [self downloadAndPlay:indexPath.row forView:progressView];
     };
     
-    cell.versionBtn.hidden = YES;
+   
     
     return cell;
     }
