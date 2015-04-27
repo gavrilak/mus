@@ -90,12 +90,12 @@
     [self addLoading];
     
     [self loadDataForSortType:@"top"];
-    [DSSoundManager sharedManager].delegate = self;
     self.playTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
     
    }
 
 - (void) viewWillAppear:(BOOL)animated {
+    [DSSoundManager sharedManager].delegate = self;
     [super viewWillAppear:animated];
 }
 
@@ -395,7 +395,8 @@
     [self selectRow:[NSIndexPath indexPathForRow:row inSection:0]];
    
     [soundFile getDataInBackgroundWithBlock:^(NSData *soundData, NSError *error) {
-        if(self.playItem!=self.activeItem ) {
+       // NSLog(@"%ld %ld", (long)self.playItem, self.activeItem);
+        if(self.playItem >= 0 ) {
             NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
             DSMainTableViewCell* cell =( DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
             UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
@@ -664,6 +665,7 @@
         }
             
         case 2:{
+            self.selectCategory = nil;
             self.navigationItem.leftBarButtonItem = nil;
             self.navigationItem.title = @"Categories";
             [self loadCategories];

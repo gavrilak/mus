@@ -286,7 +286,7 @@
     [self selectRow:[NSIndexPath indexPathForRow:row inSection:0]];
     
     [soundFile getDataInBackgroundWithBlock:^(NSData *soundData, NSError *error) {
-        if(self.playItem!=self.activeItem ) {
+        if(self.playItem >= 0) {
             NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
             DSVersionTableViewCell* cell =( DSVersionTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
             UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
