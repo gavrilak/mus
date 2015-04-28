@@ -80,7 +80,7 @@
     self.playItem = -1;
     
     self.activityIndicator = [[YRActivityIndicator alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    self.activityIndicator.center = CGPointMake(self.tableView.center.x, self.tableView.center.y - 80);
+    self.activityIndicator.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2, [[UIScreen mainScreen] bounds].size.height/2 - 80);
     self.activityIndicator.radius = 60;
     self.activityIndicator.maxItems = 5;
     self.activityIndicator.minItemSize = CGSizeMake(10, 10);

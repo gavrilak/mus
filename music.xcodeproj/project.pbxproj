@@ -125,6 +125,8 @@
 		BFCB0FD91AB879A40079CCE3 /* DSVersionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCB0FD81AB879A40079CCE3 /* DSVersionsTableViewController.m */; };
 		BFCDBE3A1ACE9DD70002FEF6 /* DSLikesSong.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCDBE371ACE9DD70002FEF6 /* DSLikesSong.m */; };
 		BFCDBE3B1ACE9DD70002FEF6 /* DSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCDBE391ACE9DD70002FEF6 /* DSSong.m */; };
+		BFD6F9941AEFCDD00033526E /* BradleyHandITCBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFD6F9921AEFCDD00033526E /* BradleyHandITCBold.ttf */; };
+		BFD6F9951AEFCDD00033526E /* FingerPaint-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFD6F9931AEFCDD00033526E /* FingerPaint-Regular.ttf */; };
 		BFD9E57C1AE7F0B500676066 /* DSVersionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD9E57B1AE7F0B500676066 /* DSVersionTableViewCell.m */; };
 		BFE8FD2A1AE680F500B11E51 /* broken_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE8FD271AE680F500B11E51 /* broken_heart.png */; };
 		BFE8FD2B1AE680F500B11E51 /* neutral_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE8FD281AE680F500B11E51 /* neutral_heart.png */; };
@@ -331,6 +333,8 @@
 		BFCDBE371ACE9DD70002FEF6 /* DSLikesSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSLikesSong.m; path = models/DSLikesSong.m; sourceTree = "<group>"; };
 		BFCDBE381ACE9DD70002FEF6 /* DSSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSSong.h; path = models/DSSong.h; sourceTree = "<group>"; };
 		BFCDBE391ACE9DD70002FEF6 /* DSSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSSong.m; path = models/DSSong.m; sourceTree = "<group>"; };
+		BFD6F9921AEFCDD00033526E /* BradleyHandITCBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BradleyHandITCBold.ttf; sourceTree = "<group>"; };
+		BFD6F9931AEFCDD00033526E /* FingerPaint-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FingerPaint-Regular.ttf"; sourceTree = "<group>"; };
 		BFD9E57A1AE7F0B500676066 /* DSVersionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSVersionTableViewCell.h; path = cells/DSVersionTableViewCell.h; sourceTree = "<group>"; };
 		BFD9E57B1AE7F0B500676066 /* DSVersionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSVersionTableViewCell.m; path = cells/DSVersionTableViewCell.m; sourceTree = "<group>"; };
 		BFE8FD271AE680F500B11E51 /* broken_heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = broken_heart.png; sourceTree = "<group>"; };
@@ -585,6 +589,7 @@
 		32D65E4F1AAB2DBD00CB04A1 /* music */ = {
 			isa = PBXGroup;
 			children = (
+				BFD6F9911AEFCDD00033526E /* fonts */,
 				32FFE5821AC7827D0093DD1B /* model */,
 				32D6D91F1AC7265C00DC6061 /* views */,
 				3209D98E1ABF7356000E5977 /* manager */,
@@ -809,6 +814,15 @@
 			name = controllers;
 			sourceTree = "<group>";
 		};
+		BFD6F9911AEFCDD00033526E /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				BFD6F9921AEFCDD00033526E /* BradleyHandITCBold.ttf */,
+				BFD6F9931AEFCDD00033526E /* FingerPaint-Regular.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 		BFE8FD331AE69BC600B11E51 /* AlertImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -912,6 +926,7 @@
 				BFE8FD2B1AE680F500B11E51 /* neutral_heart.png in Resources */,
 				32F1825D1AC87AC500EED920 /* 7.png in Resources */,
 				32F1827E1AC87C5C00EED920 /* cancel_gray@2x.png in Resources */,
+				BFD6F9951AEFCDD00033526E /* FingerPaint-Regular.ttf in Resources */,
 				32F182451AC84CE300EED920 /* download@3x.png in Resources */,
 				32F1827C1AC87B8100EED920 /* star@2x.png in Resources */,
 				32D6D9231AC7305F00DC6061 /* heart_empty@2x.png in Resources */,
@@ -943,6 +958,7 @@
 				32F182621AC87AD700EED920 /* button_set_up@3x.png in Resources */,
 				32D65E611AAB2DBD00CB04A1 /* LaunchScreen.xib in Resources */,
 				32D65E5E1AAB2DBD00CB04A1 /* Images.xcassets in Resources */,
+				BFD6F9941AEFCDD00033526E /* BradleyHandITCBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
