@@ -81,9 +81,9 @@
 - (void) deleteSong:(NSString*) ID {
     
     NSMutableArray* array = [[NSMutableArray alloc] init];
-    array = [[DSSong  MR_findAllSortedBy:@"objectid"
+    array = [[DSSong  MR_findAllSortedBy:@"idSong"
                                ascending:YES
-                           withPredicate:[NSPredicate predicateWithFormat:@"id contains[c] %@", ID]
+                           withPredicate:[NSPredicate predicateWithFormat:@"idSong contains[c] %@", ID]
                                inContext:[NSManagedObjectContext MR_defaultContext]] mutableCopy];
     if ( [array count] > 0) {
     
@@ -113,7 +113,7 @@
 - (BOOL) existsSongInDownloads: (NSString*) ID {
     
     NSMutableArray* array = [[NSMutableArray alloc] init];
-    array = [[DSSong  MR_findAllSortedBy:@"objectid"
+    array = [[DSSong  MR_findAllSortedBy:@"idSong"
                                     ascending:YES
                                 withPredicate:[NSPredicate predicateWithFormat:@"id contains[c] %@", ID]
                                     inContext:[NSManagedObjectContext MR_defaultContext]] mutableCopy];
@@ -128,7 +128,7 @@
 - (NSMutableArray*) getDownloads {
     
     NSMutableArray* array = [[NSMutableArray alloc] init];
-    array = [[DSSong  MR_findAllSortedBy:@"objectid"
+    array = [[DSSong  MR_findAllSortedBy:@"name"
                                ascending:YES
                                inContext:[NSManagedObjectContext MR_defaultContext]] mutableCopy];
     
@@ -137,7 +137,7 @@
 - (void) addSongToDownloads: (PFObject *) object fileUrl:(NSString*)  Url {
     
     DSSong* song = [DSSong MR_createEntity];
-    song.objectid = [object objectForKey:@"objectId"];
+    song.idSong = object.objectId;
     song.author = [object objectForKey:@"author"];
     song.name = [object objectForKey:@"name"];
     song.rate = [object objectForKey:@"rate"];
@@ -150,7 +150,7 @@
 - (void) addLikeforSongID: (NSString*) ID{
     
     DSLikesSong* like = [DSLikesSong MR_createEntity];
-    like.id = ID;
+    like.idSong = ID;
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
     
 }
@@ -159,9 +159,9 @@
     
     
     NSMutableArray* array = [[NSMutableArray alloc] init];
-    array = [[DSLikesSong  MR_findAllSortedBy:@"id"
+    array = [[DSLikesSong  MR_findAllSortedBy:@"idSong"
                                 ascending:YES
-                            withPredicate:[NSPredicate predicateWithFormat:@"id contains[c] %@", ID]
+                            withPredicate:[NSPredicate predicateWithFormat:@"idSong contains[c] %@", ID]
                                 inContext:[NSManagedObjectContext MR_defaultContext]] mutableCopy];
     if ( [array count] > 0) {
         return TRUE;

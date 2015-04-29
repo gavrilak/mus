@@ -14,7 +14,7 @@
 @dynamic author;
 @dynamic link;
 @dynamic name;
-@dynamic objectid;
+@dynamic idSong;
 @dynamic rate;
 
 @end

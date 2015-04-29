@@ -156,13 +156,13 @@
         cell.rateView.rating = [song.rate floatValue];
         cell.artistLabel.text = song.author;
         cell.titleLabel.text = song.name;
-        cell.rateView.editable = [[DSSoundManager sharedManager] existsLikeForSongID:song.objectid];
+        cell.rateView.editable = [[DSSoundManager sharedManager] existsLikeForSongID:song.idSong];
     } else {
         PFObject* object = [self.musicObjects objectAtIndex:indexPath.row];
         cell.rateView.rating = [[object objectForKey:@"rate"] floatValue];
         cell.artistLabel.text = [object objectForKey:@"author"];
         cell.titleLabel.text = [object objectForKey:@"name"];
-       // cell.rateView.editable = [[DSSoundManager sharedManager] existsLikeForSongID:[object objectForKey:@"objectId"]];
+        cell.rateView.editable = [[DSSoundManager sharedManager] existsLikeForSongID:object.objectId];
     }
     cell.rateView.delegate = self;
     cell.rateView.editable = YES;
@@ -702,7 +702,8 @@
         image = [UIImage imageNamed:@"smile_heart.png"];
     }
     [[GoogleWearAlertObjc getInstance]prepareNotificationToBeShown:[[GoogleWearAlertViewObjc alloc]initWithTitle:nil andImage:image andWithType:Message andWithDuration:2.5 inViewController:self atPostion:Center canBeDismissedByUser:NO]];
-    
+    rateView.editable = false;
+    [[DSSoundManager sharedManager] addLikeforSongID:object.objectId];
 }
 #pragma mark - UISearchBarDelegate
 

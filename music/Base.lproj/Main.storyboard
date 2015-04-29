@@ -7,10 +7,11 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BradleyHandITCBold.ttf">
-            <string>BradleyHandITC-Bold</string>
-        </mutableArray>
         <mutableArray key="FingerPaint-Regular.ttf">
+            <string>FingerPaint-Regular</string>
+            <string>FingerPaint-Regular</string>
+            <string>FingerPaint-Regular</string>
+            <string>FingerPaint-Regular</string>
             <string>FingerPaint-Regular</string>
         </mutableArray>
     </customFonts>
@@ -45,7 +46,7 @@
                         <viewControllerLayoutGuide type="bottom" id="XPY-B4-ssj"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KBG-nj-Wsl">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6nG-m8-cUg">
@@ -87,7 +88,7 @@
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3r-DB-Re5">
                                                     <rect key="frame" x="96" y="40" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" name="BradleyHandITC-Bold" family="BradleyHandITC" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" name="FingerPaint-Regular" family="Finger Paint" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact" misplaced="YES">
@@ -109,7 +110,7 @@
                                                         <constraint firstAttribute="width" constant="90" id="02u-Op-XTj"/>
                                                         <constraint firstAttribute="height" constant="51" id="GQ8-K4-7iQ"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="FingerPaint-Regular" family="Finger Paint" pointSize="15"/>
                                                     <state key="normal" title="Other versions">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -177,7 +178,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backdrop@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jty-U4-MdC">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                     <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="3" y="5" width="314" height="143"/>
+                                                        <rect key="frame" x="3" y="8" width="314" height="143"/>
                                                     </variation>
                                                 </imageView>
                                             </subviews>
@@ -480,18 +481,18 @@
                                 <exclude reference="lLq-s4-eEB"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="Y4g-5E-FYJ"/>
+                                <exclude reference="gNK-04-ycJ"/>
+                                <exclude reference="6nn-bz-qPd"/>
+                                <exclude reference="96a-sv-ZYA"/>
+                                <exclude reference="doe-Wb-KVY"/>
+                                <exclude reference="jy1-C6-Hsf"/>
                                 <exclude reference="6J3-1s-xqt"/>
                                 <exclude reference="CEt-sz-zTJ"/>
                                 <exclude reference="Ixt-mu-Oow"/>
                                 <exclude reference="rNe-g5-AXB"/>
                                 <exclude reference="sYe-c7-3WP"/>
                                 <exclude reference="so0-dh-ue0"/>
-                                <exclude reference="6nn-bz-qPd"/>
-                                <exclude reference="96a-sv-ZYA"/>
-                                <exclude reference="doe-Wb-KVY"/>
-                                <exclude reference="jy1-C6-Hsf"/>
-                                <exclude reference="Y4g-5E-FYJ"/>
-                                <exclude reference="gNK-04-ycJ"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -500,18 +501,18 @@
                                 <include reference="lLq-s4-eEB"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="Y4g-5E-FYJ"/>
+                                <include reference="gNK-04-ycJ"/>
+                                <include reference="6nn-bz-qPd"/>
+                                <include reference="96a-sv-ZYA"/>
+                                <include reference="doe-Wb-KVY"/>
+                                <exclude reference="jy1-C6-Hsf"/>
                                 <include reference="6J3-1s-xqt"/>
                                 <exclude reference="CEt-sz-zTJ"/>
                                 <include reference="Ixt-mu-Oow"/>
                                 <exclude reference="rNe-g5-AXB"/>
                                 <exclude reference="sYe-c7-3WP"/>
                                 <include reference="so0-dh-ue0"/>
-                                <include reference="6nn-bz-qPd"/>
-                                <include reference="96a-sv-ZYA"/>
-                                <include reference="doe-Wb-KVY"/>
-                                <exclude reference="jy1-C6-Hsf"/>
-                                <exclude reference="Y4g-5E-FYJ"/>
-                                <include reference="gNK-04-ycJ"/>
                             </mask>
                         </variation>
                     </view>
@@ -538,7 +539,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Edu-cg-zxP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ASY-oC-vJP">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="143" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="S6N-86-KCF">
@@ -554,6 +555,9 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backdrop@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="4RR-jh-R7p">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="3" y="5" width="314" height="143"/>
+                                                    </variation>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UmQ-tf-PJS" customClass="UAProgressView">
                                                     <rect key="frame" x="21" y="10" width="50" height="50"/>
@@ -569,15 +573,21 @@
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33h-Ed-3Nq">
                                                     <rect key="frame" x="96" y="40" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" name="FingerPaint-Regular" family="Finger Paint" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="78" y="44" width="189" height="23"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQV-jv-AoK">
                                                     <rect key="frame" x="96" y="8" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" name="FingerPaint-Regular" family="Finger Paint" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="78" y="10" width="189" height="23"/>
+                                                    </variation>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAX-ZY-8NZ">
                                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -592,7 +602,8 @@
                                                             <exclude reference="QV2-E0-Bia"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="widthClass=compact">
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="267" y="13" width="50" height="50"/>
                                                         <mask key="constraints">
                                                             <include reference="N9K-Id-qhC"/>
                                                             <include reference="QV2-E0-Bia"/>
@@ -815,6 +826,8 @@
                                 <exclude reference="S6N-86-KCF"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="5lq-g7-czf"/>
+                                <exclude reference="OEr-jP-dVI"/>
                                 <exclude reference="2jv-6o-xYw"/>
                                 <exclude reference="D3F-Cs-fIN"/>
                                 <exclude reference="PtI-86-8fW"/>
@@ -824,8 +837,6 @@
                                 <exclude reference="nt9-Xx-xfG"/>
                                 <exclude reference="sea-eC-qYX"/>
                                 <exclude reference="zwf-e4-KtH"/>
-                                <exclude reference="5lq-g7-czf"/>
-                                <exclude reference="OEr-jP-dVI"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -833,6 +844,8 @@
                                 <include reference="S6N-86-KCF"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="5lq-g7-czf"/>
+                                <include reference="OEr-jP-dVI"/>
                                 <exclude reference="2jv-6o-xYw"/>
                                 <include reference="D3F-Cs-fIN"/>
                                 <exclude reference="PtI-86-8fW"/>
@@ -842,8 +855,6 @@
                                 <exclude reference="nt9-Xx-xfG"/>
                                 <include reference="sea-eC-qYX"/>
                                 <exclude reference="zwf-e4-KtH"/>
-                                <exclude reference="5lq-g7-czf"/>
-                                <include reference="OEr-jP-dVI"/>
                             </mask>
                         </variation>
                     </view>

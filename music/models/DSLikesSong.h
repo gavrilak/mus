@@ -12,6 +12,6 @@
 
 @interface DSLikesSong : NSManagedObject
 
-@property (nonatomic, retain) NSString * id;
+@property (nonatomic, retain) NSString * idSong;
 
 @end

@@ -11,6 +11,6 @@
 
 @implementation DSLikesSong
 
-@dynamic id;
+@dynamic idSong;
 
 @end

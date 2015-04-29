@@ -94,7 +94,7 @@
     cell.rateView.rating = [[object objectForKey:@"rate"] floatValue];
     cell.artistLabel.text = [object objectForKey:@"author"];
     cell.titleLabel.text = [object objectForKey:@"name"];
-    // cell.rateView.editable = [[DSSoundManager sharedManager] existsLikeForSongID:[object objectForKey:@"objectId"]];
+    cell.rateView.editable = [[DSSoundManager sharedManager] existsLikeForSongID:object.objectId];
     if (self.selectedRow != indexPath.row && indexPath.row != 0 ) {
        [cell.rateView setHidden:YES];
        // [cell.versionBtn setHidden:YES];
@@ -206,7 +206,27 @@
 
 }
 
+#pragma mark - DSRateViewDelegate
 
+- (void)rateView:(DSRateView *)rateView ratingDidChange:(float)rating{
+    PFObject *object = [self.musicObjects objectAtIndex:rateView.tag];
+    UIImage *image;
+    double newRate = ([[object objectForKey:@"rate"] floatValue] * [[object objectForKey:@"colRates"] integerValue] + rating) / ([[object objectForKey:@"colRates"] integerValue] + 1);
+    newRate = newRate - [[object objectForKey:@"rate"] floatValue] ;
+    [object incrementKey:@"colRates"];
+    [object incrementKey:@"rate" byAmount:[NSNumber numberWithDouble:newRate] ];
+    [object saveInBackground];
+    if (rating < 2) {
+        image = [UIImage imageNamed:@"broken_heart.png"];
+    } else if (rating < 4) {
+        image = [UIImage imageNamed:@"neutral_heart.png"];
+    } else {
+        image = [UIImage imageNamed:@"smile_heart.png"];
+    }
+    [[GoogleWearAlertObjc getInstance]prepareNotificationToBeShown:[[GoogleWearAlertViewObjc alloc]initWithTitle:nil andImage:image andWithType:Message andWithDuration:2.5 inViewController:self atPostion:Center canBeDismissedByUser:NO]];
+    rateView.editable = false;
+    [[DSSoundManager sharedManager] addLikeforSongID:object.objectId];
+}
 
 #pragma mark - Self Methods
 - (void) selectRow:(NSIndexPath *) indexPath {
