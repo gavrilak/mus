@@ -119,6 +119,7 @@
 		32F1827E1AC87C5C00EED920 /* cancel_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32F1827D1AC87C5C00EED920 /* cancel_gray@2x.png */; };
 		32F182801AC87CEF00EED920 /* cancel_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32F1827F1AC87CEF00EED920 /* cancel_blue@2x.png */; };
 		32F1CA6C1AD7291D00D6BEE6 /* key.png in Resources */ = {isa = PBXBuildFile; fileRef = 32F1CA6B1AD7291D00D6BEE6 /* key.png */; };
+		BF7A9AB31AF26C5800A2A8AB /* NewFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF7A9AB21AF26C5800A2A8AB /* NewFont.ttf */; };
 		BF897C2F1AB9913200A3963A /* UAProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF897C2E1AB9913200A3963A /* UAProgressView.m */; };
 		BFCB0FD31AB856FC0079CCE3 /* DSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCB0FD21AB856FC0079CCE3 /* DSMainViewController.m */; };
 		BFCB0FD61AB857310079CCE3 /* DSMainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCB0FD51AB857310079CCE3 /* DSMainTableViewCell.m */; };
@@ -321,6 +322,7 @@
 		32F1827D1AC87C5C00EED920 /* cancel_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_gray@2x.png"; sourceTree = "<group>"; };
 		32F1827F1AC87CEF00EED920 /* cancel_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_blue@2x.png"; sourceTree = "<group>"; };
 		32F1CA6B1AD7291D00D6BEE6 /* key.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = key.png; sourceTree = "<group>"; };
+		BF7A9AB21AF26C5800A2A8AB /* NewFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NewFont.ttf; sourceTree = "<group>"; };
 		BF897C2D1AB9913200A3963A /* UAProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAProgressView.h; sourceTree = "<group>"; };
 		BF897C2E1AB9913200A3963A /* UAProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAProgressView.m; sourceTree = "<group>"; };
 		BFCB0FD11AB856FC0079CCE3 /* DSMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSMainViewController.h; path = controllers/DSMainViewController.h; sourceTree = "<group>"; };
@@ -817,6 +819,7 @@
 		BFD6F9911AEFCDD00033526E /* fonts */ = {
 			isa = PBXGroup;
 			children = (
+				BF7A9AB21AF26C5800A2A8AB /* NewFont.ttf */,
 				BFD6F9921AEFCDD00033526E /* BradleyHandITCBold.ttf */,
 				BFD6F9931AEFCDD00033526E /* FingerPaint-Regular.ttf */,
 			);
@@ -933,6 +936,7 @@
 				32F1825F1AC87AC500EED920 /* 9.png in Resources */,
 				32F182591AC87AC500EED920 /* 3.png in Resources */,
 				32D65E821AAB346F00CB04A1 /* Entitlements.plist in Resources */,
+				BF7A9AB31AF26C5800A2A8AB /* NewFont.ttf in Resources */,
 				32F1824C1AC87AB400EED920 /* button_back@3x.png in Resources */,
 				32D6D9241AC7305F00DC6061 /* heart_full@2x.png in Resources */,
 				3209D9941ABF7906000E5977 /* square@3x.png in Resources */,

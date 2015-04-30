@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AOL-kf-ql9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AOL-kf-ql9">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
@@ -11,8 +11,10 @@
             <string>FingerPaint-Regular</string>
             <string>FingerPaint-Regular</string>
             <string>FingerPaint-Regular</string>
-            <string>FingerPaint-Regular</string>
-            <string>FingerPaint-Regular</string>
+        </mutableArray>
+        <mutableArray key="NewFont.ttf">
+            <string>SFScribbledSans</string>
+            <string>SFScribbledSans</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -88,7 +90,7 @@
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3r-DB-Re5">
                                                     <rect key="frame" x="96" y="40" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" name="FingerPaint-Regular" family="Finger Paint" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" name="SFScribbledSans" family="SF Scribbled Sans" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact" misplaced="YES">
@@ -97,7 +99,7 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9k8-Ty-NVv">
                                                     <rect key="frame" x="96" y="8" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" name="FingerPaint-Regular" family="Finger Paint" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" name="SFScribbledSans" family="SF Scribbled Sans" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact" misplaced="YES">
@@ -178,7 +180,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backdrop@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jty-U4-MdC">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                     <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="3" y="8" width="314" height="143"/>
+                                                        <rect key="frame" x="3" y="5" width="314" height="143"/>
                                                     </variation>
                                                 </imageView>
                                             </subviews>
