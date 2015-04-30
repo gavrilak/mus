@@ -24,7 +24,10 @@
     
  
     [MagicalRecord setupAutoMigratingCoreDataStack];
+    UIImage *backBtnIcon = [UIImage imageNamed:@"button_back@3x.png"];
     
+        [UINavigationBar appearance].backIndicatorImage = backBtnIcon;
+        [UINavigationBar appearance].backIndicatorTransitionMaskImage = backBtnIcon;
     return YES;
 }
 

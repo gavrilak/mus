@@ -22,7 +22,7 @@
         <scene sceneID="mXj-9l-EVM">
             <objects>
                 <navigationController id="AOL-kf-ql9" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Y9l-xz-hdB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" backIndicatorImage="button_back@3x.png" backIndicatorTransitionMaskImage="button_back@3x.png" id="Y9l-xz-hdB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.18039215689999999" green="0.0" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -90,20 +90,20 @@
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3r-DB-Re5">
                                                     <rect key="frame" x="96" y="40" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" name="SFScribbledSans" family="SF Scribbled Sans" pointSize="20"/>
+                                                    <fontDescription key="fontDescription" name="SFScribbledSans" family="SF Scribbled Sans" pointSize="26"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="78" y="44" width="189" height="23"/>
+                                                        <rect key="frame" x="78" y="57" width="189" height="31"/>
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9k8-Ty-NVv">
                                                     <rect key="frame" x="96" y="8" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" name="SFScribbledSans" family="SF Scribbled Sans" pointSize="20"/>
+                                                    <fontDescription key="fontDescription" name="SFScribbledSans" family="SF Scribbled Sans" pointSize="26"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="78" y="10" width="189" height="23"/>
+                                                        <rect key="frame" x="78" y="15" width="189" height="31"/>
                                                     </variation>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="cHq-zc-LCs">
@@ -227,7 +227,9 @@
                                                 <constraint firstItem="9k8-Ty-NVv" firstAttribute="top" secondItem="kah-35-1ln" secondAttribute="topMargin" id="WWh-na-TNm">
                                                     <variation key="widthClass=compact" constant="2"/>
                                                 </constraint>
-                                                <constraint firstItem="9k8-Ty-NVv" firstAttribute="top" secondItem="kah-35-1ln" secondAttribute="top" constant="10" id="Y3E-WZ-toc"/>
+                                                <constraint firstItem="9k8-Ty-NVv" firstAttribute="top" secondItem="kah-35-1ln" secondAttribute="top" constant="10" id="Y3E-WZ-toc">
+                                                    <variation key="widthClass=compact" constant="15"/>
+                                                </constraint>
                                                 <constraint firstItem="9k8-Ty-NVv" firstAttribute="leading" secondItem="YUJ-OH-IXU" secondAttribute="trailing" constant="10" id="biv-Ki-Cv2"/>
                                                 <constraint firstItem="y3r-DB-Re5" firstAttribute="top" secondItem="9k8-Ty-NVv" secondAttribute="bottom" constant="11" id="btv-p6-6xD"/>
                                                 <constraint firstItem="Jty-U4-MdC" firstAttribute="top" secondItem="kah-35-1ln" secondAttribute="topMargin" constant="10" id="eA8-Q7-JJo">
@@ -372,15 +374,9 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="22"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="31" y="13" width="183" height="26"/>
-                                                    </variation>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backdrop@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="OLN-GC-DJj">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="8" y="8" width="304" height="83"/>
-                                                    </variation>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -876,6 +872,7 @@
     </scenes>
     <resources>
         <image name="backdrop@3x.png" width="1171" height="193"/>
+        <image name="button_back@3x.png" width="66" height="66"/>
         <image name="download@3x.png" width="100" height="100"/>
     </resources>
 </document>
