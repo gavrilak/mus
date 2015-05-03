@@ -53,15 +53,24 @@
     
  
     [MagicalRecord setupAutoMigratingCoreDataStack];
-    UIImage *backBtnIcon = [UIImage imageNamed:@"button_back@3x.png"];
+    UIImage *backBtnIcon = [UIImage imageNamed:@"back@3x.png"];
     
     [UINavigationBar appearance].backIndicatorImage = backBtnIcon;
     [UINavigationBar appearance].backIndicatorTransitionMaskImage = backBtnIcon;
     
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                          NSForegroundColorAttributeName:[UIColor whiteColor],
+                                                           NSFontAttributeName: [UIFont fontWithName:@"FingerPaint-Regular" size:20.0],
+                                                           }];
+    
     // set the text color for selected state
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,
+                                                       [UIFont fontWithName:@"FingerPaint-Regular" size:11.0], NSFontAttributeName, 
+                                                       nil] forState:UIControlStateSelected];
     // set the text color for unselected state
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,
+        [UIFont fontWithName:@"FingerPaint-Regular" size:11.0], NSFontAttributeName,                                               nil] forState:UIControlStateNormal];
  //   [[UITabBar appearance] setSelectionIndicatorImage:[AppDelegate imageFromColor:[UIColor colorWithRed:64/255.0 green:195/255.0 blue:213/255.0 alpha:1] forSize:CGSizeMake(60, 45) withCornerRadius:0]];
     // set the selected icon color
 

@@ -57,7 +57,7 @@
     self.titleView = self.navigationItem.titleView;
     
     
-    
+    [self.navigationItem setTitle:@"top Rated"];
     
     UIImage *btnImg = [UIImage imageNamed:@"button_set_up.png"];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -67,7 +67,7 @@
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = item;
     
-    btnImg = [UIImage imageNamed:@"button_back.png"];
+    btnImg = [UIImage imageNamed:@"back@3x.png"];
     btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0.f, 0.f, btnImg.size.width, btnImg.size.height);
     [btn setImage:btnImg forState:UIControlStateNormal];
@@ -431,7 +431,8 @@
 }
 
 - (void) setSearchItem {
-    UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchShow:)];
+    UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_search@3x.png"] style:UIBarButtonItemStylePlain target:self action:@selector(searchShow:)];
+    //UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchShow:)];
     item.tintColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = item;
     
@@ -666,14 +667,14 @@
             
         case 0:{
             [self setSearchItem];
-            self.navigationItem.title = @"Тop";
+            [self.navigationItem setTitle:@"top Rated"];
             [self loadDataForSortType:@"top"];
             break;
         }
          
         case 1:{
             [self setSearchItem];
-            self.navigationItem.title = @"New";
+            [self.navigationItem setTitle:@"New"];
             [self loadDataForSortType:@"new"];
             break;
         }

@@ -20,13 +20,13 @@
         <scene sceneID="mXj-9l-EVM">
             <objects>
                 <navigationController id="AOL-kf-ql9" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" backIndicatorImage="button_back@3x.png" backIndicatorTransitionMaskImage="button_back@3x.png" id="Y9l-xz-hdB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" backIndicatorImage="back@3x.png" backIndicatorTransitionMaskImage="back@3x.png" id="Y9l-xz-hdB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.0" green="0.59999999999999998" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="24"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
                     </navigationBar>
@@ -38,7 +38,7 @@
             </objects>
             <point key="canvasLocation" x="-3000" y="239"/>
         </scene>
-        <!--Top-->
+        <!--Main View Controller-->
         <scene sceneID="96V-09-pbT">
             <objects>
                 <viewController id="eO2-0C-etq" customClass="DSMainViewController" sceneMemberID="viewController">
@@ -55,9 +55,9 @@
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <items>
                                     <tabBarItem title="Top" image="top@3x.png" id="pa4-cd-6nA"/>
-                                    <tabBarItem title="New" image="new@3x.png" id="y1x-iq-Y8n"/>
-                                    <tabBarItem title="Categories" image="categories@3x.png" id="CCt-pJ-SAS"/>
-                                    <tabBarItem title="Downloads" image="downloads@3x.png" id="K1h-H3-fdQ"/>
+                                    <tabBarItem tag="1" title="New" image="new@3x.png" id="y1x-iq-Y8n"/>
+                                    <tabBarItem tag="2" title="Categories" image="categories@3x.png" id="CCt-pJ-SAS"/>
+                                    <tabBarItem tag="3" title="Downloads" image="downloads@3x.png" id="K1h-H3-fdQ"/>
                                 </items>
                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="barTintColor" red="0.0" green="0.59999999999999998" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -78,9 +78,6 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backdrop@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jty-U4-MdC">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="3" y="5" width="314" height="143"/>
-                                                    </variation>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YUJ-OH-IXU" customClass="UAProgressView">
                                                     <rect key="frame" x="21" y="10" width="50" height="50"/>
@@ -99,27 +96,21 @@
                                                     <fontDescription key="fontDescription" name="FingerPaint-Regular" family="Finger Paint" pointSize="18"/>
                                                     <color key="textColor" red="0.0" green="0.59999999999999998" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="73" y="33" width="185" height="21"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9k8-Ty-NVv">
                                                     <rect key="frame" x="96" y="8" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="FingerPaint-Regular" family="Finger Paint" pointSize="18"/>
                                                     <color key="textColor" red="0.0" green="0.59999999999999998" blue="0.66274509803921566" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="73" y="12" width="185" height="21"/>
-                                                    </variation>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="cHq-zc-LCs">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="cHq-zc-LCs">
                                                     <rect key="frame" x="181" y="0.0" width="100" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="90" id="02u-Op-XTj"/>
                                                         <constraint firstAttribute="height" constant="51" id="GQ8-K4-7iQ"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="FingerPaint-Regular" family="Finger Paint" pointSize="15"/>
-                                                    <state key="normal" title="Other versions">
+                                                    <state key="normal" title="Other versions" backgroundImage="forward@3x.png">
                                                         <color key="titleColor" red="0.0" green="0.59999999999999998" blue="0.66274509800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -129,8 +120,7 @@
                                                             <exclude reference="GQ8-K4-7iQ"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="222" y="85" width="90" height="51"/>
+                                                    <variation key="widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="02u-Op-XTj"/>
                                                             <include reference="GQ8-K4-7iQ"/>
@@ -153,8 +143,7 @@
                                                             <exclude reference="e0a-sQ-NR5"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="258" y="15" width="50" height="50"/>
+                                                    <variation key="widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="Az7-ER-yaq"/>
                                                             <include reference="e0a-sQ-NR5"/>
@@ -386,15 +375,9 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="22"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="31" y="13" width="183" height="26"/>
-                                                    </variation>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backdrop@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="OLN-GC-DJj">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="8" y="8" width="304" height="83"/>
-                                                    </variation>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -532,7 +515,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Top" id="bm7-OG-HDe">
+                    <navigationItem key="navigationItem" id="bm7-OG-HDe">
                         <barButtonItem key="leftBarButtonItem" id="4K2-Wz-Zgp">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
@@ -865,11 +848,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="back@3x.png" width="66" height="66"/>
         <image name="backdrop@3x.png" width="1171" height="193"/>
-        <image name="button_back@3x.png" width="66" height="66"/>
         <image name="categories@3x.png" width="100" height="100"/>
         <image name="download@3x.png" width="272" height="272"/>
         <image name="downloads@3x.png" width="100" height="100"/>
+        <image name="forward@3x.png" width="152" height="66"/>
         <image name="new@3x.png" width="100" height="100"/>
         <image name="top@3x.png" width="100" height="100"/>
     </resources>
