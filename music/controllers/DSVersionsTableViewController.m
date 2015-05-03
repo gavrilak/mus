@@ -36,8 +36,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    self.navigationController.navigationBar.topItem.title = @"";
+    self.navigationItem.title = @"Versions";
+    
     UIGraphicsBeginImageContext(self.view.frame.size);
-    [[UIImage imageNamed:@"1.jpg"] drawInRect:self.view.bounds];
+    [[UIImage imageNamed:@"2.jpg"] drawInRect:self.view.bounds];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     self.view.backgroundColor = [UIColor colorWithPatternImage:image];
@@ -217,7 +221,7 @@
     [object incrementKey:@"rate" byAmount:[NSNumber numberWithDouble:newRate] ];
     [object saveInBackground];
     if (rating < 2) {
-        image = [UIImage imageNamed:@"broken_heart.png"];
+        image = [UIImage imageNamed:@"sad_heart.png"];
     } else if (rating < 4) {
         image = [UIImage imageNamed:@"neutral_heart.png"];
     } else {

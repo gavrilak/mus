@@ -15,6 +15,35 @@
 
 @implementation AppDelegate
 
++ (UIImage *)imageFromColor:(UIColor *)color forSize:(CGSize)size withCornerRadius:(CGFloat)radius
+{
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // Begin a new image that will be the new image with the rounded corners
+    // (here with the size of an UIImageView)
+    UIGraphicsBeginImageContext(size);
+    
+    // Add a clip before drawing anything, in the shape of an rounded rect
+    [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:radius] addClip];
+    // Draw your image
+    [image drawInRect:rect];
+    
+    // Get the image, here setting the UIImageView image
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // Lets forget about that we were drawing
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -26,8 +55,33 @@
     [MagicalRecord setupAutoMigratingCoreDataStack];
     UIImage *backBtnIcon = [UIImage imageNamed:@"button_back@3x.png"];
     
-        [UINavigationBar appearance].backIndicatorImage = backBtnIcon;
-        [UINavigationBar appearance].backIndicatorTransitionMaskImage = backBtnIcon;
+    [UINavigationBar appearance].backIndicatorImage = backBtnIcon;
+    [UINavigationBar appearance].backIndicatorTransitionMaskImage = backBtnIcon;
+    
+    // set the text color for selected state
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+    // set the text color for unselected state
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+ //   [[UITabBar appearance] setSelectionIndicatorImage:[AppDelegate imageFromColor:[UIColor colorWithRed:64/255.0 green:195/255.0 blue:213/255.0 alpha:1] forSize:CGSizeMake(60, 45) withCornerRadius:0]];
+    // set the selected icon color
+
+    NSString *tabBarImage = @"tabBar_bg@2x.png";
+    UIImage *tabBackground = [[UIImage imageNamed:tabBarImage] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+   // [[UITabBar appearance] setBackgroundImage:tabBackground];
+    [[UITabBar appearance] setTintColor:[UIColor redColor]];
+     [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
+   // [[UITabBar appearance] setSelectedImageTintColor:[UIColor colorWithRed:0/255.0 green:153/255.0 blue:169/255.0 alpha:1]];
+   // [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"background.png"]];
+
+  //  UITabBarItem* item = [[UITabBarItem alloc] initWithTitle:@"Categories" image: [UIImage imageNamed:@"top@3x.png"] selectedImage:[UIImage imageNamed:@"top_s@3x.png"]];
+//    UITabBarItem* item2 = [[UITabBarItem alloc] initWithTitle:@"Categories" image: [UIImage imageNamed:@"new@3x.png"] selectedImage:[UIImage imageNamed:@"new_s@3x.png"]];
+   
+ //  NSArray * items = [[NSArray alloc] initWithObjects:item,item2, nil];
+ //   for (UITabBarItem *tbi in items) {
+ //       tbi.image = [tbi.image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+ //       tbi.selectedImage = [tbi.selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    }
+ //  [[UITabBar appearance] setItems:items];
     return YES;
 }
 

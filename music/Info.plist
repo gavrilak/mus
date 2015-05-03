@@ -4,6 +4,9 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Jester.ttf</string>
+		<string>SLRunawayGirl.ttf</string>
+		<string>Irezumi.ttf</string>
 		<string>NewFont.ttf</string>
 		<string>FingerPaint-Regular.ttf</string>
 		<string>BradleyHAndITCBold.ttf</string>

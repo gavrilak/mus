@@ -49,12 +49,15 @@
     
     // Do any additional setup after loading the view, typically from a nib.
     UIGraphicsBeginImageContext(self.view.frame.size);
-    [[UIImage imageNamed:@"1.jpg"] drawInRect:self.view.bounds];
+    [[UIImage imageNamed:@"2.jpg"] drawInRect:self.view.bounds];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     self.view.backgroundColor = [UIColor colorWithPatternImage:image];
     
     self.titleView = self.navigationItem.titleView;
+    
+    
+    
     
     UIImage *btnImg = [UIImage imageNamed:@"button_set_up.png"];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -74,8 +77,18 @@
     
     [self setSearchItem];
     
-    [self.tabbar setSelectedItem:[self.tabbar.items objectAtIndex:0]];
-    
+    UITabBarItem * tbi = [self.tabbar.items objectAtIndex:0];
+    tbi.selectedImage = [UIImage imageNamed:@"top_s@3x.png"];
+    UITabBarItem * tbi1 = [self.tabbar.items objectAtIndex:1];
+    tbi1.selectedImage = [UIImage imageNamed:@"new_s@3x.png"];
+    UITabBarItem * tbi2 = [self.tabbar.items objectAtIndex:2];
+    tbi2.selectedImage = [UIImage imageNamed:@"categories_s@3x.png"];
+    UITabBarItem * tbi3 = [self.tabbar.items objectAtIndex:3];
+    tbi3.selectedImage = [UIImage imageNamed:@"downloads_s@3x.png"];
+       for (UITabBarItem *tbi in self.tabbar.items) {
+           tbi.image = [tbi.image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+           tbi.selectedImage = [tbi.selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+       }
     self.selectedRow = -1;
     self.playItem = -1;
     
@@ -85,7 +98,7 @@
     self.activityIndicator.maxItems = 5;
     self.activityIndicator.minItemSize = CGSizeMake(10, 10);
     self.activityIndicator.maxItemSize = CGSizeMake(35, 35);
-    self.activityIndicator.itemColor = [UIColor colorWithWhite:0.8 alpha:0.8];
+    self.activityIndicator.itemColor = [UIColor colorWithRed:106/255.0 green:215/255.0 blue:230/255.0 alpha:1];
     
     [self addLoading];
     
@@ -97,6 +110,7 @@
 - (void) viewWillAppear:(BOOL)animated {
     [DSSoundManager sharedManager].delegate = self;
     [super viewWillAppear:animated];
+   // [self.tabbar setSelectedItem:[self.tabbar.items objectAtIndex:0]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -167,9 +181,9 @@
     cell.rateView.delegate = self;
     cell.rateView.editable = YES;
     cell.rateView.tag = indexPath.row;
-    cell.rateView.notSelectedImage = [UIImage imageNamed:@"heart_empty@2x.png"];
-    cell.rateView.halfSelectedImage =  [UIImage imageNamed:@"heart_half@2x.png"];
-    cell.rateView.fullSelectedImage = [UIImage imageNamed:@"heart_full@2x.png"];
+    cell.rateView.notSelectedImage = [UIImage imageNamed:@"heart_empty.png"];
+    cell.rateView.halfSelectedImage =  [UIImage imageNamed:@"heart_half.png"];
+    cell.rateView.fullSelectedImage = [UIImage imageNamed:@"heart_full.png"];
     cell.rateView.maxRating = 5;
         
     if (self.selectedRow != indexPath.row) {
@@ -182,7 +196,7 @@
                forControlEvents:UIControlEventTouchUpInside];
     
     cell.uaprogressBtn.fillOnTouch = YES;
-    cell.uaprogressBtn.tintColor = [UIColor whiteColor];
+        cell.uaprogressBtn.tintColor = [UIColor colorWithRed:0/255.0 green:153/255.0 blue:169/255.0 alpha:1];
     cell.uaprogressBtn.borderWidth = 2.0;
     cell.uaprogressBtn.lineWidth = 2.0;
     
@@ -695,7 +709,7 @@
     [object incrementKey:@"rate" byAmount:[NSNumber numberWithDouble:newRate] ];
     [object saveInBackground];
     if (rating < 2) {
-        image = [UIImage imageNamed:@"broken_heart.png"];
+        image = [UIImage imageNamed:@"sad_heart.png"];
     } else if (rating < 4) {
         image = [UIImage imageNamed:@"neutral_heart.png"];
     } else {
