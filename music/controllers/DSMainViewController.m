@@ -54,9 +54,6 @@
     UIGraphicsEndImageContext();
     self.view.backgroundColor = [UIColor colorWithPatternImage:image];
     
-    self.titleView = self.navigationItem.titleView;
-    
-    
     [self.navigationItem setTitle:@"top Rated"];
     
     UIImage *btnImg = [UIImage imageNamed:@"button_set_up.png"];
@@ -85,10 +82,10 @@
     tbi2.selectedImage = [UIImage imageNamed:@"categories_s@3x.png"];
     UITabBarItem * tbi3 = [self.tabbar.items objectAtIndex:3];
     tbi3.selectedImage = [UIImage imageNamed:@"downloads_s@3x.png"];
-       for (UITabBarItem *tbi in self.tabbar.items) {
-           tbi.image = [tbi.image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-           tbi.selectedImage = [tbi.selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-       }
+    for (UITabBarItem *tbi in self.tabbar.items) {
+        tbi.image = [tbi.image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        tbi.selectedImage = [tbi.selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
     self.selectedRow = -1;
     self.playItem = -1;
     
@@ -101,16 +98,18 @@
     self.activityIndicator.itemColor = [UIColor colorWithRed:106/255.0 green:215/255.0 blue:230/255.0 alpha:1];
     
     [self addLoading];
-    
     [self loadDataForSortType:@"top"];
-    self.playTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
+    [self.tabbar setSelectedItem:[self.tabbar.items objectAtIndex:0]];
     
-   }
+}
 
 - (void) viewWillAppear:(BOOL)animated {
+    
     [DSSoundManager sharedManager].delegate = self;
+    self.playTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
+
     [super viewWillAppear:animated];
-   // [self.tabbar setSelectedItem:[self.tabbar.items objectAtIndex:0]];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -121,7 +120,6 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -336,10 +334,6 @@
 }
 - (void)addLoading{
     
-   // [[MSLiveBlur sharedInstance] addSubview:self.activityIndicator];
-  //  [MSLiveBlur sharedInstance].isStatic = YES;
-  //  [MSLiveBlur sharedInstance].blurRadius = 1.5;
-  //  [[MSLiveBlur sharedInstance] blurRect:self.tableView.bounds];
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [self.tableView addSubview:self.activityIndicator];
     [self.activityIndicator startAnimating];
@@ -351,8 +345,6 @@
     [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     [self.activityIndicator stopAnimating];
     [self.activityIndicator removeFromSuperview];
-    
-    //[[MSLiveBlur sharedInstance] stopBlurringRect:self.view.bounds];
     
 }
 
@@ -376,6 +368,11 @@
 - (void)searchShow:(UIBarButtonItem *)sender {
     
     UISearchBar *searchBar = [[UISearchBar alloc]init];
+    UIImage *searchFieldImage = [[UIImage imageNamed:@"ic_search_green@3x.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
+    //UITextField *searchField = [searchBar valueForKey:@"_searchField"];
+    //searchField.textColor = [UIColor redColor];
+   
+    [searchBar setImage:searchFieldImage forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
     self.searchBar = searchBar;
     self.searchBar.delegate = self;
     self.navigationItem.titleView = self.searchBar;
@@ -431,8 +428,8 @@
 }
 
 - (void) setSearchItem {
+    
     UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_search@3x.png"] style:UIBarButtonItemStylePlain target:self action:@selector(searchShow:)];
-    //UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchShow:)];
     item.tintColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = item;
     
@@ -487,7 +484,7 @@
              [self removeLoading];
              
          } else {
-             // Log details of the failure
+    
              NSLog(@"Error: %@ %@", error, [error userInfo]);
              [self removeLoading];
          }
@@ -617,7 +614,8 @@
 
 #pragma mark - DSSoundManagerDelegate
 - (void) statusChanged:(BOOL) playStatus {
-   NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
+    
+    NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
     DSMainTableViewCell* cell =( DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
    
     if (playStatus == YES){
@@ -725,6 +723,13 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
    
     [searchBar setShowsCancelButton:YES animated:YES];
+    UIView* view=searchBar.subviews[0];
+    for (UIView *subView in view.subviews) {
+        if ([subView isKindOfClass:[UIButton class]]) {
+            UIButton *cancelButton = (UIButton*)subView;
+            [cancelButton.titleLabel setFont:[UIFont fontWithName:@"FingerPaint-Regular" size:15.0]];
+        }
+    }
     
 }
 

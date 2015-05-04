@@ -13,6 +13,7 @@
             <string>FingerPaint-Regular</string>
             <string>FingerPaint-Regular</string>
             <string>FingerPaint-Regular</string>
+            <string>FingerPaint-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -370,26 +371,30 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R3S-ku-0FY" id="FjB-w8-JQe">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Poy-vg-YDS">
-                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="22"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backdrop@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="OLN-GC-DJj">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Poy-vg-YDS">
+                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" name="FingerPaint-Regular" family="Finger Paint" pointSize="20"/>
+                                                    <color key="textColor" red="0.0" green="0.59999999999999998" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Poy-vg-YDS" firstAttribute="top" secondItem="FjB-w8-JQe" secondAttribute="topMargin" constant="5" id="8Qg-NT-hxV"/>
-                                                <constraint firstAttribute="trailing" secondItem="OLN-GC-DJj" secondAttribute="trailing" constant="8" id="9tT-oM-b7f"/>
+                                                <constraint firstAttribute="trailing" secondItem="OLN-GC-DJj" secondAttribute="trailing" constant="8" id="9tT-oM-b7f">
+                                                    <variation key="widthClass=compact" constant="3"/>
+                                                </constraint>
                                                 <constraint firstAttribute="trailing" secondItem="Poy-vg-YDS" secondAttribute="trailing" constant="106" id="CYs-NZ-qcZ"/>
                                                 <constraint firstItem="Poy-vg-YDS" firstAttribute="leading" secondItem="FjB-w8-JQe" secondAttribute="leadingMargin" constant="23" id="DkK-am-sJg"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Poy-vg-YDS" secondAttribute="trailing" constant="98" id="SdJ-JU-aff"/>
                                                 <constraint firstItem="OLN-GC-DJj" firstAttribute="leading" secondItem="FjB-w8-JQe" secondAttribute="leadingMargin" id="XHS-8D-sup"/>
                                                 <constraint firstAttribute="bottom" secondItem="OLN-GC-DJj" secondAttribute="bottom" constant="2" id="dXt-Xw-Lwk"/>
                                                 <constraint firstItem="Poy-vg-YDS" firstAttribute="leading" secondItem="FjB-w8-JQe" secondAttribute="leading" constant="31" id="ozc-g7-27g"/>
-                                                <constraint firstItem="OLN-GC-DJj" firstAttribute="leading" secondItem="FjB-w8-JQe" secondAttribute="leading" constant="8" id="p1Y-YK-Dx6"/>
+                                                <constraint firstItem="OLN-GC-DJj" firstAttribute="leading" secondItem="FjB-w8-JQe" secondAttribute="leading" constant="8" id="p1Y-YK-Dx6">
+                                                    <variation key="widthClass=compact" constant="3"/>
+                                                </constraint>
                                                 <constraint firstItem="OLN-GC-DJj" firstAttribute="bottom" secondItem="FjB-w8-JQe" secondAttribute="bottomMargin" id="qLl-lN-0IX">
                                                     <variation key="widthClass=compact" constant="10"/>
                                                 </constraint>
@@ -397,13 +402,17 @@
                                                     <variation key="widthClass=compact" constant="0.0"/>
                                                 </constraint>
                                                 <constraint firstItem="OLN-GC-DJj" firstAttribute="top" secondItem="FjB-w8-JQe" secondAttribute="topMargin" id="v75-mY-fV9"/>
-                                                <constraint firstItem="Poy-vg-YDS" firstAttribute="top" secondItem="FjB-w8-JQe" secondAttribute="top" constant="13" id="xWo-dE-K11"/>
-                                                <constraint firstItem="OLN-GC-DJj" firstAttribute="top" secondItem="FjB-w8-JQe" secondAttribute="top" constant="8" id="zzD-5I-AV2"/>
+                                                <constraint firstItem="Poy-vg-YDS" firstAttribute="top" secondItem="FjB-w8-JQe" secondAttribute="top" constant="13" id="xWo-dE-K11">
+                                                    <variation key="widthClass=compact" constant="10"/>
+                                                </constraint>
+                                                <constraint firstItem="OLN-GC-DJj" firstAttribute="top" secondItem="FjB-w8-JQe" secondAttribute="top" constant="8" id="zzD-5I-AV2">
+                                                    <variation key="widthClass=compact" constant="5"/>
+                                                </constraint>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
-                                                    <exclude reference="Poy-vg-YDS"/>
                                                     <exclude reference="OLN-GC-DJj"/>
+                                                    <exclude reference="Poy-vg-YDS"/>
                                                 </mask>
                                                 <mask key="constraints">
                                                     <exclude reference="8Qg-NT-hxV"/>
@@ -424,8 +433,8 @@
                                             </variation>
                                             <variation key="widthClass=compact">
                                                 <mask key="subviews">
-                                                    <include reference="Poy-vg-YDS"/>
                                                     <include reference="OLN-GC-DJj"/>
+                                                    <include reference="Poy-vg-YDS"/>
                                                 </mask>
                                                 <mask key="constraints">
                                                     <exclude reference="8Qg-NT-hxV"/>

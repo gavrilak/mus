@@ -71,26 +71,15 @@
     // set the text color for unselected state
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,
         [UIFont fontWithName:@"FingerPaint-Regular" size:11.0], NSFontAttributeName,                                               nil] forState:UIControlStateNormal];
- //   [[UITabBar appearance] setSelectionIndicatorImage:[AppDelegate imageFromColor:[UIColor colorWithRed:64/255.0 green:195/255.0 blue:213/255.0 alpha:1] forSize:CGSizeMake(60, 45) withCornerRadius:0]];
-    // set the selected icon color
+ // [[UITabBar appearance] setSelectionIndicatorImage:[AppDelegate imageFromColor:[UIColor colorWithRed:64/255.0 green:195/255.0 blue:213/255.0 alpha:1] forSize:CGSizeMake(60, 45) withCornerRadius:0]];
 
-    NSString *tabBarImage = @"tabBar_bg@2x.png";
-    UIImage *tabBackground = [[UIImage imageNamed:tabBarImage] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-   // [[UITabBar appearance] setBackgroundImage:tabBackground];
+
+
     [[UITabBar appearance] setTintColor:[UIColor redColor]];
-     [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
-   // [[UITabBar appearance] setSelectedImageTintColor:[UIColor colorWithRed:0/255.0 green:153/255.0 blue:169/255.0 alpha:1]];
-   // [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"background.png"]];
-
-  //  UITabBarItem* item = [[UITabBarItem alloc] initWithTitle:@"Categories" image: [UIImage imageNamed:@"top@3x.png"] selectedImage:[UIImage imageNamed:@"top_s@3x.png"]];
-//    UITabBarItem* item2 = [[UITabBarItem alloc] initWithTitle:@"Categories" image: [UIImage imageNamed:@"new@3x.png"] selectedImage:[UIImage imageNamed:@"new_s@3x.png"]];
-   
- //  NSArray * items = [[NSArray alloc] initWithObjects:item,item2, nil];
- //   for (UITabBarItem *tbi in items) {
- //       tbi.image = [tbi.image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
- //       tbi.selectedImage = [tbi.selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//    }
- //  [[UITabBar appearance] setItems:items];
+    [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
+  
+    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setDefaultTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:0/255.0 green:153/255.0 blue:169/255.0 alpha:1], NSFontAttributeName: [UIFont fontWithName:@"FingerPaint-Regular" size:16.0]}];
+    
     return YES;
 }
 
