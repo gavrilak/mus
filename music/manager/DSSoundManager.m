@@ -115,7 +115,7 @@
     NSMutableArray* array = [[NSMutableArray alloc] init];
     array = [[DSSong  MR_findAllSortedBy:@"idSong"
                                     ascending:YES
-                                withPredicate:[NSPredicate predicateWithFormat:@"id contains[c] %@", ID]
+                                withPredicate:[NSPredicate predicateWithFormat:@"idSong contains[c] %@", ID]
                                     inContext:[NSManagedObjectContext MR_defaultContext]] mutableCopy];
     if ( [array count] > 0) {
         return TRUE;

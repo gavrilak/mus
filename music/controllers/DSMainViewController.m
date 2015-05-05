@@ -169,12 +169,18 @@
         cell.artistLabel.text = song.author;
         cell.titleLabel.text = song.name;
         cell.rateView.editable = [[DSSoundManager sharedManager] existsLikeForSongID:song.idSong];
+        [cell.downloadBtn setImage:[UIImage imageNamed:@"complete@3x.png"] forState: UIControlStateNormal];
+
     } else {
         PFObject* object = [self.musicObjects objectAtIndex:indexPath.row];
         cell.rateView.rating = [[object objectForKey:@"rate"] floatValue];
         cell.artistLabel.text = [object objectForKey:@"author"];
         cell.titleLabel.text = [object objectForKey:@"name"];
         cell.rateView.editable = [[DSSoundManager sharedManager] existsLikeForSongID:object.objectId];
+        if ([[DSSoundManager sharedManager] existsSongInDownloads:object.objectId]) {
+            [cell.downloadBtn setImage:[UIImage imageNamed:@"complete@3x.png"] forState: UIControlStateNormal];
+            
+        }
     }
     cell.rateView.delegate = self;
     cell.rateView.editable = YES;
@@ -189,6 +195,7 @@
         [cell.versionBtn setHidden:YES];
     }
    
+    
     cell.downloadBtn.tag = indexPath.row;
     [cell.downloadBtn addTarget:self action:@selector(downloadClicked:)
                forControlEvents:UIControlEventTouchUpInside];
@@ -395,8 +402,21 @@
              [[DSSoundManager sharedManager] addSongToDownloads:object fileUrl:fullPath];
              [object incrementKey:@"colDownloads"];
              [object saveInBackground];
-         }
+             [self changeDownloadIcon:btn.tag];
+        }
     } ];
+}
+
+- (void) changeDownloadIcon:(NSInteger) row {
+   
+         [UIView animateWithDuration:0.5f animations: ^
+     {
+          NSIndexPath* indexPath = [in]
+         DSMainTableViewCell *cell = ( DSMainTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+
+         [cell.downloadBtn setImage:[UIImage imageNamed:@"complete@3x.png"] forState: UIControlStateNormal];
+
+     }];
 }
 - (void) downloadAndPlay:(NSUInteger) row forView:(UAProgressView*) progressView {
     
