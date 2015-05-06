@@ -30,4 +30,19 @@
     
 }
 
+- (void) setNotActiveWithDelay:(NSTimeInterval)delay
+                  duration:(NSTimeInterval)duration
+                         alhpa: (float) alpha {
+    [UIView animateWithDuration:duration
+                          delay:delay
+                        options:UIViewAnimationOptionAllowAnimatedContent
+                     animations:^{
+                         
+                             self.alpha = alpha;
+                         
+                     } completion:^(BOOL finished) {
+                         
+                     }];
+}
+
 @end

@@ -13,4 +13,8 @@
 - (void)setHiddenAnimated:(BOOL)hide
                     delay:(NSTimeInterval)delay
                  duration:(NSTimeInterval)duration;
+
+- (void) setNotActiveWithDelay:(NSTimeInterval)delay
+                      duration:(NSTimeInterval)duration
+                         alhpa:(float) alpha;
 @end
