@@ -147,10 +147,6 @@
     static NSString *categoryIdentifier = @"category";
     
     
-    if (self.selectedTab == 3) {
-        NSLog (@"%lu" , (unsigned long)[self.musicObjects count]);
-    }
-    
     if (self.selectedTab ==2 && self.selectCategory == nil){
     
        DSCategoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:categoryIdentifier];
@@ -196,7 +192,7 @@
         cell.titleLabel.text = [object objectForKey:@"name"];
         if ([[DSSoundManager sharedManager] existsLikeForSongID:object.objectId]) {
             cell.rateView.editable = NO;
-            [cell.rateView setNotActiveWithDelay:0 duration:0 alhpa:0.5];
+            cell.rateView.alpha = 0.5;
         } else {
             cell.rateView.editable = YES;
             cell.rateView.alpha = 1;
@@ -255,7 +251,7 @@
     label.backgroundColor = [UIColor clearColor];
         
     cell.uaprogressBtn.cancelSelectBlock =  ^(UAProgressView *progressView) {
-        NSLog(@"%ld , %ld", (long)self.playItem, (long)progressView.tag);
+       // NSLog(@"%ld , %ld", (long)self.playItem, (long)progressView.tag);
         if (![progressView.centralView isKindOfClass:[UIImageView class]]){
             if ( progressView.tag == self.playItem && [[DSSoundManager sharedManager] isPlaying]) {
                 cell.uaprogressBtn.centralView = square;
@@ -354,8 +350,8 @@
         NSIndexPath *myIP = [NSIndexPath indexPathForRow:self.selectedRow inSection:0];
         DSMainTableViewCell *cell = (DSMainTableViewCell*) [self.tableView cellForRowAtIndexPath:myIP];
         if (cell.rateView.hidden == NO){
-            [cell.rateView setHiddenAnimated:YES delay:0 duration:0.3];
-            [cell.versionBtn setHiddenAnimated:YES delay:0 duration:0.3];
+            [cell.rateView setHiddenAnimated:YES editable:cell.rateView.editable delay:0 duration:0.3];
+            [cell.versionBtn setHiddenAnimated:YES editable:YES delay:0 duration:0.3];
         }
         self.selectedRow = indexPath.row;
         [self.tableView beginUpdates];
@@ -391,8 +387,8 @@
 
      }];
     DSMainTableViewCell *cell = ( DSMainTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-    [cell.rateView setHiddenAnimated:NO delay:0 duration:1];
-    [cell.versionBtn setHiddenAnimated:NO delay:0 duration:1];
+    [cell.rateView setHiddenAnimated:NO editable:cell.rateView.editable delay:0 duration:1];
+    [cell.versionBtn setHiddenAnimated:NO editable:YES  delay:0 duration:1];
 }
 
 
@@ -416,19 +412,23 @@
     
     UIButton* btn = sender;
     PFObject *object = [self.musicObjects objectAtIndex:btn.tag];
-    PFFile *soundFile = object[@"mfile"];
-    [soundFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-         if (!error) {
-             NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-             NSString *documentsDirectory = [paths objectAtIndex:0];
-             NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:soundFile.name];
-             [data writeToFile:fullPath options:NSDataWritingWithoutOverwriting error:nil];
-             [[DSSoundManager sharedManager] addSongToDownloads:object fileUrl:fullPath];
-             [object incrementKey:@"colDownloads"];
-             [object saveInBackground];
-             [self changeDownloadIcon:btn.tag];
+    if ([object isKindOfClass:[PFObject class]] ) {
+        if (![[DSSoundManager sharedManager] existsSongInDownloads:object.objectId]) {
+            PFFile *soundFile = object[@"mfile"];
+            [soundFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                if (!error) {
+                    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                    NSString *documentsDirectory = [paths objectAtIndex:0];
+                    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:soundFile.name];
+                    [data writeToFile:fullPath options:NSDataWritingWithoutOverwriting error:nil];
+                    [[DSSoundManager sharedManager] addSongToDownloads:object fileUrl:fullPath];
+                    [object incrementKey:@"colDownloads"];
+                    [object saveInBackground];
+                    [self changeDownloadIcon:btn.tag];
+                }
+            } ];
         }
-    } ];
+    }
 }
 
 - (void) changeDownloadIcon:(NSInteger) row {

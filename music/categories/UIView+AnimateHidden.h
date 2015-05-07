@@ -11,6 +11,7 @@
 @interface UIView (AnimateHidden)
 
 - (void)setHiddenAnimated:(BOOL)hide
+                 editable:(BOOL) edit
                     delay:(NSTimeInterval)delay
                  duration:(NSTimeInterval)duration;
 

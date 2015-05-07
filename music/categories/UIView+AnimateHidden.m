@@ -11,6 +11,7 @@
 @implementation UIView (AnimateHidden)
 
 - (void)setHiddenAnimated:(BOOL)hide
+                 editable:(BOOL)edit
                     delay:(NSTimeInterval)delay
                  duration:(NSTimeInterval)duration {
     [UIView animateWithDuration:duration
@@ -22,7 +23,11 @@
                          } else {
                              self.alpha = 0;
                              self.hidden = NO; // We need this to see the animation 0 -> 1
-                             self.alpha = 1;
+                             if (edit){
+                                 self.alpha = 1;
+                             } else {
+                                 self.alpha = 0.5;
+                             }
                          }
                      } completion:^(BOOL finished) {
                          self.hidden = hide;

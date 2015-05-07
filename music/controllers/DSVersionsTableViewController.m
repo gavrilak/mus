@@ -60,15 +60,15 @@
     [self.musicObjects addObject:self.musicObject];
     [self addLoading];
     
-    [self loadData];
-    [DSSoundManager sharedManager].delegate = self;
-    self.playTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
+    [self checkMusicObject];
 
   
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [DSSoundManager sharedManager].delegate = self;
+    self.playTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -95,17 +95,60 @@
     }
     
     PFObject* object = [self.musicObjects objectAtIndex:indexPath.row];
-    cell.rateView.rating = [[object objectForKey:@"rate"] floatValue];
-    cell.artistLabel.text = [object objectForKey:@"author"];
-    cell.titleLabel.text = [object objectForKey:@"name"];
-    cell.rateView.editable = [[DSSoundManager sharedManager] existsLikeForSongID:object.objectId];
-    if (self.selectedRow != indexPath.row && indexPath.row != 0 ) {
-       [cell.rateView setHidden:YES];
-       // [cell.versionBtn setHidden:YES];
+    if ([object isKindOfClass:[PFObject class]]) {
+    
+        cell.rateView.rating = [[object objectForKey:@"rate"] floatValue];
+      
+        if ( [object objectForKey:@"author"]  == nil) {
+            cell.artistLabel.text =  [[self.musicObjects objectAtIndex:0] objectForKey:@"author"];
+            cell.titleLabel.text =   [[self.musicObjects objectAtIndex:0] objectForKey:@"name"];
+        } else {
+            cell.artistLabel.text = [object objectForKey:@"author"];
+            cell.titleLabel.text = [object objectForKey:@"name"];
+        }
+        cell.rateView.editable = [[DSSoundManager sharedManager] existsLikeForSongID:object.objectId];
+        if (self.selectedRow != indexPath.row && indexPath.row != 0 ) {
+            [cell.rateView setHidden:YES];
+            [cell.shareBtn setHidden:YES];
+        } else {
+            [cell.rateView setHidden:NO];
+            [cell.shareBtn setHidden:NO];
+        }
+        if ([[DSSoundManager sharedManager] existsLikeForSongID:object.objectId]) {
+            cell.rateView.alpha = 0.5;
+        } else {
+            cell.rateView.alpha = 1;
+        }
+    
+        if ([[DSSoundManager sharedManager] existsSongInDownloads:object.objectId]) {
+            [cell.downloadBtn setImage:[UIImage imageNamed:@"complete@3x.png"] forState: UIControlStateNormal];
+        } else {
+            [cell.downloadBtn setImage:[UIImage imageNamed:@"download@3x.png"] forState: UIControlStateNormal];
+        
+        }
+    } else {
+        DSSong* song = (DSSong*) object;
+        cell.rateView.rating = [song.rate floatValue];
+        cell.artistLabel.text =  song.author;
+        cell.titleLabel.text =  song.name;
+        [cell.downloadBtn setImage:[UIImage imageNamed:@"complete@3x.png"] forState: UIControlStateNormal];
+        cell.rateView.editable = [[DSSoundManager sharedManager] existsLikeForSongID:song.idSong];
+        if (self.selectedRow != indexPath.row && indexPath.row != 0 ) {
+            [cell.rateView setHidden:YES];
+            [cell.shareBtn setHidden:YES];
+        } else {
+            [cell.rateView setHidden:NO];
+            [cell.shareBtn setHidden:NO];
+        }
+        if ([[DSSoundManager sharedManager] existsLikeForSongID:song.idSong]) {
+            cell.rateView.alpha = 0.5;
+        } else {
+            cell.rateView.alpha = 1;
+        }
+
     }
     
     cell.rateView.delegate = self;
-    cell.rateView.editable = YES;
     cell.rateView.tag = indexPath.row;
     cell.rateView.notSelectedImage = [UIImage imageNamed:@"heart_empty@2x.png"];
     cell.rateView.halfSelectedImage =  [UIImage imageNamed:@"heart_half@2x.png"];
@@ -117,10 +160,11 @@
     [cell.downloadBtn addTarget:self action:@selector(downloadClicked:)
                forControlEvents:UIControlEventTouchUpInside];
 
+   
     
-    
+    cell.uaprogressBtn.tag = indexPath.row;
     cell.uaprogressBtn.fillOnTouch = YES;
-    cell.uaprogressBtn.tintColor = [UIColor whiteColor];
+    cell.uaprogressBtn.tintColor =  [UIColor colorWithRed:0/255.0 green:153/255.0 blue:169/255.0 alpha:1];
     cell.uaprogressBtn.borderWidth = 2.0;
     cell.uaprogressBtn.lineWidth = 2.0;
     
@@ -143,16 +187,16 @@
         }
     }
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 48.0, 18.0)];
-    label.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:14];
+    label.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:12];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = cell.uaprogressBtn.tintColor;
     label.backgroundColor = [UIColor clearColor];
     cell.uaprogressBtn.cancelSelectBlock =  ^(UAProgressView *progressView) {
         if (![progressView.centralView isKindOfClass:[UIImageView class]]){
-            if ( progressView.tag == self.playItem) {
-                cell.uaprogressBtn.centralView = triangle;
-            } else {
+            if ( progressView.tag == self.playItem && [[DSSoundManager sharedManager] isPlaying]) {
                 cell.uaprogressBtn.centralView = square;
+            } else {
+                cell.uaprogressBtn.centralView = triangle;
             }
         }
     };
@@ -196,8 +240,12 @@
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
     return indexPath;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self selectRow:indexPath];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -213,13 +261,26 @@
 #pragma mark - DSRateViewDelegate
 
 - (void)rateView:(DSRateView *)rateView ratingDidChange:(float)rating{
-    PFObject *object = [self.musicObjects objectAtIndex:rateView.tag];
+    
+    
+    if ([[self.musicObjects objectAtIndex:rateView.tag] isKindOfClass:[PFObject class]]){
+        PFObject* object = [self.musicObjects objectAtIndex:rateView.tag];
+        [self setRate:rating forObject:object];
+        [[DSSoundManager sharedManager] addLikeforSongID:object.objectId];
+    } else {
+        DSSong* song = [self.musicObjects objectAtIndex:rateView.tag];
+        PFQuery *query = [PFQuery queryWithClassName:@"Music"];
+        [query whereKey:@"objectId" equalTo:song.idSong];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if ([objects count]> 0) {
+                PFObject* object = [objects objectAtIndex:0] ;
+                [self setRate:rating forObject: object];
+                [[DSSoundManager sharedManager] addLikeforSongID:object.objectId];
+            }
+        }];
+    }
+    
     UIImage *image;
-    double newRate = ([[object objectForKey:@"rate"] floatValue] * [[object objectForKey:@"colRates"] integerValue] + rating) / ([[object objectForKey:@"colRates"] integerValue] + 1);
-    newRate = newRate - [[object objectForKey:@"rate"] floatValue] ;
-    [object incrementKey:@"colRates"];
-    [object incrementKey:@"rate" byAmount:[NSNumber numberWithDouble:newRate] ];
-    [object saveInBackground];
     if (rating < 2) {
         image = [UIImage imageNamed:@"sad_heart.png"];
     } else if (rating < 4) {
@@ -228,18 +289,31 @@
         image = [UIImage imageNamed:@"smile_heart.png"];
     }
     [[GoogleWearAlertObjc getInstance]prepareNotificationToBeShown:[[GoogleWearAlertViewObjc alloc]initWithTitle:nil andImage:image andWithType:Message andWithDuration:2.5 inViewController:self atPostion:Center canBeDismissedByUser:NO]];
+    [rateView setNotActiveWithDelay:1.5 duration:1 alhpa: 0.5];
     rateView.editable = false;
-    [[DSSoundManager sharedManager] addLikeforSongID:object.objectId];
+    
 }
 
+
+
 #pragma mark - Self Methods
+
+
+- (void) setRate:(float) rating  forObject: (PFObject*) object  {
+    double newRate = ([[object objectForKey:@"rate"] floatValue] * [[object objectForKey:@"colRates"] integerValue] + rating) / ([[object objectForKey:@"colRates"] integerValue] + 1);
+    newRate = newRate - [[object objectForKey:@"rate"] floatValue] ;
+    [object incrementKey:@"colRates"];
+    [object incrementKey:@"rate" byAmount:[NSNumber numberWithDouble:newRate] ];
+    [object saveInBackground];
+}
+
 - (void) selectRow:(NSIndexPath *) indexPath {
     if (self.selectedRow != indexPath.row) {
         NSIndexPath *myIP = [NSIndexPath indexPathForRow:self.selectedRow inSection:0];
         DSVersionTableViewCell *cell = ( DSVersionTableViewCell*)[self.tableView cellForRowAtIndexPath:myIP];
         if (cell.rateView.hidden == NO){
-            [cell.rateView setHiddenAnimated:YES delay:0 duration:0.3];
-            [cell.shareBtn setHiddenAnimated:YES delay:0 duration:0.3];
+            [cell.rateView setHiddenAnimated:YES editable:cell.rateView.editable delay:0 duration:0.3];
+            [cell.shareBtn setHiddenAnimated:YES editable:YES  delay:0 duration:0.3];
         }
         self.selectedRow = indexPath.row;
         [self.tableView beginUpdates];
@@ -249,10 +323,6 @@
 }
 - (void)addLoading{
     
-    // [[MSLiveBlur sharedInstance] addSubview:self.activityIndicator];
-    //  [MSLiveBlur sharedInstance].isStatic = YES;
-    //  [MSLiveBlur sharedInstance].blurRadius = 1.5;
-    //  [[MSLiveBlur sharedInstance] blurRect:self.tableView.bounds];
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [self.tableView addSubview:self.activityIndicator];
     [self.activityIndicator startAnimating];
@@ -264,8 +334,6 @@
     [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     [self.activityIndicator stopAnimating];
     [self.activityIndicator removeFromSuperview];
-    
-    //[[MSLiveBlur sharedInstance] stopBlurringRect:self.view.bounds];
     
 }
 
@@ -281,26 +349,43 @@
          
      }];
     DSVersionTableViewCell *cell = ( DSVersionTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-    [cell.rateView setHiddenAnimated:NO delay:0 duration:1];
-    [cell.shareBtn setHiddenAnimated:NO delay:0 duration:1];
+    [cell.rateView setHiddenAnimated:NO editable:cell.rateView.editable delay:0 duration:1];
+    [cell.shareBtn setHiddenAnimated:NO editable:YES delay:0 duration:1];
 }
 
 - (void) downloadClicked:(id)sender {
     
     UIButton* btn = sender;
     PFObject *object = [self.musicObjects objectAtIndex:btn.tag];
-    PFFile *soundFile = object[@"mfile"];
-    [soundFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-        if (!error) {
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            NSString *documentsDirectory = [paths objectAtIndex:0];
-            NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:soundFile.name];
-            [data writeToFile:fullPath options:NSDataWritingWithoutOverwriting error:nil];
-            [[DSSoundManager sharedManager] addSongToDownloads:object fileUrl:fullPath];
-            [object incrementKey:@"colDownloads"];
-            [object saveInBackground];
+    if ([object isKindOfClass:[PFObject class]] ) {
+        if (![[DSSoundManager sharedManager] existsSongInDownloads:object.objectId]) {
+            PFFile *soundFile = object[@"mfile"];
+            [soundFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                if (!error) {
+                    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                    NSString *documentsDirectory = [paths objectAtIndex:0];
+                    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:soundFile.name];
+                    [data writeToFile:fullPath options:NSDataWritingWithoutOverwriting error:nil];
+                    [[DSSoundManager sharedManager] addSongToDownloads:object fileUrl:fullPath];
+                    [object incrementKey:@"colDownloads"];
+                    [object saveInBackground];
+                    [self changeDownloadIcon:btn.tag];
+                }
+            } ];
         }
-    } ];
+    }
+}
+
+- (void) changeDownloadIcon:(NSInteger) row {
+    
+    [UIView animateWithDuration:0.5f animations: ^
+     {
+         NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+         DSVersionTableViewCell *cell = ( DSVersionTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+         
+         [cell.downloadBtn setImage:[UIImage imageNamed:@"complete@3x.png"] forState: UIControlStateNormal];
+         
+     }];
 }
 - (void) downloadAndPlay:(NSUInteger) row forView:(UAProgressView*) progressView {
     
@@ -330,12 +415,32 @@
                               }];
 }
 
+- (void) checkMusicObject {
+    if([self.musicObject isKindOfClass:[PFObject class]])  {
+        [self loadData];
+    } else {
+        DSSong* song = (DSSong*) self.musicObject;
+        PFQuery *query = [PFQuery queryWithClassName:@"Music"];
+        [query whereKey:@"objectId" equalTo:song.idSong];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if ([objects count]> 0) {
+                self.musicObject = [objects objectAtIndex:0];
+                [self loadData];
+            }
+        }];
+    }
+    
+}
+
 
 - (void) loadData {
+    
     
         PFQuery *query = [[self.musicObject  relationForKey:@"versions"]  query];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
+                [self.musicObjects removeAllObjects];
+                [self.musicObjects addObject:self.musicObject];
                 [self.musicObjects addObjectsFromArray:objects];
                 [self reloadData];
                 [self removeLoading];
@@ -362,23 +467,26 @@
 
 
 #pragma mark - DSSoundManagerDelegate
+
 - (void) statusChanged:(BOOL) playStatus {
+        
     NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
-    DSVersionTableViewCell* cell =( DSVersionTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
-    
+    DSVersionTableViewCell* cell = (DSVersionTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
+        
     if (playStatus == YES){
         UIImageView *square = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         [square setImage:[UIImage imageNamed: @"square.png"] ];
         cell.uaprogressBtn.centralView = square;
     }
     else{
-        
+            
         UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
         [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
         cell.uaprogressBtn.centralView = triangle;
         
     }
 }
+
 
 #pragma mark - Timer
 - (void) timerAction:(id)timer{
