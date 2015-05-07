@@ -106,7 +106,7 @@
             cell.artistLabel.text = [object objectForKey:@"author"];
             cell.titleLabel.text = [object objectForKey:@"name"];
         }
-        cell.rateView.editable = [[DSSoundManager sharedManager] existsLikeForSongID:object.objectId];
+        cell.rateView.editable = ![[DSSoundManager sharedManager] existsLikeForSongID:object.objectId];
         if (self.selectedRow != indexPath.row && indexPath.row != 0 ) {
             [cell.rateView setHidden:YES];
             [cell.shareBtn setHidden:YES];
@@ -141,8 +141,10 @@
             [cell.shareBtn setHidden:NO];
         }
         if ([[DSSoundManager sharedManager] existsLikeForSongID:song.idSong]) {
+            cell.rateView.editable = NO;
             cell.rateView.alpha = 0.5;
         } else {
+            cell.rateView.editable = YES;
             cell.rateView.alpha = 1;
         }
 

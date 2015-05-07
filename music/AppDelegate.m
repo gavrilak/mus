@@ -71,9 +71,6 @@
     // set the text color for unselected state
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,
         [UIFont fontWithName:@"FingerPaint-Regular" size:11.0], NSFontAttributeName,                                               nil] forState:UIControlStateNormal];
- // [[UITabBar appearance] setSelectionIndicatorImage:[AppDelegate imageFromColor:[UIColor colorWithRed:64/255.0 green:195/255.0 blue:213/255.0 alpha:1] forSize:CGSizeMake(60, 45) withCornerRadius:0]];
-
-
 
     [[UITabBar appearance] setTintColor:[UIColor redColor]];
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
