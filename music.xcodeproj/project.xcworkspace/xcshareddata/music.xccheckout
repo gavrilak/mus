@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>C79C6E48-2896-4F5F-8EE9-7DDA65F79A0F</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>music</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>32C83E330822315573628CB7C9CFF33EDF055111</key>
 		<string>https://github.com/gavrilak/mus.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>music.xcodeproj/project.xcworkspace</string>
+	<string>music.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>32C83E330822315573628CB7C9CFF33EDF055111</key>
