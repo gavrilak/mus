@@ -148,6 +148,12 @@
 		BFE8FD391AE69BC600B11E51 /* GoogleWearAlertViewObjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FD371AE69BC600B11E51 /* GoogleWearAlertViewObjc.m */; };
 		BFE8FD3C1AE69DB000B11E51 /* UIColor+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FD3B1AE69DB000B11E51 /* UIColor+Alert.m */; };
 		BFEEA5991AFBB74E004CB08B /* SF Scribbled Sans SC Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFEEA5981AFBB74E004CB08B /* SF Scribbled Sans SC Bold.ttf */; };
+		BFF3FD5B1B04D9FF000F13AB /* btSimpleMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF3FD581B04D9FF000F13AB /* btSimpleMenuItem.m */; };
+		BFF3FD5C1B04D9FF000F13AB /* btSimpleSideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF3FD5A1B04D9FF000F13AB /* btSimpleSideMenu.m */; };
+		BFF3FD611B04EC94000F13AB /* icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = BFF3FD5D1B04EC94000F13AB /* icon1.png */; };
+		BFF3FD621B04EC94000F13AB /* icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = BFF3FD5E1B04EC94000F13AB /* icon2.png */; };
+		BFF3FD631B04EC94000F13AB /* icon3.png in Resources */ = {isa = PBXBuildFile; fileRef = BFF3FD5F1B04EC94000F13AB /* icon3.png */; };
+		BFF3FD641B04EC94000F13AB /* icon4.png in Resources */ = {isa = PBXBuildFile; fileRef = BFF3FD601B04EC94000F13AB /* icon4.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -374,6 +380,14 @@
 		BFE8FD3A1AE69DB000B11E51 /* UIColor+Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Alert.h"; sourceTree = "<group>"; };
 		BFE8FD3B1AE69DB000B11E51 /* UIColor+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Alert.m"; sourceTree = "<group>"; };
 		BFEEA5981AFBB74E004CB08B /* SF Scribbled Sans SC Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF Scribbled Sans SC Bold.ttf"; sourceTree = "<group>"; };
+		BFF3FD571B04D9FF000F13AB /* btSimpleMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btSimpleMenuItem.h; sourceTree = "<group>"; };
+		BFF3FD581B04D9FF000F13AB /* btSimpleMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = btSimpleMenuItem.m; sourceTree = "<group>"; };
+		BFF3FD591B04D9FF000F13AB /* btSimpleSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btSimpleSideMenu.h; sourceTree = "<group>"; };
+		BFF3FD5A1B04D9FF000F13AB /* btSimpleSideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = btSimpleSideMenu.m; sourceTree = "<group>"; };
+		BFF3FD5D1B04EC94000F13AB /* icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon1.png; sourceTree = "<group>"; };
+		BFF3FD5E1B04EC94000F13AB /* icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon2.png; sourceTree = "<group>"; };
+		BFF3FD5F1B04EC94000F13AB /* icon3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon3.png; sourceTree = "<group>"; };
+		BFF3FD601B04EC94000F13AB /* icon4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon4.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -665,6 +679,7 @@
 		32D65E761AAB2F4400CB04A1 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				BFF3FD561B04D9FF000F13AB /* btSimpleSideMenu */,
 				BFE8FD331AE69BC600B11E51 /* AlertImage */,
 				3245F1141AD971CA0063A2A1 /* MSLiveBlur */,
 				32EB20631AD70C0800CFA191 /* YRActivityIndicator */,
@@ -806,6 +821,10 @@
 		BF897C301AB9A23100A3963A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				BFF3FD5D1B04EC94000F13AB /* icon1.png */,
+				BFF3FD5E1B04EC94000F13AB /* icon2.png */,
+				BFF3FD5F1B04EC94000F13AB /* icon3.png */,
+				BFF3FD601B04EC94000F13AB /* icon4.png */,
 				BFA1E0FC1AF77B730030698C /* ic_search_green@3x.png */,
 				32E7913D1AF69E6200F85515 /* back@3x.png */,
 				32E7913B1AF69E0700F85515 /* complete@3x.png */,
@@ -885,6 +904,18 @@
 			);
 			name = AlertImage;
 			path = lib/AlertImage;
+			sourceTree = "<group>";
+		};
+		BFF3FD561B04D9FF000F13AB /* btSimpleSideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				BFF3FD571B04D9FF000F13AB /* btSimpleMenuItem.h */,
+				BFF3FD581B04D9FF000F13AB /* btSimpleMenuItem.m */,
+				BFF3FD591B04D9FF000F13AB /* btSimpleSideMenu.h */,
+				BFF3FD5A1B04D9FF000F13AB /* btSimpleSideMenu.m */,
+			);
+			name = btSimpleSideMenu;
+			path = lib/btSimpleSideMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -984,6 +1015,7 @@
 				BFD6F9951AEFCDD00033526E /* FingerPaint-Regular.ttf in Resources */,
 				327C37211AF5632600B1D58B /* heart_full@2x.png in Resources */,
 				32F182451AC84CE300EED920 /* download@3x.png in Resources */,
+				BFF3FD641B04EC94000F13AB /* icon4.png in Resources */,
 				32F1827C1AC87B8100EED920 /* star@2x.png in Resources */,
 				32E3FADE1AF67262001B63C2 /* categories@3x.png in Resources */,
 				32F1825F1AC87AC500EED920 /* 9.png in Resources */,
@@ -999,10 +1031,13 @@
 				32E3FAE41AF67262001B63C2 /* top@3x.png in Resources */,
 				32F182571AC87AC500EED920 /* 1.png in Resources */,
 				BFE8FD2C1AE680F500B11E51 /* smile_heart.png in Resources */,
+				BFF3FD611B04EC94000F13AB /* icon1.png in Resources */,
 				32F182581AC87AC500EED920 /* 2.png in Resources */,
+				BFF3FD631B04EC94000F13AB /* icon3.png in Resources */,
 				32F182631AC87AD700EED920 /* ic_search@3x.png in Resources */,
 				32EB205C1AD5AB9900CFA191 /* 2.jpg in Resources */,
 				32EB205E1AD5AB9900CFA191 /* 4.jpg in Resources */,
+				BFF3FD621B04EC94000F13AB /* icon2.png in Resources */,
 				32F1825C1AC87AC500EED920 /* 6.png in Resources */,
 				32F182751AC87B8100EED920 /* iRate.bundle in Resources */,
 				32F182791AC87B8100EED920 /* star-gray.png in Resources */,
@@ -1065,6 +1100,7 @@
 				320157F51AC74AAD00999D88 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				3245F1371AD971CA0063A2A1 /* GLProgram.m in Sources */,
 				320157FC1AC74AAD00999D88 /* NSManagedObjectContext+MagicalChainSave.m in Sources */,
+				BFF3FD5C1B04D9FF000F13AB /* btSimpleSideMenu.m in Sources */,
 				32EB20661AD70C0800CFA191 /* YRActivityIndicator.m in Sources */,
 				3245F13D1AD971CA0063A2A1 /* GPUImageTextureOutput.m in Sources */,
 				320157FD1AC74AAD00999D88 /* NSManagedObjectContext+MagicalObserving.m in Sources */,
@@ -1073,6 +1109,7 @@
 				32F182761AC87B8100EED920 /* iRate.m in Sources */,
 				32F182771AC87B8100EED920 /* SARate.m in Sources */,
 				BFCB0FD31AB856FC0079CCE3 /* DSMainViewController.m in Sources */,
+				BFF3FD5B1B04D9FF000F13AB /* btSimpleMenuItem.m in Sources */,
 				320158091AC74AAD00999D88 /* MagicalRecord+ShorthandSupport.m in Sources */,
 				32D65E531AAB2DBD00CB04A1 /* main.m in Sources */,
 				BFE8FD381AE69BC600B11E51 /* GoogleWearAlertObjc.m in Sources */,

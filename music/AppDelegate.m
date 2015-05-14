@@ -76,7 +76,7 @@
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
   
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setDefaultTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:0/255.0 green:153/255.0 blue:169/255.0 alpha:1], NSFontAttributeName: [UIFont fontWithName:@"FingerPaint-Regular" size:16.0]}];
-    
+   
     return YES;
 }
 

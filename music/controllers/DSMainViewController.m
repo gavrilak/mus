@@ -18,9 +18,11 @@
 #import "MSLiveBlur.h"
 #import "GoogleWearAlertObjc.h"
 
+#import <QuartzCore/QuartzCore.h>
+#import <Accelerate/Accelerate.h>
 
+@interface DSMainViewController () <DSRateViewDelegate, UISearchBarDelegate , BTSimpleSideMenuDelegate>
 
-@interface DSMainViewController () <DSRateViewDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) PFRelation* relation;
 @property (strong, nonatomic) NSMutableArray* musicObjects;
@@ -100,7 +102,7 @@
     [self addLoading];
     [self loadDataForSortType:@"top"];
     [self.tabbar setSelectedItem:[self.tabbar.items objectAtIndex:0]];
-    
+    [self setupMenu];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -110,6 +112,7 @@
 
     [super viewWillAppear:animated];
 
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -343,8 +346,63 @@
     }
  
 }
+#pragma -mark BTSimpleSideMenuDelegate
+
+-(void)BTSimpleSideMenu:(BTSimpleSideMenu *)menu didSelectItemAtIndex:(NSInteger)index {
+    NSLog(@"Item Cliecked : %ld", (long)index);
+}
+
+-(void)BTSimpleSideMenu:(BTSimpleSideMenu *)menu selectedItemTitle:(NSString *)title {
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Menu Clicked"
+                                                   message:[NSString stringWithFormat:@"Item Title : %@", title]
+                                                  delegate:self
+                                         cancelButtonTitle:@"Dismiss"
+                                         otherButtonTitles:nil, nil];
+    [alert show];
+}
 
 #pragma mark - Self Methods
+- (void) setupMenu {
+    
+    self.sideMenu.delegate = self;
+    
+    BTSimpleMenuItem *item1 = [[BTSimpleMenuItem alloc]initWithTitle:@"One"
+                                                               image:[UIImage imageNamed:@"icon1.png"]
+                                                        onCompletion:^(BOOL success, BTSimpleMenuItem *item) {
+                                                            
+                                                            NSLog(@"I am Item 1");
+                                                        }];
+    
+    BTSimpleMenuItem *item2 = [[BTSimpleMenuItem alloc]initWithTitle:@"Two"
+                                                               image:[UIImage imageNamed:@"icon2.png"]
+                                                        onCompletion:^(BOOL success, BTSimpleMenuItem *item) {
+                                                            
+                                                            NSLog(@"I am Item 2");
+                                                        }];
+    
+    BTSimpleMenuItem *item3 = [[BTSimpleMenuItem alloc]initWithTitle:@"Three"
+                                                               image:[UIImage imageNamed:@"icon3.png"]
+                                                        onCompletion:^(BOOL success, BTSimpleMenuItem *item) {
+                                                            
+                                                            NSLog(@"I am Item 3");
+                                                        }];
+    
+    BTSimpleMenuItem *item4 = [[BTSimpleMenuItem alloc]initWithTitle:@"Four"
+                                                               image:[UIImage imageNamed:@"icon4.png"]
+                                                        onCompletion:^(BOOL success, BTSimpleMenuItem *item) {
+                                                            NSLog(@"I am Item 4");
+                                                        }];
+    
+    
+    self.sideMenu = [[BTSimpleSideMenu alloc]initWithItem:@[item1, item2, item3, item4]
+                                 addToViewController:self];
+    
+    
+    
+    
+}
+
+
 - (void) selectRow:(NSIndexPath *) indexPath {
     if (self.selectedRow != indexPath.row) {
         NSIndexPath *myIP = [NSIndexPath indexPathForRow:self.selectedRow inSection:0];
@@ -626,6 +684,9 @@
 }
 
 - (void) showInstruction {
+   
+    [self.sideMenu show];
+    [self.view bringSubviewToFront:self.sideMenu];
     
     UIImage*i1 = [UIImage imageNamed:@"1.png"];
     UIImage*i2 = [UIImage imageNamed:@"2.png"];
@@ -637,8 +698,8 @@
     UIImage*i8 = [UIImage imageNamed:@"8.png"];
     UIImage*i9 = [UIImage imageNamed:@"9.png"];
     
-    NFXIntroViewController*vc = [[NFXIntroViewController alloc] initWithViews:@[i1,i2,i3,i4,i5,i2,i6,i7,i8,i9]];
-    [self presentViewController:vc animated:true completion:nil];
+  //  NFXIntroViewController*vc = [[NFXIntroViewController alloc] initWithViews:@[i1,i2,i3,i4,i5,i2,i6,i7,i8,i9]];
+   // [self presentViewController:vc animated:true completion:nil];
     
 }
 
