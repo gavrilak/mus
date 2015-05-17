@@ -51,7 +51,7 @@
     
     // Do any additional setup after loading the view, typically from a nib.
     UIGraphicsBeginImageContext(self.view.frame.size);
-    [[UIImage imageNamed:@"2.jpg"] drawInRect:self.view.bounds];
+    [[UIImage imageNamed:@"3.jpg"] drawInRect:self.view.bounds];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     self.view.backgroundColor = [UIColor colorWithPatternImage:image];
