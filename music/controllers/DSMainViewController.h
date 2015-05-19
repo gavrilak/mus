@@ -9,11 +9,11 @@
 #import <ParseUI/ParseUI.h>
 #import <UIKit/UIKit.h>
 #import "DSSoundManager.h"
-#import "BTSimpleSideMenu.h"
+#import "DSBaseViewController.h"
 
-@interface DSMainViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, DSSoundManagerDelegate>
+@interface DSMainViewController : DSBaseViewController <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, DSSoundManagerDelegate>
 
-@property (strong ,nonatomic) BTSimpleSideMenu *sideMenu;
+
 @property (nonatomic , weak ) IBOutlet UITableView* tableView;
 @property (nonatomic , weak ) IBOutlet UITabBar* tabbar;
 

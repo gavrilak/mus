@@ -46,7 +46,7 @@
 }
 
 @property (nonatomic, retain) BTSimpleMenuItem *selectedItem;
-@property(nonatomic, weak) id <BTSimpleSideMenuDelegate> delegate;
+@property (nonatomic, weak) id <BTSimpleSideMenuDelegate> delegate;
 
 -(instancetype) initWithItem:(NSArray *)items addToViewController:(id)sender;
 -(instancetype) initWithItemTitles:(NSArray *)itemsTitle addToViewController:(id)sender;

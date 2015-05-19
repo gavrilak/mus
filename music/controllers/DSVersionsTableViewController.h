@@ -9,8 +9,9 @@
 #import <ParseUI/ParseUI.h>
 #import <UIKit/UIKit.h>
 #import "DSSoundManager.h"
+#import "DSBaseViewController.h"
 
-@interface DSVersionsTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, DSSoundManagerDelegate>
+@interface DSVersionsTableViewController : DSBaseViewController <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, DSSoundManagerDelegate>
 
 @property (strong, nonatomic) PFObject* musicObject;
 @property (nonatomic , weak ) IBOutlet UITableView* tableView;

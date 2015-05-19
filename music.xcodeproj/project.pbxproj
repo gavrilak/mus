@@ -148,6 +148,8 @@
 		BFE8FD391AE69BC600B11E51 /* GoogleWearAlertViewObjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FD371AE69BC600B11E51 /* GoogleWearAlertViewObjc.m */; };
 		BFE8FD3C1AE69DB000B11E51 /* UIColor+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FD3B1AE69DB000B11E51 /* UIColor+Alert.m */; };
 		BFEEA5991AFBB74E004CB08B /* SF Scribbled Sans SC Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFEEA5981AFBB74E004CB08B /* SF Scribbled Sans SC Bold.ttf */; };
+		BFF19F581B0B6CB8008EDD73 /* DSBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF19F571B0B6CB8008EDD73 /* DSBaseViewController.m */; };
+		BFF19F5A1B0B8345008EDD73 /* 8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BFF19F591B0B8345008EDD73 /* 8.jpg */; };
 		BFF3FD5B1B04D9FF000F13AB /* btSimpleMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF3FD581B04D9FF000F13AB /* btSimpleMenuItem.m */; };
 		BFF3FD5C1B04D9FF000F13AB /* btSimpleSideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF3FD5A1B04D9FF000F13AB /* btSimpleSideMenu.m */; };
 		BFF3FD611B04EC94000F13AB /* icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = BFF3FD5D1B04EC94000F13AB /* icon1.png */; };
@@ -380,6 +382,9 @@
 		BFE8FD3A1AE69DB000B11E51 /* UIColor+Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Alert.h"; sourceTree = "<group>"; };
 		BFE8FD3B1AE69DB000B11E51 /* UIColor+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Alert.m"; sourceTree = "<group>"; };
 		BFEEA5981AFBB74E004CB08B /* SF Scribbled Sans SC Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF Scribbled Sans SC Bold.ttf"; sourceTree = "<group>"; };
+		BFF19F561B0B6CB8008EDD73 /* DSBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSBaseViewController.h; path = controllers/DSBaseViewController.h; sourceTree = "<group>"; };
+		BFF19F571B0B6CB8008EDD73 /* DSBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSBaseViewController.m; path = controllers/DSBaseViewController.m; sourceTree = "<group>"; };
+		BFF19F591B0B8345008EDD73 /* 8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 8.jpg; sourceTree = "<group>"; };
 		BFF3FD571B04D9FF000F13AB /* btSimpleMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btSimpleMenuItem.h; sourceTree = "<group>"; };
 		BFF3FD581B04D9FF000F13AB /* btSimpleMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = btSimpleMenuItem.m; sourceTree = "<group>"; };
 		BFF3FD591B04D9FF000F13AB /* btSimpleSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btSimpleSideMenu.h; sourceTree = "<group>"; };
@@ -821,6 +826,7 @@
 		BF897C301AB9A23100A3963A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				BFF19F591B0B8345008EDD73 /* 8.jpg */,
 				BFF3FD5D1B04EC94000F13AB /* icon1.png */,
 				BFF3FD5E1B04EC94000F13AB /* icon2.png */,
 				BFF3FD5F1B04EC94000F13AB /* icon3.png */,
@@ -879,6 +885,8 @@
 				BFCB0FD81AB879A40079CCE3 /* DSVersionsTableViewController.m */,
 				BFCB0FD11AB856FC0079CCE3 /* DSMainViewController.h */,
 				BFCB0FD21AB856FC0079CCE3 /* DSMainViewController.m */,
+				BFF19F561B0B6CB8008EDD73 /* DSBaseViewController.h */,
+				BFF19F571B0B6CB8008EDD73 /* DSBaseViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -1003,6 +1011,7 @@
 				32E3FAE21AF67262001B63C2 /* new@3x.png in Resources */,
 				32F1825E1AC87AC500EED920 /* 8.png in Resources */,
 				32E791381AF69DE200F85515 /* forward@3x.png in Resources */,
+				BFF19F5A1B0B8345008EDD73 /* 8.jpg in Resources */,
 				32F1825A1AC87AC500EED920 /* 4.png in Resources */,
 				32F1825B1AC87AC500EED920 /* 5.png in Resources */,
 				32E3FAE11AF67262001B63C2 /* downloads_s@3x.png in Resources */,
@@ -1097,6 +1106,7 @@
 				3245F1421AD971CA0063A2A1 /* MSBlurWindow.m in Sources */,
 				320158011AC74AAD00999D88 /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				320157F61AC74AAD00999D88 /* NSString+MagicalDataImport.m in Sources */,
+				BFF19F581B0B6CB8008EDD73 /* DSBaseViewController.m in Sources */,
 				320157F51AC74AAD00999D88 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				3245F1371AD971CA0063A2A1 /* GLProgram.m in Sources */,
 				320157FC1AC74AAD00999D88 /* NSManagedObjectContext+MagicalChainSave.m in Sources */,

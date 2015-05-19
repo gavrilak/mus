@@ -5,7 +5,7 @@
 //  Copyright (c) 2014 Balram Tiwari. All rights reserved.
 //
 
-#define BACKGROUND_COLOR [UIColor colorWithWhite:1 alpha:0.2]
+#define BACKGROUND_COLOR [UIColor colorWithWhite:1 alpha:0.7]
 #define GENERIC_IMAGE_FRAME CGRectMake(0, 0, 40, 40)
 #define MENU_WIDTH 175
 
@@ -184,7 +184,7 @@
     self.frame = CGRectMake(-width, yAxis, width, height);
     self.backgroundColor = BACKGROUND_COLOR;
     if(!sender.navigationController.navigationBarHidden) {
-        menuTable = [[UITableView alloc]initWithFrame:CGRectMake(xAxis, yAxis+15, width, height) style:UITableViewStyleGrouped];
+        menuTable = [[UITableView alloc]initWithFrame:CGRectMake(xAxis, yAxis-25, width, height) style:UITableViewStyleGrouped];
     }else {
         menuTable = [[UITableView alloc]initWithFrame:CGRectMake(xAxis, yAxis-15, width, height) style:UITableViewStyleGrouped];
     }
