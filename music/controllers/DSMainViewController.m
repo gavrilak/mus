@@ -629,7 +629,7 @@
 - (void) showInstruction {
    
     [self.sideMenu show];
-    [self.view bringSubviewToFront:self.sideMenu];
+
     
     UIImage*i1 = [UIImage imageNamed:@"1.png"];
     UIImage*i2 = [UIImage imageNamed:@"2.png"];

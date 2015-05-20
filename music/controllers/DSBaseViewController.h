@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BTSimpleSideMenu.h"
+#import "RNFrostedSidebar.h"
 
 @interface DSBaseViewController : UIViewController
 
-@property (strong ,nonatomic) BTSimpleSideMenu *sideMenu;
+@property (nonatomic, strong) RNFrostedSidebar* sideMenu;
 
 @end

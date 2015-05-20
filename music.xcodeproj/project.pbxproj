@@ -150,8 +150,7 @@
 		BFEEA5991AFBB74E004CB08B /* SF Scribbled Sans SC Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFEEA5981AFBB74E004CB08B /* SF Scribbled Sans SC Bold.ttf */; };
 		BFF19F581B0B6CB8008EDD73 /* DSBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF19F571B0B6CB8008EDD73 /* DSBaseViewController.m */; };
 		BFF19F5A1B0B8345008EDD73 /* 8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BFF19F591B0B8345008EDD73 /* 8.jpg */; };
-		BFF3FD5B1B04D9FF000F13AB /* btSimpleMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF3FD581B04D9FF000F13AB /* btSimpleMenuItem.m */; };
-		BFF3FD5C1B04D9FF000F13AB /* btSimpleSideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF3FD5A1B04D9FF000F13AB /* btSimpleSideMenu.m */; };
+		BFF19F5E1B0B9283008EDD73 /* RNFrostedSidebar.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF19F5D1B0B9283008EDD73 /* RNFrostedSidebar.m */; };
 		BFF3FD611B04EC94000F13AB /* icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = BFF3FD5D1B04EC94000F13AB /* icon1.png */; };
 		BFF3FD621B04EC94000F13AB /* icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = BFF3FD5E1B04EC94000F13AB /* icon2.png */; };
 		BFF3FD631B04EC94000F13AB /* icon3.png in Resources */ = {isa = PBXBuildFile; fileRef = BFF3FD5F1B04EC94000F13AB /* icon3.png */; };
@@ -385,10 +384,8 @@
 		BFF19F561B0B6CB8008EDD73 /* DSBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSBaseViewController.h; path = controllers/DSBaseViewController.h; sourceTree = "<group>"; };
 		BFF19F571B0B6CB8008EDD73 /* DSBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSBaseViewController.m; path = controllers/DSBaseViewController.m; sourceTree = "<group>"; };
 		BFF19F591B0B8345008EDD73 /* 8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 8.jpg; sourceTree = "<group>"; };
-		BFF3FD571B04D9FF000F13AB /* btSimpleMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btSimpleMenuItem.h; sourceTree = "<group>"; };
-		BFF3FD581B04D9FF000F13AB /* btSimpleMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = btSimpleMenuItem.m; sourceTree = "<group>"; };
-		BFF3FD591B04D9FF000F13AB /* btSimpleSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btSimpleSideMenu.h; sourceTree = "<group>"; };
-		BFF3FD5A1B04D9FF000F13AB /* btSimpleSideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = btSimpleSideMenu.m; sourceTree = "<group>"; };
+		BFF19F5C1B0B9283008EDD73 /* RNFrostedSidebar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNFrostedSidebar.h; sourceTree = "<group>"; };
+		BFF19F5D1B0B9283008EDD73 /* RNFrostedSidebar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNFrostedSidebar.m; sourceTree = "<group>"; };
 		BFF3FD5D1B04EC94000F13AB /* icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon1.png; sourceTree = "<group>"; };
 		BFF3FD5E1B04EC94000F13AB /* icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon2.png; sourceTree = "<group>"; };
 		BFF3FD5F1B04EC94000F13AB /* icon3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon3.png; sourceTree = "<group>"; };
@@ -684,7 +681,7 @@
 		32D65E761AAB2F4400CB04A1 /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				BFF3FD561B04D9FF000F13AB /* btSimpleSideMenu */,
+				BFF19F5B1B0B9283008EDD73 /* RNFrostedSideBar */,
 				BFE8FD331AE69BC600B11E51 /* AlertImage */,
 				3245F1141AD971CA0063A2A1 /* MSLiveBlur */,
 				32EB20631AD70C0800CFA191 /* YRActivityIndicator */,
@@ -914,16 +911,14 @@
 			path = lib/AlertImage;
 			sourceTree = "<group>";
 		};
-		BFF3FD561B04D9FF000F13AB /* btSimpleSideMenu */ = {
+		BFF19F5B1B0B9283008EDD73 /* RNFrostedSideBar */ = {
 			isa = PBXGroup;
 			children = (
-				BFF3FD571B04D9FF000F13AB /* btSimpleMenuItem.h */,
-				BFF3FD581B04D9FF000F13AB /* btSimpleMenuItem.m */,
-				BFF3FD591B04D9FF000F13AB /* btSimpleSideMenu.h */,
-				BFF3FD5A1B04D9FF000F13AB /* btSimpleSideMenu.m */,
+				BFF19F5C1B0B9283008EDD73 /* RNFrostedSidebar.h */,
+				BFF19F5D1B0B9283008EDD73 /* RNFrostedSidebar.m */,
 			);
-			name = btSimpleSideMenu;
-			path = lib/btSimpleSideMenu;
+			name = RNFrostedSideBar;
+			path = lib/RNFrostedSideBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1101,6 +1096,7 @@
 				3245F1441AD971CA0063A2A1 /* MSLiveBlur.m in Sources */,
 				32D65E561AAB2DBD00CB04A1 /* AppDelegate.m in Sources */,
 				3201580A1AC74AAD00999D88 /* MagicalRecord.m in Sources */,
+				BFF19F5E1B0B9283008EDD73 /* RNFrostedSidebar.m in Sources */,
 				320157F71AC74AAD00999D88 /* NSManagedObject+MagicalAggregation.m in Sources */,
 				320158021AC74AAD00999D88 /* NSPersistentStore+MagicalRecord.m in Sources */,
 				3245F1421AD971CA0063A2A1 /* MSBlurWindow.m in Sources */,
@@ -1110,7 +1106,6 @@
 				320157F51AC74AAD00999D88 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				3245F1371AD971CA0063A2A1 /* GLProgram.m in Sources */,
 				320157FC1AC74AAD00999D88 /* NSManagedObjectContext+MagicalChainSave.m in Sources */,
-				BFF3FD5C1B04D9FF000F13AB /* btSimpleSideMenu.m in Sources */,
 				32EB20661AD70C0800CFA191 /* YRActivityIndicator.m in Sources */,
 				3245F13D1AD971CA0063A2A1 /* GPUImageTextureOutput.m in Sources */,
 				320157FD1AC74AAD00999D88 /* NSManagedObjectContext+MagicalObserving.m in Sources */,
@@ -1119,7 +1114,6 @@
 				32F182761AC87B8100EED920 /* iRate.m in Sources */,
 				32F182771AC87B8100EED920 /* SARate.m in Sources */,
 				BFCB0FD31AB856FC0079CCE3 /* DSMainViewController.m in Sources */,
-				BFF3FD5B1B04D9FF000F13AB /* btSimpleMenuItem.m in Sources */,
 				320158091AC74AAD00999D88 /* MagicalRecord+ShorthandSupport.m in Sources */,
 				32D65E531AAB2DBD00CB04A1 /* main.m in Sources */,
 				BFE8FD381AE69BC600B11E51 /* GoogleWearAlertObjc.m in Sources */,

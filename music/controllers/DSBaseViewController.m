@@ -8,7 +8,7 @@
 
 #import "DSBaseViewController.h"
 
-@interface DSBaseViewController () < BTSimpleSideMenuDelegate>
+@interface DSBaseViewController () < RNFrostedSidebarDelegate>
 
 @end
 
@@ -25,62 +25,34 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma -mark BTSimpleSideMenuDelegate
-
--(void)BTSimpleSideMenu:(BTSimpleSideMenu *)menu didSelectItemAtIndex:(NSInteger)index {
-    NSLog(@"Item Cliecked : %ld", (long)index);
-}
-
--(void)BTSimpleSideMenu:(BTSimpleSideMenu *)menu selectedItemTitle:(NSString *)title {
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Menu Clicked"
-                                                   message:[NSString stringWithFormat:@"Item Title : %@", title]
-                                                  delegate:self
-                                         cancelButtonTitle:@"Dismiss"
-                                         otherButtonTitles:nil, nil];
-    [alert show];
-}
-
-#pragma mark - Self Methods
-- (void) setupMenu {
-    
+- (void)setupMenu {
+    NSArray *images = @[
+                        [UIImage imageNamed:@"icon1"],
+                        [UIImage imageNamed:@"icon2"],
+                        [UIImage imageNamed:@"icon3"],
+                        [UIImage imageNamed:@"icon4"]
+                        ];
+    self.sideMenu = [[RNFrostedSidebar alloc] initWithImages:images];
     self.sideMenu.delegate = self;
-    
-    BTSimpleMenuItem *item1 = [[BTSimpleMenuItem alloc]initWithTitle:@"One"
-                                                               image:[UIImage imageNamed:@"icon1.png"]
-                                                        onCompletion:^(BOOL success, BTSimpleMenuItem *item) {
-                                                            
-                                                            NSLog(@"I am Item 1");
-                                                        }];
-    
-    BTSimpleMenuItem *item2 = [[BTSimpleMenuItem alloc]initWithTitle:@"Two"
-                                                               image:[UIImage imageNamed:@"icon2.png"]
-                                                        onCompletion:^(BOOL success, BTSimpleMenuItem *item) {
-                                                            
-                                                            NSLog(@"I am Item 2");
-                                                        }];
-    
-    BTSimpleMenuItem *item3 = [[BTSimpleMenuItem alloc]initWithTitle:@"Three"
-                                                               image:[UIImage imageNamed:@"icon3.png"]
-                                                        onCompletion:^(BOOL success, BTSimpleMenuItem *item) {
-                                                            
-                                                            NSLog(@"I am Item 3");
-                                                        }];
-    
-    BTSimpleMenuItem *item4 = [[BTSimpleMenuItem alloc]initWithTitle:@"Four"
-                                                               image:[UIImage imageNamed:@"icon4.png"]
-                                                        onCompletion:^(BOOL success, BTSimpleMenuItem *item) {
-                                                            NSLog(@"I am Item 4");
-                                                        }];
-    
-    
-    self.sideMenu = [[BTSimpleSideMenu alloc]initWithItem:@[item1, item2, item3, item4]
-                                      addToViewController:self];
-    
-    
-    
-    
+    self.sideMenu.showFromRight = YES;
 }
 
+#pragma mark - RNFrostedSidebarDelegate
 
+- (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index {
+    NSLog(@"Tapped item at index %lu",(unsigned long)index);
+    if (index == 3) {
+        [sidebar dismissAnimated:YES completion:nil];
+    }
+}
+
+- (void)sidebar:(RNFrostedSidebar *)sidebar didEnable:(BOOL)itemEnabled itemAtIndex:(NSUInteger)index {
+    if (itemEnabled) {
+      //  [self.optionIndices addIndex:index];
+    }
+    else {
+      //  [self.optionIndices removeIndex:index];
+    }
+}
 
 @end
