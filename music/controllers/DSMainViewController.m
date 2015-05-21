@@ -50,7 +50,7 @@
     
     // Do any additional setup after loading the view, typically from a nib.
     UIGraphicsBeginImageContext(self.view.frame.size);
-    [[UIImage imageNamed:@"8.jpg"] drawInRect:self.view.bounds];
+    [[UIImage imageNamed:@"9.png"] drawInRect:self.view.bounds];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     self.view.backgroundColor = [UIColor colorWithPatternImage:image];
@@ -224,7 +224,7 @@
     
     cell.uaprogressBtn.tag = indexPath.row;
     cell.uaprogressBtn.fillOnTouch = YES;
-    cell.uaprogressBtn.tintColor = [UIColor colorWithRed:0/255.0 green:153/255.0 blue:169/255.0 alpha:1];
+    cell.uaprogressBtn.tintColor = [UIColor whiteColor];
     cell.uaprogressBtn.borderWidth = 2.0;
     cell.uaprogressBtn.lineWidth = 2.0;
     

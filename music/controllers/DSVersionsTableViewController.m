@@ -41,7 +41,7 @@
     self.navigationItem.title = @"Versions";
     
     UIGraphicsBeginImageContext(self.view.frame.size);
-    [[UIImage imageNamed:@"8.jpg"] drawInRect:self.view.bounds];
+    [[UIImage imageNamed:@"9.png"] drawInRect:self.view.bounds];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     self.view.backgroundColor = [UIColor colorWithPatternImage:image];
