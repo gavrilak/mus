@@ -9,7 +9,7 @@
 
 #import "DSBaseViewController.h"
 
-@interface DSVersionsTableViewController : DSBaseViewController <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, DSSoundManagerDelegate>
+@interface DSVersionsTableViewController : DSBaseViewController <UITableViewDelegate, UITableViewDataSource >
 
 @property (strong, nonatomic) PFObject* musicObject;
 

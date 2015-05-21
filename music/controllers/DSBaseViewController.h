@@ -22,9 +22,14 @@
 @property (strong, nonatomic) YRActivityIndicator* activityIndicator;
 @property (nonatomic , weak ) IBOutlet UITableView* tableView;
 @property (strong, nonatomic) NSMutableArray* musicObjects;
+@property (assign, nonatomic) NSInteger activeItem;
+@property (assign, nonatomic) NSInteger playItem;
+@property (strong, nonatomic) NSTimer* playTimer;
+@property (assign, nonatomic) NSInteger selectedRow;
 
 - (void) showMenu;
 - (void) removeLoading;
 - (void) addLoading;
+- (void) downloadClicked:(id)sender;
 - (void)rateView:(DSRateView *)rateView ratingDidChange:(float)rating;
 @end

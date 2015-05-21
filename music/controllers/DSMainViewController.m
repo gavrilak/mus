@@ -17,10 +17,6 @@
 
 @property (strong, nonatomic) PFRelation* relation;
 @property (strong, nonatomic) NSArray* categories;
-@property (assign, nonatomic) NSInteger activeItem;
-@property (assign, nonatomic) NSInteger playItem;
-@property (strong, nonatomic) NSTimer* playTimer;
-@property (assign, nonatomic) NSInteger selectedRow;
 @property (assign, nonatomic) NSInteger selectedTab;
 @property (strong, nonatomic) NSString* selectCategory;
 @property (strong, nonatomic) UIBarButtonItem* navBarItem;
@@ -75,8 +71,6 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     
-    [DSSoundManager sharedManager].delegate = self;
-    self.playTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
 
     [super viewWillAppear:animated];
 
@@ -86,8 +80,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [DSSoundManager sharedManager].delegate = nil;
-    [self.playTimer invalidate];
+   
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -363,40 +356,7 @@
     
 }
 
-- (void) downloadClicked:(id)sender {
-    
-    UIButton* btn = sender;
-    PFObject *object = [self.musicObjects objectAtIndex:btn.tag];
-    if ([object isKindOfClass:[PFObject class]] ) {
-        if (![[DSSoundManager sharedManager] existsSongInDownloads:object.objectId]) {
-            PFFile *soundFile = object[@"mfile"];
-            [soundFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-                if (!error) {
-                    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-                    NSString *documentsDirectory = [paths objectAtIndex:0];
-                    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:soundFile.name];
-                    [data writeToFile:fullPath options:NSDataWritingWithoutOverwriting error:nil];
-                    [[DSSoundManager sharedManager] addSongToDownloads:object fileUrl:fullPath];
-                    [object incrementKey:@"colDownloads"];
-                    [object saveInBackground];
-                    [self changeDownloadIcon:btn.tag];
-                }
-            } ];
-        }
-    }
-}
 
-- (void) changeDownloadIcon:(NSInteger) row {
-   
-    [UIView animateWithDuration:0.5f animations: ^
-     {
-         NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-         DSMainTableViewCell *cell = ( DSMainTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
-
-         [cell.downloadBtn setImage:[UIImage imageNamed:@"complete@3x.png"] forState: UIControlStateNormal];
-
-     }];
-}
 - (void) downloadAndPlay:(NSUInteger) row forView:(UAProgressView*) progressView {
     
     self.activeItem = row;
@@ -622,37 +582,7 @@
     [object incrementKey:@"rate" byAmount:[NSNumber numberWithDouble:newRate] ];
     [object saveInBackground];
 }
-#pragma mark - DSSoundManagerDelegate
-- (void) statusChanged:(BOOL) playStatus {
-    
-    NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
-    DSMainTableViewCell* cell = (DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
-   
-    if (playStatus == YES){
-        UIImageView *square = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-        [square setImage:[UIImage imageNamed: @"square.png"] ];
-        cell.uaprogressBtn.centralView = square;
-    }
-    else{
-        
-        UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
-        [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
-        cell.uaprogressBtn.centralView = triangle;
 
-    }
-}
-
-#pragma mark - Timer
-- (void) timerAction:(id)timer{
-   
-    if( [[DSSoundManager sharedManager] isPlaying]) {
-        NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
-        DSMainTableViewCell* cell = (DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
-   
-        [cell.uaprogressBtn setProgress:[DSSoundManager sharedManager].getCurrentProgress];
-   
-    }
-}
 
 #pragma mark - UITabBarDelegate
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{

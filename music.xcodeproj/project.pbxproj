@@ -61,6 +61,7 @@
 		327C37201AF5632600B1D58B /* heart_empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 327C371D1AF5632600B1D58B /* heart_empty@2x.png */; };
 		327C37211AF5632600B1D58B /* heart_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 327C371E1AF5632600B1D58B /* heart_full@2x.png */; };
 		327C37221AF5632600B1D58B /* heart_half@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 327C371F1AF5632600B1D58B /* heart_half@2x.png */; };
+		32CEA5961B0E545C00A4BF85 /* DSBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CEA5951B0E545C00A4BF85 /* DSBaseTableViewCell.m */; };
 		32D65E531AAB2DBD00CB04A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D65E521AAB2DBD00CB04A1 /* main.m */; };
 		32D65E561AAB2DBD00CB04A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D65E551AAB2DBD00CB04A1 /* AppDelegate.m */; };
 		32D65E5C1AAB2DBD00CB04A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32D65E5A1AAB2DBD00CB04A1 /* Main.storyboard */; };
@@ -274,6 +275,8 @@
 		327C371D1AF5632600B1D58B /* heart_empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart_empty@2x.png"; sourceTree = "<group>"; };
 		327C371E1AF5632600B1D58B /* heart_full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart_full@2x.png"; sourceTree = "<group>"; };
 		327C371F1AF5632600B1D58B /* heart_half@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart_half@2x.png"; sourceTree = "<group>"; };
+		32CEA5941B0E545C00A4BF85 /* DSBaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSBaseTableViewCell.h; path = cells/DSBaseTableViewCell.h; sourceTree = "<group>"; };
+		32CEA5951B0E545C00A4BF85 /* DSBaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSBaseTableViewCell.m; path = cells/DSBaseTableViewCell.m; sourceTree = "<group>"; };
 		32D65E4D1AAB2DBD00CB04A1 /* music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = music.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32D65E511AAB2DBD00CB04A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32D65E521AAB2DBD00CB04A1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -877,6 +880,8 @@
 				32F182471AC85D6000EED920 /* DSCategoryTableViewCell.m */,
 				BFCB0FD41AB857310079CCE3 /* DSMainTableViewCell.h */,
 				BFCB0FD51AB857310079CCE3 /* DSMainTableViewCell.m */,
+				32CEA5941B0E545C00A4BF85 /* DSBaseTableViewCell.h */,
+				32CEA5951B0E545C00A4BF85 /* DSBaseTableViewCell.m */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -1104,6 +1109,7 @@
 				3245F1441AD971CA0063A2A1 /* MSLiveBlur.m in Sources */,
 				32D65E561AAB2DBD00CB04A1 /* AppDelegate.m in Sources */,
 				3201580A1AC74AAD00999D88 /* MagicalRecord.m in Sources */,
+				32CEA5961B0E545C00A4BF85 /* DSBaseTableViewCell.m in Sources */,
 				BFF19F5E1B0B9283008EDD73 /* RNFrostedSidebar.m in Sources */,
 				320157F71AC74AAD00999D88 /* NSManagedObject+MagicalAggregation.m in Sources */,
 				320158021AC74AAD00999D88 /* NSPersistentStore+MagicalRecord.m in Sources */,

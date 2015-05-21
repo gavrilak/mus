@@ -8,7 +8,7 @@
 
 #import "DSBaseViewController.h"
 
-@interface DSMainViewController : DSBaseViewController <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, DSSoundManagerDelegate>
+@interface DSMainViewController : DSBaseViewController <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate >
 
 @property (nonatomic , weak ) IBOutlet UITabBar* tabbar;
 
