@@ -8,20 +8,15 @@
 
 #import "DSVersionsTableViewController.h"
 #import "DSVersionTableViewCell.h"
-#import "DSRateView.h"
-#import "YRActivityIndicator.h"
-#import "NFXIntroViewController.h"
-#import "DSSong.h"
 #import "UIView+AnimateHidden.h"
-#import "GoogleWearAlertObjc.h"
 
-@interface DSVersionsTableViewController ()  <DSRateViewDelegate>
-    @property (strong, nonatomic) NSMutableArray* musicObjects;
+
+@interface DSVersionsTableViewController () < DSRateViewDelegate >
+
     @property (assign, nonatomic) NSInteger activeItem;
     @property (assign, nonatomic) NSInteger playItem;
     @property (strong, nonatomic) NSTimer* playTimer;
     @property (assign, nonatomic) NSInteger selectedRow;
-    @property (strong , nonatomic) YRActivityIndicator* activityIndicator;
 @end
 
 @implementation DSVersionsTableViewController
@@ -37,28 +32,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    
+    
     self.navigationController.navigationBar.topItem.title = @"";
     self.navigationItem.title = @"Versions";
-    
-    UIGraphicsBeginImageContext(self.view.frame.size);
-    [[UIImage imageNamed:@"9.png"] drawInRect:self.view.bounds];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+
     
     self.selectedRow = -1;
     self.playItem = -1;
     
-    self.activityIndicator = [[YRActivityIndicator alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    self.activityIndicator.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2, [[UIScreen mainScreen] bounds].size.height/2 - 80);
-    self.activityIndicator.radius = 60;
-    self.activityIndicator.maxItems = 5;
-    self.activityIndicator.minItemSize = CGSizeMake(10, 10);
-    self.activityIndicator.maxItemSize = CGSizeMake(35, 35);
-    self.activityIndicator.itemColor = [UIColor colorWithWhite:0.8 alpha:0.8];
+   
     self.musicObjects = [[NSMutableArray alloc] init];
     [self.musicObjects addObject:self.musicObject];
-    [self addLoading];
+
     
     [self checkMusicObject];
 
@@ -260,54 +246,13 @@
 
 }
 
-#pragma mark - DSRateViewDelegate
-
-- (void)rateView:(DSRateView *)rateView ratingDidChange:(float)rating{
-    
-    
-    if ([[self.musicObjects objectAtIndex:rateView.tag] isKindOfClass:[PFObject class]]){
-        PFObject* object = [self.musicObjects objectAtIndex:rateView.tag];
-        [self setRate:rating forObject:object];
-        [[DSSoundManager sharedManager] addLikeforSongID:object.objectId];
-    } else {
-        DSSong* song = [self.musicObjects objectAtIndex:rateView.tag];
-        PFQuery *query = [PFQuery queryWithClassName:@"Music"];
-        [query whereKey:@"objectId" equalTo:song.idSong];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if ([objects count]> 0) {
-                PFObject* object = [objects objectAtIndex:0] ;
-                [self setRate:rating forObject: object];
-                [[DSSoundManager sharedManager] addLikeforSongID:object.objectId];
-            }
-        }];
-    }
-    
-    UIImage *image;
-    if (rating < 2) {
-        image = [UIImage imageNamed:@"sad_heart.png"];
-    } else if (rating < 4) {
-        image = [UIImage imageNamed:@"neutral_heart.png"];
-    } else {
-        image = [UIImage imageNamed:@"smile_heart.png"];
-    }
-    [[GoogleWearAlertObjc getInstance]prepareNotificationToBeShown:[[GoogleWearAlertViewObjc alloc]initWithTitle:nil andImage:image andWithType:Message andWithDuration:2.5 inViewController:self atPostion:Center canBeDismissedByUser:NO]];
-    [rateView setNotActiveWithDelay:1.5 duration:1 alhpa: 0.5];
-    rateView.editable = false;
-    
-}
 
 
 
 #pragma mark - Self Methods
 
 
-- (void) setRate:(float) rating  forObject: (PFObject*) object  {
-    double newRate = ([[object objectForKey:@"rate"] floatValue] * [[object objectForKey:@"colRates"] integerValue] + rating) / ([[object objectForKey:@"colRates"] integerValue] + 1);
-    newRate = newRate - [[object objectForKey:@"rate"] floatValue] ;
-    [object incrementKey:@"colRates"];
-    [object incrementKey:@"rate" byAmount:[NSNumber numberWithDouble:newRate] ];
-    [object saveInBackground];
-}
+
 
 - (void) selectRow:(NSIndexPath *) indexPath {
     if (self.selectedRow != indexPath.row) {
@@ -323,21 +268,7 @@
         [self.tableView endUpdates];
     }
 }
-- (void)addLoading{
-    
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [self.tableView addSubview:self.activityIndicator];
-    [self.activityIndicator startAnimating];
-    
-}
 
-- (void)removeLoading{
-    
-    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator removeFromSuperview];
-    
-}
 
 - (void)animateCell:(NSIndexPath*)indexPath andTableView:(UITableView*)tableView
 {

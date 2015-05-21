@@ -10,21 +10,12 @@
 #import "DSMainViewController.h"
 #import "DSMainTableViewCell.h"
 #import "DSCategoryTableViewCell.h"
-#import "DSRateView.h"
-#import "NFXIntroViewController.h"
-#import "DSSong.h"
-#import "UIView+AnimateHidden.h"
-#import "YRActivityIndicator.h"
-#import "MSLiveBlur.h"
-#import "GoogleWearAlertObjc.h"
-#import <QuartzCore/QuartzCore.h>
-#import <Accelerate/Accelerate.h>
 
-@interface DSMainViewController () <DSRateViewDelegate, UISearchBarDelegate >
+
+@interface DSMainViewController () < UISearchBarDelegate , DSRateViewDelegate  >
 
 
 @property (strong, nonatomic) PFRelation* relation;
-@property (strong, nonatomic) NSMutableArray* musicObjects;
 @property (strong, nonatomic) NSArray* categories;
 @property (assign, nonatomic) NSInteger activeItem;
 @property (assign, nonatomic) NSInteger playItem;
@@ -37,7 +28,6 @@
 @property (strong, nonatomic) UIView* titleView;
 @property (assign, nonatomic) BOOL reloadData;
 @property (assign, nonatomic) BOOL loadingData;
-@property (strong, nonatomic) YRActivityIndicator* activityIndicator;
 
 @end
 
@@ -49,29 +39,17 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view, typically from a nib.
-    UIGraphicsBeginImageContext(self.view.frame.size);
-    [[UIImage imageNamed:@"9.png"] drawInRect:self.view.bounds];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+   
     
     [self.navigationItem setTitle:@"top Rated"];
     
-    UIImage *btnImg = [UIImage imageNamed:@"button_set_up.png"];
+   
+    UIImage *btnImg = [UIImage imageNamed:@"back@3x.png"];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0.f, 0.f, btnImg.size.width, btnImg.size.height);
     [btn setImage:btnImg forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(showInstruction) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    self.navigationItem.rightBarButtonItem = item;
-    
-    btnImg = [UIImage imageNamed:@"back@3x.png"];
-    btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0.f, 0.f, btnImg.size.width, btnImg.size.height);
-    [btn setImage:btnImg forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    item = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    self.navBarItem = item;
+    self.navBarItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     
     [self setSearchItem];
     
@@ -90,15 +68,6 @@
     self.selectedRow = -1;
     self.playItem = -1;
     
-    self.activityIndicator = [[YRActivityIndicator alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    self.activityIndicator.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2, [[UIScreen mainScreen] bounds].size.height/2 - 80);
-    self.activityIndicator.radius = 60;
-    self.activityIndicator.maxItems = 5;
-    self.activityIndicator.minItemSize = CGSizeMake(10, 10);
-    self.activityIndicator.maxItemSize = CGSizeMake(35, 35);
-    self.activityIndicator.itemColor = [UIColor colorWithRed:106/255.0 green:215/255.0 blue:230/255.0 alpha:1];
-    
-    [self addLoading];
     [self loadDataForSortType:@"top"];
     [self.tabbar setSelectedItem:[self.tabbar.items objectAtIndex:0]];
    
@@ -360,21 +329,6 @@
         [self.tableView endUpdates];
     }
 }
-- (void)addLoading{
-    
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [self.tableView addSubview:self.activityIndicator];
-    [self.activityIndicator startAnimating];
-
-}
-
-- (void)removeLoading{
-    
-    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator removeFromSuperview];
-    
-}
 
 - (void)animateCell:(NSIndexPath*)indexPath andTableView:(UITableView*)tableView
 {
@@ -447,11 +401,29 @@
     
     self.activeItem = row;
     PFObject *object = [self.musicObjects objectAtIndex:row];
-    PFFile *soundFile = object[@"mfile"];
-    [self selectRow:[NSIndexPath indexPathForRow:row inSection:0]];
    
-    [soundFile getDataInBackgroundWithBlock:^(NSData *soundData, NSError *error) {
-       // NSLog(@"%ld %ld", (long)self.playItem, self.activeItem);
+    [self selectRow:[NSIndexPath indexPathForRow:row inSection:0]];
+    
+    if (![object isKindOfClass:[PFObject class]]) {
+        DSSong* song = [self.musicObjects objectAtIndex:row];
+        NSLog(@"%@",[NSURL fileURLWithPath:song.link]);
+        NSData * data = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:song.link]];
+        if (data != nil) {
+             self.playItem = row;
+            [[DSSoundManager sharedManager] playSong: data] ;
+        } else {
+            NSIndexPath* activeRow = [NSIndexPath indexPathForRow:row inSection:0];
+            DSMainTableViewCell* cell =( DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
+            UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
+            [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
+            cell.uaprogressBtn.centralView = triangle;
+            [cell.uaprogressBtn setProgress:0];
+        }
+    }
+    else {
+         PFFile *soundFile = object[@"mfile"];
+        [soundFile getDataInBackgroundWithBlock:^(NSData *soundData, NSError *error) {
+        // NSLog(@"%ld %ld", (long)self.playItem, self.activeItem);
         if(self.playItem >= 0 ) {
             NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
             DSMainTableViewCell* cell =( DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
@@ -459,17 +431,18 @@
             [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
             cell.uaprogressBtn.centralView = triangle;
             [cell.uaprogressBtn setProgress:0];
+            }
+            if (!error) {
+                self.playItem = row;
+                [[DSSoundManager sharedManager] playSong:soundData];
+            }
         }
-        if (!error) {
-            self.playItem = row;
-            [[DSSoundManager sharedManager] playSong:soundData];
-        }
-    }
-    progressBlock:^(int percentDone) {
+        progressBlock:^(int percentDone) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [progressView setProgress: (float) percentDone/100];
         });
-    }];
+        }];
+    }
 }
 
 - (void) setSearchItem {
@@ -626,25 +599,7 @@
     }];
 }
 
-- (void) showInstruction {
-   
-    [self.sideMenu show];
 
-    
-    UIImage*i1 = [UIImage imageNamed:@"1.png"];
-    UIImage*i2 = [UIImage imageNamed:@"2.png"];
-    UIImage*i3 = [UIImage imageNamed:@"3.png"];
-    UIImage*i4 = [UIImage imageNamed:@"4.png"];
-    UIImage*i5 = [UIImage imageNamed:@"5.png"];
-    UIImage*i6 = [UIImage imageNamed:@"6.png"];
-    UIImage*i7 = [UIImage imageNamed:@"7.png"];
-    UIImage*i8 = [UIImage imageNamed:@"8.png"];
-    UIImage*i9 = [UIImage imageNamed:@"9.png"];
-    
-  //  NFXIntroViewController*vc = [[NFXIntroViewController alloc] initWithViews:@[i1,i2,i3,i4,i5,i2,i6,i7,i8,i9]];
-   // [self presentViewController:vc animated:true completion:nil];
-    
-}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (self.selectedTab < 2 ) {
@@ -752,41 +707,7 @@
     
 }
 
-#pragma mark - DSRateViewDelegate
 
-- (void)rateView:(DSRateView *)rateView ratingDidChange:(float)rating{
-
-   
-    if ([[self.musicObjects objectAtIndex:rateView.tag] isKindOfClass:[PFObject class]]){
-         PFObject* object = [self.musicObjects objectAtIndex:rateView.tag];
-        [self setRate:rating forObject:object];
-        [[DSSoundManager sharedManager] addLikeforSongID:object.objectId];
-    } else {
-        DSSong* song = [self.musicObjects objectAtIndex:rateView.tag];
-        PFQuery *query = [PFQuery queryWithClassName:@"Music"];
-        [query whereKey:@"objectId" equalTo:song.idSong];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if ([objects count]> 0) {
-                PFObject* object = [objects objectAtIndex:0] ;
-                [self setRate:rating forObject: object];
-                [[DSSoundManager sharedManager] addLikeforSongID:object.objectId];
-            }
-        }];
-    }
-    
-    UIImage *image;
-    if (rating < 2) {
-        image = [UIImage imageNamed:@"sad_heart.png"];
-    } else if (rating < 4) {
-        image = [UIImage imageNamed:@"neutral_heart.png"];
-    } else {
-        image = [UIImage imageNamed:@"smile_heart.png"];
-    }
-    [[GoogleWearAlertObjc getInstance]prepareNotificationToBeShown:[[GoogleWearAlertViewObjc alloc]initWithTitle:nil andImage:image andWithType:Message andWithDuration:2.5 inViewController:self atPostion:Center canBeDismissedByUser:NO]];
-    [rateView setNotActiveWithDelay:1.5 duration:1 alhpa: 0.4];
-    rateView.editable = false;
-    
-}
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
