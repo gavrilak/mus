@@ -148,6 +148,7 @@
 		BFE8FD381AE69BC600B11E51 /* GoogleWearAlertObjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FD351AE69BC600B11E51 /* GoogleWearAlertObjc.m */; };
 		BFE8FD391AE69BC600B11E51 /* GoogleWearAlertViewObjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FD371AE69BC600B11E51 /* GoogleWearAlertViewObjc.m */; };
 		BFE8FD3C1AE69DB000B11E51 /* UIColor+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FD3B1AE69DB000B11E51 /* UIColor+Alert.m */; };
+		BFEBA0D01B0DE47B00ADB343 /* bar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEBA0CF1B0DE47B00ADB343 /* bar@3x.png */; };
 		BFEEA5991AFBB74E004CB08B /* SF Scribbled Sans SC Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFEEA5981AFBB74E004CB08B /* SF Scribbled Sans SC Bold.ttf */; };
 		BFF19F581B0B6CB8008EDD73 /* DSBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF19F571B0B6CB8008EDD73 /* DSBaseViewController.m */; };
 		BFF19F5A1B0B8345008EDD73 /* 8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BFF19F591B0B8345008EDD73 /* 8.jpg */; };
@@ -382,6 +383,7 @@
 		BFE8FD371AE69BC600B11E51 /* GoogleWearAlertViewObjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleWearAlertViewObjc.m; sourceTree = "<group>"; };
 		BFE8FD3A1AE69DB000B11E51 /* UIColor+Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Alert.h"; sourceTree = "<group>"; };
 		BFE8FD3B1AE69DB000B11E51 /* UIColor+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Alert.m"; sourceTree = "<group>"; };
+		BFEBA0CF1B0DE47B00ADB343 /* bar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar@3x.png"; sourceTree = "<group>"; };
 		BFEEA5981AFBB74E004CB08B /* SF Scribbled Sans SC Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF Scribbled Sans SC Bold.ttf"; sourceTree = "<group>"; };
 		BFF19F561B0B6CB8008EDD73 /* DSBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSBaseViewController.h; path = controllers/DSBaseViewController.h; sourceTree = "<group>"; };
 		BFF19F571B0B6CB8008EDD73 /* DSBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSBaseViewController.m; path = controllers/DSBaseViewController.m; sourceTree = "<group>"; };
@@ -825,6 +827,7 @@
 		BF897C301AB9A23100A3963A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				BFEBA0CF1B0DE47B00ADB343 /* bar@3x.png */,
 				327017AB1B0D21E1008E50A5 /* 9.png */,
 				BFF19F591B0B8345008EDD73 /* 8.jpg */,
 				BFF3FD5D1B04EC94000F13AB /* icon1.png */,
@@ -1058,6 +1061,7 @@
 				32F182801AC87CEF00EED920 /* cancel_blue@2x.png in Resources */,
 				32E7913E1AF69E6200F85515 /* back@3x.png in Resources */,
 				327C37221AF5632600B1D58B /* heart_half@2x.png in Resources */,
+				BFEBA0D01B0DE47B00ADB343 /* bar@3x.png in Resources */,
 				32F182621AC87AD700EED920 /* button_set_up@3x.png in Resources */,
 				32D65E611AAB2DBD00CB04A1 /* LaunchScreen.xib in Resources */,
 				32E3FAE51AF67262001B63C2 /* top_s@3x.png in Resources */,

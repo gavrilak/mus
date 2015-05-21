@@ -57,7 +57,9 @@
     
     [UINavigationBar appearance].backIndicatorImage = backBtnIcon;
     [UINavigationBar appearance].backIndicatorTransitionMaskImage = backBtnIcon;
-    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed: @"bar.png"]
+                                       forBarMetrics:UIBarMetricsDefault];
+
     
     [[UINavigationBar appearance] setTitleTextAttributes:@{
                                                           NSForegroundColorAttributeName:[UIColor whiteColor],
@@ -72,8 +74,9 @@
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,
         [UIFont fontWithName:@"FingerPaint-Regular" size:11.0], NSFontAttributeName,                                               nil] forState:UIControlStateNormal];
 
-    [[UITabBar appearance] setTintColor:[UIColor redColor]];
+    [[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"bar.png"]];
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
+    [UITabBar appearance].clipsToBounds =YES ;
   
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setDefaultTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:0/255.0 green:153/255.0 blue:169/255.0 alpha:1], NSFontAttributeName: [UIFont fontWithName:@"FingerPaint-Regular" size:16.0]}];
    
