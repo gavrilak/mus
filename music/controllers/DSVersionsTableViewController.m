@@ -329,22 +329,37 @@
 
 - (void) loadData {
     
+    NSString* ganre = [self.musicObject objectForKey:@"ganre"];
+    if (ganre == nil) {
+        ganre = @"unknown";
+    }
+    PFQuery *queryFirst = [[self.musicObject  relationForKey:@"versions"]  query];
+    PFQuery *querySecond = [PFQuery queryWithClassName:@"Music"];
+    [querySecond whereKey:@"ganre" equalTo:ganre];
     
-        PFQuery *query = [[self.musicObject  relationForKey:@"versions"]  query];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    [queryFirst findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    if (!error) {
+        [self.musicObjects removeAllObjects];
+        [self.musicObjects addObject:self.musicObject];
+        [self.musicObjects addObjectsFromArray:objects];
+        
+        [querySecond findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
-                [self.musicObjects removeAllObjects];
-                [self.musicObjects addObject:self.musicObject];
                 [self.musicObjects addObjectsFromArray:objects];
                 [self reloadData];
                 [self removeLoading];
-                
             } else {
-                // Log details of the failure
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
+                 NSLog(@"Error: %@ %@", error, [error userInfo]);
                 [self removeLoading];
             }
         }];
+                
+    } else {
+        // Log details of the failure
+        NSLog(@"Error: %@ %@", error, [error userInfo]);
+        [self removeLoading];
+        }
+    }];
  
 }
 

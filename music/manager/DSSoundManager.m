@@ -90,7 +90,7 @@
         DSSong* song = array[0];
         [self removeFile:song.link];
         [song MR_deleteEntity];
-        
+        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
     }
     
 }

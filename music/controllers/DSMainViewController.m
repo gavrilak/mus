@@ -19,7 +19,8 @@
 @property (strong, nonatomic) NSArray* categories;
 @property (assign, nonatomic) NSInteger selectedTab;
 @property (strong, nonatomic) NSString* selectCategory;
-@property (strong, nonatomic) UIBarButtonItem* navBarItem;
+@property (strong, nonatomic) UIBarButtonItem* navBarBackItem;
+@property (strong, nonatomic) UIBarButtonItem* rightBarButtonItem;
 @property (weak  , nonatomic) UISearchBar *searchBar;
 @property (strong, nonatomic) UIView* titleView;
 @property (assign, nonatomic) BOOL reloadData;
@@ -45,8 +46,8 @@
     btn.frame = CGRectMake(0.f, 0.f, btnImg.size.width, btnImg.size.height);
     [btn setImage:btnImg forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    self.navBarItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    
+    self.navBarBackItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    self.rightBarButtonItem = self.navigationItem.rightBarButtonItem;
     [self setSearchItem];
     
     UITabBarItem * tbi = [self.tabbar.items objectAtIndex:0];
@@ -270,7 +271,30 @@
 }
 
 #pragma mark - UITableViewDelegate
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.selectedTab == 3 ) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
 
+        
+        DSSong *deleteSong = [self.musicObjects objectAtIndex:indexPath.row ];
+        
+        [self.musicObjects removeObject:deleteSong];
+        
+        
+        [[DSSoundManager sharedManager] deleteSong:deleteSong.idSong];
+        [self.tableView beginUpdates];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView endUpdates];
+        
+    }
+}
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     if (self.selectCategory != nil){
@@ -307,6 +331,21 @@
     }
  
 }
+
+#pragma mark - Self methods
+
+- (void) editMode {
+    
+    
+    self.tableView.editing = !self.tableView.editing;
+    if (self.tableView.editing){
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone target:self action:@selector(editMode)];
+    }
+    else{
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemEdit target:self action:@selector(editMode)];
+    }
+}
+
 
 - (void) selectRow:(NSIndexPath *) indexPath {
     if (self.selectedRow != indexPath.row) {
@@ -411,6 +450,7 @@
     item.tintColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = item;
     
+    
 }
 
 - (void) back {
@@ -424,7 +464,7 @@
 
 - (void) loadCategory:(NSString*) category {
    
-    self.navigationItem.leftBarButtonItems  = @[self.navBarItem ];
+    self.navigationItem.leftBarButtonItems  = @[self.navBarBackItem ];
     
     self.navigationItem.title = category;
     PFQuery *query = [PFQuery queryWithClassName:@"Music"];
@@ -586,9 +626,13 @@
 
 #pragma mark - UITabBarDelegate
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
-    if ([self.navigationItem.titleView isKindOfClass:[UISearchBar class]] ||[self.navigationItem.titleView isKindOfClass:[UISegmentedControl class]]) {
+    if ([self.navigationItem.titleView isKindOfClass:[UISearchBar class]]) {
         self.navigationItem.titleView = self.titleView;
     }
+    if (self.navigationItem.rightBarButtonItem == nil) {
+        self.navigationItem.rightBarButtonItem = self.rightBarButtonItem;
+    }
+    self.tableView.editing = NO;
     self.reloadData = YES;
     self.musicObjects = nil;
     [self.tableView reloadData];
@@ -626,7 +670,8 @@
         }
             
         case 3:{
-            self.navigationItem.leftBarButtonItem = nil;
+        
+            self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemEdit target:self action:@selector(editMode)];
             self.navigationItem.title = @"Downloads";
             [self loadDownloads];
             break;
