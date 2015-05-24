@@ -31,5 +31,6 @@
 - (void) removeLoading;
 - (void) addLoading;
 - (void) downloadClicked:(id)sender;
-- (void)rateView:(DSRateView *)rateView ratingDidChange:(float)rating;
+- (void) rateView:(DSRateView *)rateView ratingDidChange:(float)rating;
+- (void) shareClicked:(id) sender;
 @end

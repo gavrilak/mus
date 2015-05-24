@@ -133,6 +133,34 @@
     
 }
 
+- (void) shareClicked:(id) sender {
+    UIImage *sendImage = [UIImage new];
+    UIButton* btn = sender;
+    PFObject* obj = [self.musicObjects objectAtIndex:btn.tag];
+    CGRect rect;
+    rect = self.view.bounds;
+    rect.size.height = rect.size.height+200.f;
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    dispatch_queue_t queue = dispatch_queue_create("openActivityIndicatorQueue", NULL);
+    // send initialization of UIActivityViewController in background
+    dispatch_async(queue, ^{
+        UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
+                                                            initWithActivityItems:@[[NSString stringWithFormat:@"Лучшие рингтоны! Скачай %@ - %@ на свой телефон! itunes.apple.com/ru/artist/bestapp-studio-ltd./id739061892?l=ru",[obj objectForKey:@"author"], [obj objectForKey:@"name"]], sendImage] applicationActivities:nil];
+        activityViewController.excludedActivityTypes=@[UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact,UIActivityTypePostToWeibo,UIActivityTypePrint,UIActivityTypeSaveToCameraRoll];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+            [self presentViewController:activityViewController animated:YES completion:nil];
+            
+        });
+    });
+
+    
+    
+    
+}
+
+
 - (void) downloadClicked:(id)sender {
     
     UIButton* btn = sender;

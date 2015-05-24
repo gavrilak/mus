@@ -143,6 +143,9 @@
     [cell.downloadBtn addTarget:self action:@selector(downloadClicked:)
                forControlEvents:UIControlEventTouchUpInside];
 
+    cell.shareBtn.tag = indexPath.row;
+    [cell.shareBtn addTarget:self action:@selector(shareClicked:)
+               forControlEvents:UIControlEventTouchUpInside];
    
     
     cell.uaprogressBtn.tag = indexPath.row;

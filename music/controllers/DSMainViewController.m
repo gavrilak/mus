@@ -36,11 +36,11 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view, typically from a nib.
-   
-    
+    self.extendedLayoutIncludesOpaqueBars = YES;
+    self.automaticallyAdjustsScrollViewInsets =  NO;
     [self.navigationItem setTitle:@"top Rated"];
     
-   
+ 
     UIImage *btnImg = [UIImage imageNamed:@"back@3x.png"];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0.f, 0.f, btnImg.size.width, btnImg.size.height);
@@ -72,7 +72,23 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     
-
+    switch (self.selectedTab) {
+        case 0:
+            self.navigationItem.title = @"top Rated";
+            break;
+        case 1:
+            self.navigationItem.title = @"New";
+            break;
+        case 2:
+            self.navigationItem.title = @"Categories";
+            break;
+        case 3:
+            self.navigationItem.title = @"Downloads";
+            break;
+        default:
+            break;
+    }
+    
     [super viewWillAppear:animated];
 
     
