@@ -45,6 +45,21 @@
     return image;
 }
 
++ (UIImage *)imageWithColor:(UIColor *)color
+{
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
@@ -57,28 +72,31 @@
     
     [UINavigationBar appearance].backIndicatorImage = backBtnIcon;
     [UINavigationBar appearance].backIndicatorTransitionMaskImage = backBtnIcon;
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed: @"bar.png"]
-                                       forBarMetrics:UIBarMetricsDefault];
-
+    //[[UINavigationBar appearance] setBarTintColor: [UIColor colorWithRed:171/255.0 green:0 blue:0 alpha:0.15]];
+   [[UINavigationBar appearance] setBackgroundImage:[AppDelegate imageWithColor:[UIColor colorWithRed:171/255.0 green:0 blue:0 alpha:0.55]] forBarMetrics:UIBarMetricsDefault];
+   [UINavigationBar appearance].shadowImage = [UIImage new];
+  //  [UINavigationBar appearance].opaque = YES;
+   // [UINavigationBar appearance].view.backgroundColor = [UIColor clearColor];
+    
     
     [[UINavigationBar appearance] setTitleTextAttributes:@{
                                                           NSForegroundColorAttributeName:[UIColor whiteColor],
-                                                           NSFontAttributeName: [UIFont fontWithName:@"FingerPaint-Regular" size:20.0],
+                                                           NSFontAttributeName: [UIFont fontWithName:@"laCartoonerie" size:20.0],
                                                            }];
     
     // set the text color for selected state
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,
-                                                       [UIFont fontWithName:@"FingerPaint-Regular" size:11.0], NSFontAttributeName, 
+                                                       [UIFont fontWithName:@"laCartoonerie" size:11.0], NSFontAttributeName,
                                                        nil] forState:UIControlStateSelected];
     // set the text color for unselected state
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,
-        [UIFont fontWithName:@"FingerPaint-Regular" size:11.0], NSFontAttributeName,                                               nil] forState:UIControlStateNormal];
+        [UIFont fontWithName:@"laCartoonerie" size:11.0], NSFontAttributeName,                                               nil] forState:UIControlStateNormal];
 
     [[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"bar.png"]];
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
-    [UITabBar appearance].clipsToBounds =YES ;
+    [UITabBar appearance].clipsToBounds = YES;
   
-    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setDefaultTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:0/255.0 green:153/255.0 blue:169/255.0 alpha:1], NSFontAttributeName: [UIFont fontWithName:@"FingerPaint-Regular" size:16.0]}];
+    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setDefaultTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:159/255.0 green:0/255.0 blue:0/255.0 alpha:1], NSFontAttributeName: [UIFont fontWithName:@"laCartoonerie" size:16.0]}];
    
     return YES;
 }

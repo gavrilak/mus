@@ -28,7 +28,7 @@
     UIGraphicsEndImageContext();
     self.view.backgroundColor = [UIColor colorWithPatternImage:image];
     
-    UIImage *btnImg = [UIImage imageNamed:@"button_set_up.png"];
+    UIImage *btnImg = [UIImage imageNamed:@"settings.png"];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0.f, 0.f, btnImg.size.width, btnImg.size.height);
     [btn setImage:btnImg forState:UIControlStateNormal];
@@ -70,10 +70,10 @@
 
 - (void)setupMenu {
     NSArray *images = @[
-                        [UIImage imageNamed:@"icon1"],
-                        [UIImage imageNamed:@"icon2"],
-                        [UIImage imageNamed:@"icon3"],
-                        [UIImage imageNamed:@"icon4"]
+                        [UIImage imageNamed:@"home"],
+                        [UIImage imageNamed:@"instruction"],
+                        [UIImage imageNamed:@"letter"],
+                        [UIImage imageNamed:@"like"]
                         ];
     self.sideMenu = [[RNFrostedSidebar alloc] initWithImages:images];
     self.sideMenu.delegate = self;

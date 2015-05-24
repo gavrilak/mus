@@ -4,7 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>SF Scribbled Sans SC Bold.ttf</string>
+		<string>laCartoonerie.ttf</string>
 		<string>FingerPaint-Regular.ttf</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>

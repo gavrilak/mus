@@ -382,7 +382,7 @@
 - (void)searchShow:(UIBarButtonItem *)sender {
     
     UISearchBar *searchBar = [[UISearchBar alloc]init];
-    UIImage *searchFieldImage = [[UIImage imageNamed:@"ic_search_green@3x.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
+    UIImage *searchFieldImage = [[UIImage imageNamed:@"ic_search_red@3x.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
     //UITextField *searchField = [searchBar valueForKey:@"_searchField"];
     //searchField.textColor = [UIColor redColor];
    
@@ -494,6 +494,7 @@
     
     if ([self.categories count] == 0 ) {
         PFQuery *query = [PFQuery queryWithClassName:@"Music"];
+        query.limit = 1000;
         [query selectKeys:@[@"ganre"]];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
          if (!error) {
@@ -692,7 +693,7 @@
     for (UIView *subView in view.subviews) {
         if ([subView isKindOfClass:[UIButton class]]) {
             UIButton *cancelButton = (UIButton*)subView;
-            [cancelButton.titleLabel setFont:[UIFont fontWithName:@"FingerPaint-Regular" size:15.0]];
+            [cancelButton.titleLabel setFont:[UIFont fontWithName:@"laCartoonerie" size:15.0]];
         }
     }
     

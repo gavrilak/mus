@@ -9,7 +9,7 @@
 #import "DSVersionsTableViewController.h"
 #import "DSVersionTableViewCell.h"
 #import "UIView+AnimateHidden.h"
-
+#import "AppDelegate.h"
 
 @interface DSVersionsTableViewController () < DSRateViewDelegate >
 
@@ -34,7 +34,7 @@
     
     self.navigationController.navigationBar.topItem.title = @"";
     self.navigationItem.title = @"Versions";
-
+    [self.navigationController.navigationBar setBackgroundImage:[AppDelegate imageWithColor:[UIColor colorWithRed:171/255.0 green:0 blue:0 alpha:0.60]] forBarMetrics:UIBarMetricsDefault];
     
     self.selectedRow = -1;
     self.playItem = -1;
@@ -147,7 +147,7 @@
     
     cell.uaprogressBtn.tag = indexPath.row;
     cell.uaprogressBtn.fillOnTouch = YES;
-    cell.uaprogressBtn.tintColor =  [UIColor colorWithRed:0/255.0 green:153/255.0 blue:169/255.0 alpha:1];
+    cell.uaprogressBtn.tintColor = [UIColor colorWithWhite:1 alpha:1];
     cell.uaprogressBtn.borderWidth = 2.0;
     cell.uaprogressBtn.lineWidth = 2.0;
     
@@ -330,13 +330,30 @@
 - (void) loadData {
     
     NSString* ganre = [self.musicObject objectForKey:@"ganre"];
+    NSString* author = [self.musicObject objectForKey:@"author" ];
     if (ganre == nil) {
         ganre = @"unknown";
     }
     PFQuery *queryFirst = [[self.musicObject  relationForKey:@"versions"]  query];
-    PFQuery *querySecond = [PFQuery queryWithClassName:@"Music"];
-    [querySecond whereKey:@"ganre" equalTo:ganre];
     
+    PFQuery *queryA = [PFQuery queryWithClassName:@"Music"];
+    [queryA whereKey:@"objectId" notEqualTo:self.musicObject.objectId];
+    [queryA whereKey:@"author" matchesRegex:author modifiers:@"i" ];
+    
+    PFQuery *queryB = [PFQuery queryWithClassName:@"Music"];
+    [queryB whereKey:@"ganre" equalTo:ganre];
+    [queryB whereKey:@"objectId" notEqualTo:self.musicObject.objectId];
+    
+    PFQuery *querySecond = [PFQuery orQueryWithSubqueries:@[queryA,queryB]];
+    NSSortDescriptor* descriptor= [NSSortDescriptor sortDescriptorWithKey:@"author" ascending:YES comparator:^NSComparisonResult(id obj1, id obj2) {
+        if( [obj1 isEqualToString:author]) {
+            return NSOrderedSame;
+        } else {
+            return NSOrderedDescending;
+        }
+            
+    }];
+    [querySecond orderBySortDescriptor:descriptor];
     [queryFirst findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     if (!error) {
         [self.musicObjects removeAllObjects];

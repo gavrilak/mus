@@ -383,7 +383,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "452"
             endingLineNumber = "452"
-            landmarkName = "-loadCategories"
+            landmarkName = "-setSearchItem"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -399,7 +399,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "453"
             endingLineNumber = "453"
-            landmarkName = "-loadCategories"
+            landmarkName = "-setSearchItem"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -463,7 +463,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "378"
             endingLineNumber = "378"
-            landmarkName = "-downloadAndPlay:forView:"
+            landmarkName = "-animateCell:andTableView:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -511,7 +511,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "486"
             endingLineNumber = "486"
-            landmarkName = "-reloadCategories"
+            landmarkName = "-loadDownloads"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -527,7 +527,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "493"
             endingLineNumber = "493"
-            landmarkName = "-reloadMusicObjects"
+            landmarkName = "-loadCategories"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -543,7 +543,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "363"
             endingLineNumber = "363"
-            landmarkName = "-downloadAndPlay:forView:"
+            landmarkName = "-selectRow:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -650,12 +650,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "453925682.476977"
+            timestampString = "454036218.27941"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "667"
-            endingLineNumber = "667"
-            landmarkName = "-searchBarSearchButtonClicked:"
+            startingLineNumber = "668"
+            endingLineNumber = "668"
+            landmarkName = "-tabBar:didSelectItem:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -666,12 +666,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "453925682.476977"
+            timestampString = "454036218.27941"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "665"
-            endingLineNumber = "665"
-            landmarkName = "-searchBarSearchButtonClicked:"
+            startingLineNumber = "666"
+            endingLineNumber = "666"
+            landmarkName = "-tabBar:didSelectItem:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -682,11 +682,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "453925682.476977"
+            timestampString = "454036218.27941"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "529"
-            endingLineNumber = "529"
+            startingLineNumber = "530"
+            endingLineNumber = "530"
+            landmarkName = "-reloadMusicObjects"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "music/controllers/DSMainViewController.m"
+            timestampString = "454036218.27941"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "567"
+            endingLineNumber = "567"
             landmarkName = "-getAddDataFromServer:"
             landmarkType = "5">
          </BreakpointContent>
@@ -698,28 +714,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "453925682.476977"
+            timestampString = "454036218.27941"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "566"
-            endingLineNumber = "566"
-            landmarkName = "-scrollViewDidScroll:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "453925682.476977"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "567"
-            endingLineNumber = "567"
-            landmarkName = "-scrollViewDidScroll:"
+            startingLineNumber = "568"
+            endingLineNumber = "568"
+            landmarkName = "-getAddDataFromServer:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -842,12 +842,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "453925682.476977"
+            timestampString = "454036218.27941"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "581"
-            endingLineNumber = "581"
-            landmarkName = "-setRate:forObject:"
+            startingLineNumber = "582"
+            endingLineNumber = "582"
+            landmarkName = "-loadDataForSortType:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -922,12 +922,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "music/controllers/DSMainViewController.m"
-            timestampString = "453925682.476977"
+            timestampString = "454036218.27941"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "596"
-            endingLineNumber = "596"
-            landmarkName = "-tabBar:didSelectItem:"
+            startingLineNumber = "597"
+            endingLineNumber = "597"
+            landmarkName = "-loadDataForSortType:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -943,7 +943,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "462"
             endingLineNumber = "462"
-            landmarkName = "-loadCategories"
+            landmarkName = "-back"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -959,7 +959,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "375"
             endingLineNumber = "375"
-            landmarkName = "-downloadAndPlay:forView:"
+            landmarkName = "-animateCell:andTableView:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -975,7 +975,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "373"
             endingLineNumber = "373"
-            landmarkName = "-downloadAndPlay:forView:"
+            landmarkName = "-animateCell:andTableView:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1039,7 +1039,23 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "410"
             endingLineNumber = "410"
-            landmarkName = "-setSearchItem"
+            landmarkName = "-downloadAndPlay:forView:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "music/controllers/DSMainViewController.m"
+            timestampString = "454036218.27941"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "502"
+            endingLineNumber = "502"
+            landmarkName = "-loadCategories"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -12,8 +12,8 @@
 
 //Constants
 const CGFloat alertViewSize = 0.4; // 40% of presenting viewcontrollers width
-const CGFloat imageViewSize = 1; //4 0% of AlertViews width
-const CGFloat imageViewOffsetFromCentre = 0.0; // Offset of image along Y axis
+const CGFloat imageViewSize = 1.5; //4 0% of AlertViews width
+const CGFloat imageViewOffsetFromCentre = 0.15; // Offset of image along Y axis
 const CGFloat titleLabelWidth = 0.7 ;// 70% of AlertViews width
 const CGFloat titleLabelHeight = 30;
 const CGFloat navControllerHeight = 44;
@@ -153,7 +153,7 @@ const CGFloat navControllerHeight = 44;
     if (UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation)) {
         
         int centerX = self.viewController.view.frame.size.width/2;
-        int centerY = self.viewController.view.frame.size.height/2;
+        int centerY = self.viewController.view.frame.size.height/2 -40;
         self.center = CGPointMake(centerX, centerY);
         
     } else {
@@ -168,6 +168,7 @@ const CGFloat navControllerHeight = 44;
             break;
         case Center:
                 self.center = self.viewController.view.center;
+               // self.center.y = CGPoint self.center.y -120;
             break;
         case Bottom:
                 self.center = CGPointMake(self.viewController.view.center.x, self.viewController.view.frame.size.height * 0.75);
