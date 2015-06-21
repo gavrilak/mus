@@ -138,11 +138,19 @@
     cell.rateView.fullSelectedImage = [UIImage imageNamed:@"heart_full@2x.png"];
     cell.rateView.maxRating = 5;
    
-    
-    cell.downloadBtn.tag = indexPath.row;
-    [cell.downloadBtn addTarget:self action:@selector(downloadClicked:)
-               forControlEvents:UIControlEventTouchUpInside];
+    cell.downloadBtn.alpha=0;
+   // cell.downloadBtn.tag = indexPath.row;
+   // [cell.downloadBtn addTarget:self action:@selector(downloadClicked:)
+   //            forControlEvents:UIControlEventTouchUpInside];
+    VBFDownloadButton *downloadButton = [[VBFDownloadButton alloc]initWithButtonDiameter:50
+                                                                                  center:CGPointMake(285, 40)
+                                                                                   color:[UIColor colorWithRed:204/255.0 green:120/255.0 blue:98/255.0 alpha:1]
+                                                                       progressLineColor:[UIColor flatCloudsColor]
+                                                                            downloadIcon:[UIImage imageNamed:@"download"]
+                                                                      progressViewLength:60];
 
+    cell.vbfButton = downloadButton;
+    [cell.contentView addSubview:downloadButton];
     cell.shareBtn.tag = indexPath.row;
     [cell.shareBtn addTarget:self action:@selector(shareClicked:)
                forControlEvents:UIControlEventTouchUpInside];
@@ -154,22 +162,27 @@
     cell.uaprogressBtn.borderWidth = 2.0;
     cell.uaprogressBtn.lineWidth = 2.0;
     
-    UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
+    UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
     [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
     
     UIImageView *square = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     [square setImage:[UIImage imageNamed: @"square.png"] ];
     
+    UIColor* playColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"circle_play.png"]];
+    UIColor* stopColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"circle_stop.png"]];
     
     if (indexPath.row != self.playItem) {
         cell.uaprogressBtn.centralView = triangle;
+        cell.uaprogressBtn.backgroundColor = playColor;
         [cell.uaprogressBtn setProgress:0];
     } else {
         [cell.uaprogressBtn setProgress:[DSSoundManager sharedManager].getCurrentProgress];
         if ([[DSSoundManager sharedManager] isPlaying]) {
             cell.uaprogressBtn.centralView = square;
+            cell.uaprogressBtn.backgroundColor = stopColor;
         } else {
             cell.uaprogressBtn.centralView = triangle;
+            cell.uaprogressBtn.backgroundColor = playColor;
         }
     }
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 48.0, 18.0)];
@@ -181,8 +194,10 @@
         if (![progressView.centralView isKindOfClass:[UIImageView class]]){
             if ( progressView.tag == self.playItem && [[DSSoundManager sharedManager] isPlaying]) {
                 cell.uaprogressBtn.centralView = square;
+                cell.uaprogressBtn.backgroundColor = stopColor;
             } else {
                 cell.uaprogressBtn.centralView = triangle;
+                cell.uaprogressBtn.backgroundColor = playColor;
             }
         }
     };
@@ -295,9 +310,10 @@
         if(self.playItem >= 0) {
             NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
             DSVersionTableViewCell* cell =( DSVersionTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
-            UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
+            UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
             [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
             cell.uaprogressBtn.centralView = triangle;
+              cell.uaprogressBtn.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"circle_play.png"]];
             [cell.uaprogressBtn setProgress:0];
         }
         if (!error) {

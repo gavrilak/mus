@@ -42,7 +42,7 @@
     self.activityIndicator.maxItems = 5;
     self.activityIndicator.minItemSize = CGSizeMake(10, 10);
     self.activityIndicator.maxItemSize = CGSizeMake(35, 35);
-    self.activityIndicator.itemColor = [UIColor whiteColor];
+    self.activityIndicator.itemColor = [UIColor colorWithRed:219/255.0 green:10/255.0 blue:91/255.0 alpha:1.0];
     
     [self addLoading];
 
@@ -78,7 +78,7 @@
     self.sideMenu = [[RNFrostedSidebar alloc] initWithImages:images];
     self.sideMenu.delegate = self;
     self.sideMenu.showFromRight = YES;
-    self.sideMenu.tintColor = [UIColor colorWithRed:159/255.0 green:0 blue:0 alpha:0.4];
+    self.sideMenu.tintColor = [UIColor colorWithRed:246/255.0 green:71/255.0 blue:71/255.0 alpha:0.4];
     self.sideMenu.itemBackgroundColor = [UIColor colorWithWhite:1 alpha:1];
 }
 
@@ -269,12 +269,14 @@
         UIImageView *square = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         [square setImage:[UIImage imageNamed: @"square.png"] ];
         cell.uaprogressBtn.centralView = square;
+        cell.uaprogressBtn.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"circle_stop.png"]];
     }
     else{
         
-        UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
+        UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
         [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
         cell.uaprogressBtn.centralView = triangle;
+        cell.uaprogressBtn.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"circle_play.png"]];
         
     }
 }

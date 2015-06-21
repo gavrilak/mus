@@ -40,6 +40,7 @@
     self.automaticallyAdjustsScrollViewInsets =  NO;
     [self.navigationItem setTitle:@"top Rated"];
     
+    
  
     UIImage *btnImg = [UIImage imageNamed:@"back@3x.png"];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -67,8 +68,11 @@
     
     [self loadDataForSortType:@"top"];
     [self.tabbar setSelectedItem:[self.tabbar.items objectAtIndex:0]];
+    
+    
    
 }
+
 
 - (void) viewWillAppear:(BOOL)animated {
     
@@ -204,10 +208,13 @@
     cell.uaprogressBtn.tag = indexPath.row;
     cell.uaprogressBtn.fillOnTouch = YES;
     cell.uaprogressBtn.tintColor = [UIColor whiteColor];
-    cell.uaprogressBtn.borderWidth = 2.0;
+    cell.uaprogressBtn.borderWidth = 1.5;
     cell.uaprogressBtn.lineWidth = 2.0;
     
-    UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
+   
+    UIColor* playColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"circle_play.png"]];
+    UIColor* stopColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"circle_stop.png"]];
+    UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
     [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
         
     UIImageView *square = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
@@ -215,13 +222,16 @@
         
     if (indexPath.row != self.playItem) {
         cell.uaprogressBtn.centralView = triangle;
+        cell.uaprogressBtn.backgroundColor = playColor;
         [cell.uaprogressBtn setProgress:0];
     } else {
         [cell.uaprogressBtn setProgress:[DSSoundManager sharedManager].getCurrentProgress];
         if ([[DSSoundManager sharedManager] isPlaying]) {
             cell.uaprogressBtn.centralView = square;
+            cell.uaprogressBtn.backgroundColor = stopColor;
         } else {
             cell.uaprogressBtn.centralView = triangle;
+            cell.uaprogressBtn.backgroundColor = playColor;
         }
     }
     cell.uaprogressBtn.tag = indexPath.row;
@@ -236,8 +246,10 @@
         if (![progressView.centralView isKindOfClass:[UIImageView class]]){
             if ( progressView.tag == self.playItem && [[DSSoundManager sharedManager] isPlaying]) {
                 cell.uaprogressBtn.centralView = square;
+                cell.uaprogressBtn.backgroundColor = stopColor;
             } else {
                 cell.uaprogressBtn.centralView = triangle;
+                cell.uaprogressBtn.backgroundColor = playColor;
             }
         }
     };
@@ -429,9 +441,10 @@
         } else {
             NSIndexPath* activeRow = [NSIndexPath indexPathForRow:row inSection:0];
             DSMainTableViewCell* cell =( DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
-            UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
+            UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
             [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
             cell.uaprogressBtn.centralView = triangle;
+            cell.uaprogressBtn.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"circle_play.png"]];
             [cell.uaprogressBtn setProgress:0];
         }
     }
@@ -442,9 +455,10 @@
         if(self.playItem >= 0 ) {
             NSIndexPath* activeRow = [NSIndexPath indexPathForRow:self.playItem inSection:0];
             DSMainTableViewCell* cell =( DSMainTableViewCell*)  [self.tableView cellForRowAtIndexPath:activeRow];
-            UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 35)];
+            UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
             [triangle setImage:[UIImage imageNamed: @"triangle.png"] ];
             cell.uaprogressBtn.centralView = triangle;
+             cell.uaprogressBtn.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"circle_play.png"]];
             [cell.uaprogressBtn setProgress:0];
             }
             if (!error) {
