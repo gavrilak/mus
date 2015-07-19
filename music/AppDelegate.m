@@ -57,7 +57,7 @@
                                                            }];
     
     // set the text color for selected state
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,
+  /*  [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,
                                                        [UIFont fontWithName:@"laCartoonerie" size:11.0], NSFontAttributeName,
                                                        nil] forState:UIControlStateSelected];
     // set the text color for unselected state
@@ -66,7 +66,7 @@
 
     [[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"bar.png"]];
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
-    [UITabBar appearance].clipsToBounds = YES;
+    [UITabBar appearance].clipsToBounds = YES;*/
   
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setDefaultTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:159/255.0 green:0/255.0 blue:0/255.0 alpha:1], NSFontAttributeName: [UIFont fontWithName:@"laCartoonerie" size:16.0]}];
    

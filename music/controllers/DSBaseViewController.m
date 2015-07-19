@@ -78,7 +78,8 @@
     self.sideMenu = [[RNFrostedSidebar alloc] initWithImages:images];
     self.sideMenu.delegate = self;
     self.sideMenu.showFromRight = YES;
-    self.sideMenu.tintColor = [UIColor colorWithRed:246/255.0 green:71/255.0 blue:71/255.0 alpha:0.4];
+    //self.sideMenu.tintColor = [UIColor colorWithRed:246/255.0 green:71/255.0 blue:71/255.0 alpha:0.4];
+    self.sideMenu.tintColor = [UIColor colorWithRed:50/255.0 green:150/255.0 blue:255/255.0 alpha:0.4];
     self.sideMenu.itemBackgroundColor = [UIColor colorWithWhite:1 alpha:1];
 }
 

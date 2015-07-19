@@ -12,7 +12,7 @@
 #import "DSCategoryTableViewCell.h"
 
 
-@interface DSMainViewController () < UISearchBarDelegate , DSRateViewDelegate  >
+@interface DSMainViewController () < UISearchBarDelegate , DSRateViewDelegate  , VMTabBarDelegate >
 
 
 @property (strong, nonatomic) PFRelation* relation;
@@ -51,7 +51,7 @@
     self.rightBarButtonItem = self.navigationItem.rightBarButtonItem;
     [self setSearchItem];
     
-    UITabBarItem * tbi = [self.tabbar.items objectAtIndex:0];
+   /* UITabBarItem * tbi = [self.tabbar.items objectAtIndex:0];
     tbi.selectedImage = [UIImage imageNamed:@"top_s@3x.png"];
     UITabBarItem * tbi1 = [self.tabbar.items objectAtIndex:1];
     tbi1.selectedImage = [UIImage imageNamed:@"new_s@3x.png"];
@@ -62,20 +62,37 @@
     for (UITabBarItem *tbi in self.tabbar.items) {
         tbi.image = [tbi.image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         tbi.selectedImage = [tbi.selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    }
+    } */
     self.selectedRow = -1;
     self.playItem = -1;
     
     [self loadDataForSortType:@"top"];
-    [self.tabbar setSelectedItem:[self.tabbar.items objectAtIndex:0]];
+  //  [self.tabbar setSelectedItem:[self.tabbar.items objectAtIndex:0]];
     
+       [self initTabBar];
+  //  [self.view insertSubview:self.tabbar belowSubview:self.tableView];
     
+}
+
+- (void)initTabBar
+{
+    VMTabBar *tabbar = self.tabbar;
    
+    // add icon an for tab
+    [tabbar addListOfItemImage:[NSMutableArray arrayWithObjects:@"top.png",@"new.png",@"categories.png",@"downloads.png", nil]];
+    [tabbar addListOfItemText:[NSMutableArray arrayWithObjects:@"Top",@"New",@"Categories",@"Downloads", nil]];
+    [tabbar setDelegate:self];
+    
+    [tabbar iconTabBarWithNumber:4];
+    //[tabbar selectTabBarValueWithTag:1];
+    [tabbar changeColorTabbarWithColor:[UIColor whiteColor]];
+       //self.tabbar  = tabbar;
 }
 
 
 - (void) viewWillAppear:(BOOL)animated {
-    
+    self.tabbar.layer.zPosition = 1;
+
     switch (self.selectedTab) {
         case 0:
             self.navigationItem.title = @"top Rated";
@@ -656,7 +673,8 @@
 
 
 #pragma mark - UITabBarDelegate
-- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
+-(void)VMTabBar:(VMTabBar *)tabbar switchTabWithTag:(NSInteger)tag{
+//- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
     if ([self.navigationItem.titleView isKindOfClass:[UISearchBar class]]) {
         self.navigationItem.titleView = self.titleView;
     }
@@ -668,7 +686,7 @@
     self.musicObjects = nil;
     [self.tableView reloadData];
     self.reloadData = NO;
-    self.selectedTab = tabBar.selectedItem.tag;
+    self.selectedTab = tag;
     self.selectedRow = -1;
     
     
@@ -676,7 +694,7 @@
     self.activeItem = -1;
     [[DSSoundManager sharedManager] pause];
     [self addLoading];
-    switch (tabBar.selectedItem.tag) {
+    switch (tag) {
             
         case 0:{
             [self setSearchItem];

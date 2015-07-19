@@ -7,10 +7,10 @@
 //
 
 #import "DSBaseViewController.h"
-
+#import "VMTabBar.h"
 @interface DSMainViewController : DSBaseViewController <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate >
 
-@property (nonatomic , weak ) IBOutlet UITabBar* tabbar;
+@property (nonatomic , weak ) IBOutlet VMTabBar* tabbar;
 
 @end
 
